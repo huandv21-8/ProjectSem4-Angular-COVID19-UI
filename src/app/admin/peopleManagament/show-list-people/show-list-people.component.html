@@ -1,0 +1,70 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-header">
+          <div class="row">
+            <div class="col-md-7">
+              <div class="row">
+                <div class="col-md-1" [ngStyle]="{'margin-top': '-8px', 'float': 'right'}">
+                  <i class="fa fa-filter fa-lg mt-4" [ngStyle]="{ 'float': 'right'}"
+                     tooltip="Tìm kiếm."
+                     (click)="isCollapsed = !isCollapsed"></i>
+                </div>
+                <div class="col-md-11" [ngStyle]="{'margin-top': '13px', 'height':'0px'}">
+                  <h6>Có ... người</h6>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-5 ">
+              <div class="limit">
+                <h6 class="show">Show</h6>
+                <select name="show" class="select-limit show" (change)="test($event.currentTarget.value)">
+                  <option value="5" select>5</option>
+                  <option value="10">10</option>
+                  <option value="25">25</option>
+                  <option value="50">50</option>
+                  <option value="0">Tất cả</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body" [collapse]="isCollapsed">
+          <p>
+            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet
+            dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper
+            suscipit lobortis nisl ut aliquip ex ea commodo
+            consequat.
+          </p>
+        </div>
+        <div class="card-body">
+          <table class="table">
+            <thead>
+            <tr>
+              <th>id</th>
+              <th>Date registered</th>
+              <th>Role</th>
+              <th>Status</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let item of listSick | paginate: { itemsPerPage: itemsInPage, currentPage: p }">
+              <td>{{item.id}}</td>
+              <td>2012/01/01</td>
+              <td>Member</td>
+              <td>
+                <span class="badge badge-success">Active</span>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+          <div class="page" [ngStyle]="{'text-align': 'center'}">
+            <pagination-controls (pageChange)="p = $event"></pagination-controls>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

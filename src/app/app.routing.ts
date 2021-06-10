@@ -1,13 +1,14 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
 
 // Import Containers
-import { DefaultLayoutComponent } from './containers';
+import {DefaultLayoutComponent} from './containers';
 
-import { P404Component } from './views/error/404.component';
-import { P500Component } from './views/error/500.component';
-import { LoginComponent } from './views/login/login.component';
-import { RegisterComponent } from './views/register/register.component';
+import {P404Component} from './views/error/404.component';
+import {P500Component} from './views/error/500.component';
+import {LoginComponent} from './views/login/login.component';
+import {RegisterComponent} from './views/register/register.component';
+import {AuthGuardGuard} from './shared/service/auth-guard.guard';
 
 export const routes: Routes = [
   {
@@ -51,6 +52,11 @@ export const routes: Routes = [
     },
     children: [
       {
+        path: 'admin',
+        canActivate: [AuthGuardGuard],
+        loadChildren: () => import('./admin/peopleManagament/peopleManagament.module').then(m => m.PeopleManagamentModule)
+      },
+      {
         path: 'base',
         loadChildren: () => import('./views/base/base.module').then(m => m.BaseModule)
       },
@@ -84,11 +90,12 @@ export const routes: Routes = [
       }
     ]
   },
-  { path: '**', component: P404Component }
+  {path: '**', component: P404Component}
 ];
 
 @NgModule({
-  imports: [ RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' }) ],
-  exports: [ RouterModule ]
+  imports: [RouterModule.forRoot(routes, {relativeLinkResolution: 'legacy'})],
+  exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule {
+}

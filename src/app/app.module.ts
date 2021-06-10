@@ -42,6 +42,11 @@ import { AppRoutingModule } from './app.routing';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ChartsModule } from 'ng2-charts';
+import {ToastrModule} from 'ngx-toastr';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {NgxWebstorageModule} from 'ngx-webstorage';
+import {TokenInterceptor} from './token-interceptor';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   imports: [
@@ -57,8 +62,18 @@ import { ChartsModule } from 'ng2-charts';
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
     ChartsModule,
+    HttpClientModule,
     IconModule,
+    NgxWebstorageModule.forRoot(),
     IconSetModule.forRoot(),
+    ToastrModule.forRoot({
+      timeOut: 1000,
+      progressBar: true,
+      progressAnimation: 'increasing',
+      preventDuplicates: true
+    }),
+    FormsModule,
+    ReactiveFormsModule
   ],
   declarations: [
     AppComponent,
@@ -72,6 +87,11 @@ import { ChartsModule } from 'ng2-charts';
     {
       provide: LocationStrategy,
       useClass: HashLocationStrategy
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
     },
     IconSetService,
   ],

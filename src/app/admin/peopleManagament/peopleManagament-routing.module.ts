@@ -5,7 +5,7 @@ import {ShowListPeopleComponent} from './show-list-people/show-list-people.compo
 
 const routes: Routes = [
   {
-    path: 'peopleManagement',
+    path: 'people-management',
     data: {
       title: 'Quản lý bệnh nhân'
     },

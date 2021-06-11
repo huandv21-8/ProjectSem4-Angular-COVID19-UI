@@ -8,7 +8,7 @@
               <strong>Form điền thông tin</strong>
             </div>
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-              <label class="switch switch-lg switch-label switch-outline-primary-alt" >
+              <label class="switch switch-lg switch-label switch-outline-primary-alt">
                 <input type="checkbox" class="switch-input" (click)="checkForm()" checked>
                 <span class="switch-slider" data-checked="sick" data-unchecked="F1"></span>
               </label>
@@ -21,7 +21,8 @@
             <div class="form-group row">
               <label class="col-md-1 col-form-label" for="name-input">Tên</label>
               <div class="col-md-9">
-                <input type="text" [formControlName]="'name'" id="name-input" name="name" class="form-control " placeholder="Nhập tên">
+                <input type="text" [formControlName]="'name'" id="name-input" name="name" class="form-control "
+                       placeholder="Nhập tên">
                 <!--                <div class="valid-feedback">-->
                 <!--                  Input is valid.-->
                 <!--                </div>-->
@@ -30,17 +31,18 @@
             <div class="form-group row">
               <label class="col-md-1 col-form-label" for="age-input">Tuổi</label>
               <div class="col-md-9">
-                <input type="number" id="age-input" [formControlName]="'age'" name="age" class="form-control " placeholder="Nhập tuổi">
-                <!--                <div class="invalid-feedback">-->
-                <!--                  Please provide a valid information.-->
-                <!--                </div>-->
+                <input type="number" id="age-input" [formControlName]="'age'" name="age" class="form-control "
+                       placeholder="Nhập tuổi">
+<!--                                <div class="invalid-feedback" *ngIf="f.age.errors.pattern">-->
+<!--                                  Please provide a valid information.-->
+<!--                                </div>-->
               </div>
             </div>
             <div class="form-group row">
               <label class="col-md-1 col-form-label">Giới tính</label>
               <div class="col-md-9">
                 <div class="radio">
-                  <input id="radio-1" [formControlName]="'gender'" [value]="true" type="radio" name="gender" >
+                  <input id="radio-1" [formControlName]="'gender'" [value]="true" type="radio" name="gender">
                   <label for="radio-1" class="radio-label">Nam </label>
                   <input id="radio-2" [formControlName]="'gender'" [value]="false" type="radio" name="gender">
                   <label for="radio-2" class="radio-label">Nữ</label>
@@ -50,10 +52,13 @@
             <div class="form-group row">
               <label class="col-md-1 col-form-label" for="phone-input">Số điện thoại</label>
               <div class="col-md-9">
-                <input type="number" id="phone-input"  [formControlName]="'phone'" name="phone" class="form-control " placeholder="Nhập số điện thoại">
-                <!--                <div class="invalid-feedback">-->
-                <!--                  Please provide a valid information.-->
-                <!--                </div>-->
+                <input type="text" id="phone-input" (change)="checkPhoneNumber()" formControlName="phone"
+                       name="phone" class="form-control "
+                       [ngClass]="checkPhoneNumber() ? 'is-invalid' : ''"
+                       placeholder="Nhập số điện thoại">
+                <div class="invalid-feedback" *ngIf="checkPhoneNumber()">
+                  Nhập sai số điện thoại !!!
+                </div>
               </div>
             </div>
             <div class="form-group row">
@@ -86,38 +91,43 @@
             <div class="form-group row">
               <label class="col-md-1 col-form-label" for="textarea-input">Lịch trình di chuyển</label>
               <div class="col-md-9">
-                <textarea id="textarea-input" [formControlName]="'schedule'" name="schedule" rows="9" class="form-control"
+                <textarea id="textarea-input" [formControlName]="'schedule'" name="schedule" rows="9"
+                          class="form-control"
                           placeholder="Content..."></textarea>
               </div>
             </div>
-            <div class="form-group row" *ngIf="isCheckForm" >
+            <div class="form-group row" *ngIf="isCheckForm">
               <label class="col-md-1 col-form-label">Loại</label>
               <div class="col-md-9">
                 <div class="radio">
-                  <input type="radio" [formControlName]="'loai'" id="radio-12"[value]="true" name="loai" checked>
+                  <input type="radio" [formControlName]="'loai'" (click)="checkLoai()" id="radio-12" [value]="true"
+                         name="loai">
                   <label for="radio-12" class="radio-label">Lây nhiễm trong nước </label><br>
-                  <input type="radio" [formControlName]="'loai'" [value]="false" id="radio-22" name="loai">
+                  <input type="radio" [formControlName]="'loai'" (click)="checkLoai()" [value]="false" id="radio-22"
+                         name="loai">
                   <label for="radio-22" class="radio-label">Nhập cảnh</label>
                 </div>
               </div>
             </div>
-            <div class="form-group row">
+            <div class="form-group row" *ngIf="isLoai">
               <label class="col-md-1 col-form-label">Nguồn lây</label>
               <div class="col-md-3">
                 <select id="source" [formControlName]="'source'" name="source" class="form-control">
-                  <option [value]="1" >-- Lựa chọn --</option>
-                  <option value="3">Option #1</option>
-                  <option value="2">Option #2</option>
+                  <option>-- Lựa chọn --</option>
+                  <option [value]="3">Option #1</option>
+                  <option [value]="2">Option #2</option>
                   <option [value]="4">Option #3</option>
                 </select>
               </div>
             </div>
           </div>
           <div class="card-footer">
-            <button type="submit" [ngStyle]="{'cursor': peopleForm.invalid? 'no-drop' : 'pointer'}" [disabled]="peopleForm.invalid" class="btn btn-sm btn-primary"><i
+            <button type="submit" [ngStyle]="{'cursor': peopleForm.invalid? 'no-drop' : 'pointer'}"
+                    [disabled]="peopleForm.invalid" class="btn btn-sm btn-primary"><i
               class="fa fa-dot-circle-o"></i> Submit
             </button>
-            <button type="reset" (click)="reset()" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> Reset</button>
+            <button type="reset" (click)="reset()" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> Reset
+            </button>
           </div>
         </form>
       </div>

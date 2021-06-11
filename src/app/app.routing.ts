@@ -50,10 +50,10 @@ export const routes: Routes = [
     data: {
       title: 'Home'
     },
+    canActivate: [AuthGuardGuard],
     children: [
       {
         path: 'admin',
-        canActivate: [AuthGuardGuard],
         loadChildren: () => import('./admin/peopleManagament/peopleManagament.module').then(m => m.PeopleManagamentModule)
       },
       {

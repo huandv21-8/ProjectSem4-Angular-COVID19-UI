@@ -1,4 +1,4 @@
-import {PeopleModel} from './people-model';
+import {PeopleModel} from '../people-model';
 
 export interface SickResponseModel {
   id: number;

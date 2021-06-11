@@ -4,6 +4,7 @@ import {BehaviorSubject, Observable, throwError} from 'rxjs';
 import {catchError, filter, finalize, switchMap, take} from 'rxjs/operators';
 import {LoginResponse} from './shared/model/response/loginResponse';
 import {AuthService} from './shared/service/service/auth.service';
+import {ToastrService} from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class TokenInterceptor implements HttpInterceptor {
   isTokenRefreshing = false;
   refreshTokenSubject: BehaviorSubject<any> = new BehaviorSubject(null);
 
-  constructor(public authService: AuthService) {
+  constructor(public authService: AuthService, private toastr: ToastrService) {
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -36,6 +37,8 @@ export class TokenInterceptor implements HttpInterceptor {
 
         if (error instanceof HttpErrorResponse && error.status === 403) {  // neu bao loi truy cập thì có thể login hoặc làm mới token
           console.log('Token hết hạn, ko thể truy cập');
+          this.toastr.error('Token hết hạn vui lòng đăng nhập lại.');
+          this.authService.logout();
           return throwError(error);
         } else {
           console.log('loi roi');

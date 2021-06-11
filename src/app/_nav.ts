@@ -12,18 +12,44 @@ export const navItems: INavData[] = [
   },
   {
     title: true,
-    name: 'Theme'
+    name: 'People Management'
   },
   {
-    name: 'Colors',
-    url: '/theme/colors',
-    icon: 'icon-drop'
+    name: 'Quản lý bệnh nhân',
+    url: '/admin/people-management',
+    icon: 'icon-cursor',
+    children: [
+      {
+        name: 'Thêm thông tin',
+        url: 'admin/people-management/createPeople',
+        icon: 'icon-cursor'
+      },
+      {
+        name: 'Danh sách',
+        url: 'admin/people-management/listPeople',
+        icon: 'icon-cursor'
+      }
+      // {
+      //   name: 'Brand Buttons',
+      //   url: '/buttons/brand-buttons',
+      //   icon: 'icon-cursor'
+      // }
+    ]
   },
-  {
-    name: 'Typography',
-    url: '/theme/typography',
-    icon: 'icon-pencil'
-  },
+  // {
+  //   title: true,
+  //   name: 'Theme'
+  // },
+  // {
+  //   name: 'Colors',
+  //   url: '/theme/colors',
+  //   icon: 'icon-drop'
+  // },
+  // {
+  //   name: 'Typography',
+  //   url: '/theme/typography',
+  //   icon: 'icon-pencil'
+  // },
   {
     title: true,
     name: 'Components'

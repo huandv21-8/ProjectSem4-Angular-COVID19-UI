@@ -1,8 +1,9 @@
-.limit{
-  float:right;
+.limit {
+  float: right;
   margin-right: 13px;
 }
-.select-limit{
+
+.select-limit {
   //float:right;
   display: block;
   height: calc(1.5em + 0.75rem + 2px);
@@ -17,9 +18,62 @@
   border-radius: 0.25rem;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
-.show{
+
+.show-limit {
   display: inline;
   margin-right: 10px;
-
+}
+.select-limit :focus {
+  outline: 0;
+  border: none;
 }
 
+.option-td {
+  text-align: -webkit-right;
+  line-height: 0px;
+  cursor: pointer;
+}
+
+.option-td :hover {
+  color: #8feed1;
+}
+
+.dropdown {
+  //position: absolute;
+  border: 1px solid #fafafa;
+  line-height: 17px;
+  margin-left: -131px;
+}
+//.dropdown li {
+//  margin-bottom: -24px;
+//}
+
+.dropdown :hover {
+  color: black;
+}
+
+.option-btn {
+  font-size: 33px;
+  color: black;
+  background-color: rgba(255, 255, 255, 0);
+  border-color: rgba(255, 255, 255, 0);
+  line-height: 32px;
+  margin-top: -20px;
+}
+
+.option-btn:focus {
+  outline: 0;
+}
+
+.table-body-list {
+  background-color: #fafafa;
+  table-layout: fixed;
+}
+
+.dropdown-item :focus {
+  color: #fafafa;
+}
+
+.dropdown-item i {
+  color: black;
+}

@@ -7,6 +7,7 @@ import { ShowListPeopleComponent } from './show-list-people/show-list-people.com
 import {NgxPaginationModule} from 'ngx-pagination';
 import {CollapseModule} from 'ngx-bootstrap/collapse';
 import {TooltipModule} from 'ngx-bootstrap/tooltip';
+import {BsDropdownModule} from 'ngx-bootstrap/dropdown';
 
 
 // Angular
@@ -20,6 +21,7 @@ import {TooltipModule} from 'ngx-bootstrap/tooltip';
     NgxPaginationModule,
     CollapseModule,
     TooltipModule,
+    BsDropdownModule
   ],
   declarations: [
     CreatePeopleFormComponent,

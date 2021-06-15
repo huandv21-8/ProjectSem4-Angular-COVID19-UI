@@ -1,4 +1,7 @@
 import {AddressModel} from './address-model';
+import {ProvinceModel} from './province-model';
+import {DistrictModel} from './district-model';
+import {XaModel} from './xa-model';
 
 export interface PeopleModel {
   idPeople?: number;
@@ -6,7 +9,9 @@ export interface PeopleModel {
   age: number;
   gender: boolean;
   phone: string;
-  idAddress?: AddressModel;
+  province: ProvinceModel;
+  district: DistrictModel;
+  xa: XaModel;
   schedule: string;
   created_at?: Date;
 

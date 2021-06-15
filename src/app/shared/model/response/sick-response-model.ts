@@ -6,4 +6,5 @@ export interface SickResponseModel {
   type: string;
   status: string;
   time: Date;
+  idSickSource: number;
 }

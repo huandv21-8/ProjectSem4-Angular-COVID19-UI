@@ -5,6 +5,7 @@ import {catchError, filter, finalize, switchMap, take} from 'rxjs/operators';
 import {LoginResponse} from './shared/model/response/loginResponse';
 import {AuthService} from './shared/service/service/auth.service';
 import {ToastrService} from 'ngx-toastr';
+import {Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class TokenInterceptor implements HttpInterceptor {
   isTokenRefreshing = false;
   refreshTokenSubject: BehaviorSubject<any> = new BehaviorSubject(null);
 
-  constructor(public authService: AuthService, private toastr: ToastrService) {
+  constructor(public authService: AuthService, private toastr: ToastrService, private router: Router) {
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -25,12 +26,9 @@ export class TokenInterceptor implements HttpInterceptor {
     const jwtToken = this.authService.getJwtToken();   // lấy token thằng đayg login
 
     if (jwtToken) {
-      console.log('chay vao day');
       return next.handle(this.addToken(req, jwtToken)).pipe(catchError(error => {
-        console.log('ko chay vao day');
         if (error instanceof HttpErrorResponse && error.status === 401) {
           console.log('Token hết hạn, đang làm mới Token');
-          //  return this.handle401Error(request, next);
           return this.handleAuthErrors(req, next);
 
         } // lỗi 403 là do chúng ta có token đã hết hạn, ko có quyền truy cập mà chúng ta cần làm mới.
@@ -39,6 +37,7 @@ export class TokenInterceptor implements HttpInterceptor {
           console.log('Token hết hạn, ko thể truy cập');
           this.toastr.error('Token hết hạn vui lòng đăng nhập lại.');
           this.authService.logout();
+          this.router.navigateByUrl('login');
           return throwError(error);
         } else {
           console.log('loi roi');

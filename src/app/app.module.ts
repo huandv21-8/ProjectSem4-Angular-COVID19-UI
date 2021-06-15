@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { LocationStrategy, HashLocationStrategy } from '@angular/common';
+import {LocationStrategy, HashLocationStrategy, PathLocationStrategy} from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
@@ -86,7 +86,9 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
   providers: [
     {
       provide: LocationStrategy,
-      useClass: HashLocationStrategy
+      useClass: PathLocationStrategy
+      // useClass: HashLocationStrategy
+
     },
     {
       provide: HTTP_INTERCEPTORS,

@@ -7,19 +7,20 @@
             <div class="col-md-7">
               <div class="row">
                 <div class="col-md-1" [ngStyle]="{'margin-top': '-8px', 'float': 'right'}">
-                  <i class="fa fa-filter fa-lg mt-4" [ngStyle]="{ 'float': 'right'}"
+                  <i class="fa fa-filter fa-lg mt-4" [ngStyle]="{ 'float': 'right', 'cursor': 'pointer'}"
                      tooltip="Tìm kiếm."
+                     placement="top"
                      (click)="isCollapsed = !isCollapsed"></i>
                 </div>
                 <div class="col-md-11" [ngStyle]="{'margin-top': '13px', 'height':'0px'}">
-                  <h6>Có ... người</h6>
+                  <h6>Có tất cả {{listSick.length}} người</h6>
                 </div>
               </div>
             </div>
             <div class="col-md-5 ">
               <div class="limit">
-                <h6 class="show">Show</h6>
-                <select name="show" class="select-limit show" (change)="test($event.currentTarget.value)">
+                <h6 class="show-limit">Show</h6>
+                <select name="show" class="select-limit show-limit" (change)="test($event.currentTarget.value)">
                   <option value="5" select>5</option>
                   <option value="10">10</option>
                   <option value="25">25</option>
@@ -39,28 +40,53 @@
           </p>
         </div>
         <div class="card-body">
-          <table class="table">
+          <table class="table table-body-list">
             <thead>
             <tr>
-              <th>id</th>
-              <th>Date registered</th>
-              <th>Role</th>
-              <th>Status</th>
+              <th>Bệnh nhân</th>
+              <th>Tên</th>
+              <th>Tuổi</th>
+              <th>Địa chỉ</th>
+              <th>Tình trạng</th>
+              <th>type</th>
+              <th></th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let item of listSick | paginate: { itemsPerPage: itemsInPage, currentPage: p }">
-              <td>{{item.id}}</td>
-              <td>2012/01/01</td>
-              <td>Member</td>
-              <td>
-                <span class="badge badge-success">Active</span>
+              <td>BN{{item.idPeople}}</td>
+              <td>{{item.name}}</td>
+              <td>{{item.age}}</td>
+              <td>{{item.nameProvince}}</td>
+              <td>{{item.status == 'sick' ? 'Đang điều trị' : ''}}</td>
+              <td>{{item.type}}</td>
+              <td class="option-td">
+                <div class="btn-group" dropdown>
+                  <button dropdownToggle class="option-btn">...</button>
+                  <ul *dropdownMenu class="dropdown-menu dropdown" role="menu">
+                    <li role="menuitem">
+                      <span class="dropdown-item">
+                        <i class="fa fa-eye"></i> Xem chi tiết
+                      </span>
+                    </li>
+                    <li role="menuitem">
+                       <span class="dropdown-item">
+                         <i class="fas fa-edit"></i> Sửa
+                      </span>
+                    </li>
+                    <li role="menuitem">
+                       <span class="dropdown-item">
+                       <i class="fas fa-trash-alt"></i> Xóa
+                      </span>
+                    </li>
+                  </ul>
+                </div>
               </td>
             </tr>
             </tbody>
           </table>
           <div class="page" [ngStyle]="{'text-align': 'center'}">
-            <pagination-controls (pageChange)="p = $event"></pagination-controls>
+            <pagination-controls (pageChange)="p = $event" previousLabel="Trước" nextLabel="Tiếp theo"></pagination-controls>
           </div>
         </div>
       </div>

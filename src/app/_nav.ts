@@ -1,4 +1,4 @@
-import { INavData } from '@coreui/angular';
+import {INavData} from '@coreui/angular';
 
 export const navItems: INavData[] = [
   {
@@ -27,7 +27,24 @@ export const navItems: INavData[] = [
       {
         name: 'Danh sách',
         url: 'admin/people-management/listPeople',
-        icon: 'icon-cursor'
+        icon: 'icon-cursor',
+        children: [
+          {
+            name: 'Bệnh nhân',
+            url: 'admin/people-management/listPeople',
+            icon: 'icon-cursor'
+          },
+          {
+            name: 'F1',
+            url: 'admin/people-management/listPeople',
+            icon: 'icon-cursor'
+          },
+          {
+            name: 'Khỏi bệnh',
+            url: 'admin/people-management/listPeople',
+            icon: 'icon-cursor'
+          }
+        ]
       }
       // {
       //   name: 'Brand Buttons',
@@ -257,7 +274,7 @@ export const navItems: INavData[] = [
       variant: 'secondary',
       text: 'NEW'
     },
-    attributes: { disabled: true },
+    attributes: {disabled: true},
   },
   {
     name: 'Download CoreUI',
@@ -265,13 +282,13 @@ export const navItems: INavData[] = [
     icon: 'icon-cloud-download',
     class: 'mt-auto',
     variant: 'success',
-    attributes: { target: '_blank', rel: 'noopener' }
+    attributes: {target: '_blank', rel: 'noopener'}
   },
   {
     name: 'Try CoreUI PRO',
     url: 'http://coreui.io/pro/angular/',
     icon: 'icon-layers',
     variant: 'danger',
-    attributes: { target: '_blank', rel: 'noopener' }
+    attributes: {target: '_blank', rel: 'noopener'}
   }
 ];

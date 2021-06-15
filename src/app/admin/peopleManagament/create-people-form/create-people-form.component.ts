@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ToastrService} from 'ngx-toastr';
+import {PeopleModelRequest} from '../../../shared/model/request/people-model-request';
+import {PeopleManagementService} from '../peopleManagement.service';
 
 @Component({
   selector: 'app-create-people-form',
@@ -10,12 +12,12 @@ import {ToastrService} from 'ngx-toastr';
 export class CreatePeopleFormComponent implements OnInit {
 
   peopleForm: FormGroup;
-  // people :
+  inforPeople: PeopleModelRequest;
   isCheckForm: boolean;
   stylePeople: string;        // xem là f1 hay bị bệnh
   isLoai: boolean;     // check xem là loại nhập cảnh hay trong nước
 
-  constructor(private toastrService: ToastrService) {
+  constructor(private toastrService: ToastrService, private peopleManagementService: PeopleManagementService) {
   }
 
   ngOnInit(): void {
@@ -26,9 +28,43 @@ export class CreatePeopleFormComponent implements OnInit {
   }
 
   createPerson() {
-    console.log(this.peopleForm.value);
-    console.log(this.stylePeople);
 
+    if (this.isCheckForm) {
+      this.inforPeople = {
+        name: this.peopleForm.value.name,
+        age: this.peopleForm.value.age,
+        gender: this.peopleForm.value.gender,
+        phone: this.peopleForm.value.phone,
+        idDistrict: this.peopleForm.value.district,
+        idProvince: this.peopleForm.value.province,
+        idCommune: this.peopleForm.value.commune,
+        schedule: this.peopleForm.value.schedule,
+        status: this.stylePeople,
+        type: this.peopleForm.value.loai,
+        idSourced: this.peopleForm.value.source,
+      };
+    } else {
+      this.inforPeople = {
+        name: this.peopleForm.value.name,
+        age: this.peopleForm.value.age,
+        gender: this.peopleForm.value.gender,
+        phone: this.peopleForm.value.phone,
+        idDistrict: this.peopleForm.value.district,
+        idProvince: this.peopleForm.value.province,
+        idCommune: this.peopleForm.value.commune,
+        schedule: this.peopleForm.value.schedule,
+        status: this.stylePeople,
+        idSourced: this.peopleForm.value.source,
+      };
+    }
+
+    const message = this.peopleManagementService.createPeople(this.inforPeople).subscribe((data) => {
+      console.log(data);
+      this.toastrService.success(data.message);
+    }, (error) => {
+      console.log(error);
+      this.toastrService.error(error);
+    });
 
   }
 

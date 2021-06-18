@@ -58,7 +58,7 @@ export class CreatePeopleFormComponent implements OnInit {
       };
     }
 
-    const message = this.peopleManagementService.createPeople(this.inforPeople).subscribe((data) => {
+   this.peopleManagementService.createPeople(this.inforPeople).subscribe((data) => {
       console.log(data);
       this.toastrService.success(data.message);
     }, (error) => {
@@ -74,7 +74,7 @@ export class CreatePeopleFormComponent implements OnInit {
         name: new FormControl('', [Validators.required]),
         age: new FormControl('', [Validators.required]),
         gender: new FormControl(true, [Validators.required]),
-        phone: new FormControl('', [Validators.required, Validators.pattern('[0-9 ]{10}')]),
+        phone: new FormControl('', [ Validators.pattern('[0-9 ]{10}')]),
         province: new FormControl(1, [Validators.required]),
         district: new FormControl(1, [Validators.required]),
         commune: new FormControl(1, [Validators.required]),

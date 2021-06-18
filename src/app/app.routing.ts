@@ -13,7 +13,7 @@ import {AuthGuardGuard} from './shared/service/auth-guard.guard';
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'dashboard',
+    redirectTo: 'admin',
     pathMatch: 'full',
   },
   {
@@ -45,7 +45,7 @@ export const routes: Routes = [
     }
   },
   {
-    path: '',
+    path: 'admin',
     component: DefaultLayoutComponent,
     data: {
       title: 'Home'
@@ -53,7 +53,7 @@ export const routes: Routes = [
     canActivate: [AuthGuardGuard],
     children: [
       {
-        path: 'admin',
+        path: '',
         loadChildren: () => import('./admin/peopleManagament/peopleManagament.module').then(m => m.PeopleManagamentModule)
       },
       {

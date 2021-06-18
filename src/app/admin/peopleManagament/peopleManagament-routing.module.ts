@@ -5,6 +5,10 @@ import {ShowListPeopleComponent} from './show-list-people/show-list-people.compo
 
 const routes: Routes = [
   {
+    path: '',
+    redirectTo: 'people-management'
+  },
+  {
     path: 'people-management',
     data: {
       title: 'Quản lý bệnh nhân'
@@ -22,10 +26,28 @@ const routes: Routes = [
         }
       }, {
         path: 'listPeople',
-        component: ShowListPeopleComponent,
+        // component: ShowListPeopleComponent,
         data: {
           title: 'Danh sách bệnh nhân'
-        }
+        },
+        children: [
+          {
+            path: '',
+            redirectTo: 'a/sick'
+          },
+          {
+            path: 'a/:key',
+            component: ShowListPeopleComponent,
+          },
+          {
+            path: 'b/:key',
+            component: ShowListPeopleComponent,
+          },
+          {
+            path: 'c/:key',
+            component: ShowListPeopleComponent,
+          }
+        ]
       }
     ]
   }

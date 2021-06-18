@@ -1,4 +1,4 @@
-export interface PeopleModelRequest {
+export interface PeopleModelRequest {   // dùng để create people
   idPeople?: number;
   name: string;
   age: number;

@@ -86,8 +86,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
   providers: [
     {
       provide: LocationStrategy,
-      useClass: PathLocationStrategy
-      // useClass: HashLocationStrategy
+      // useClass: PathLocationStrategy
+      useClass: HashLocationStrategy
 
     },
     {

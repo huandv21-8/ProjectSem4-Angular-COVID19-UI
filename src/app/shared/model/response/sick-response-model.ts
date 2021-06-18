@@ -1,8 +1,7 @@
-import {PeopleModel} from '../people-model';
 
 export interface SickResponseModel {
   id: number;
-  people: PeopleModel;
+  // people: PeopleModel;
   type: string;
   status: string;
   time: Date;

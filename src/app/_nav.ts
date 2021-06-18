@@ -1,6 +1,7 @@
 import {INavData} from '@coreui/angular';
 
 export const navItems: INavData[] = [
+
   {
     name: 'Dashboard',
     url: '/dashboard',
@@ -12,37 +13,37 @@ export const navItems: INavData[] = [
   },
   {
     title: true,
-    name: 'People Management'
+    name: 'Quản lý bệnh nhân'
   },
   {
-    name: 'Quản lý bệnh nhân',
-    url: '/admin/people-management',
+    name: 'Thông tin',
+    url: 'people-management',
     icon: 'icon-cursor',
     children: [
       {
         name: 'Thêm thông tin',
-        url: 'admin/people-management/createPeople',
-        icon: 'icon-cursor'
+        url: 'people-management/createPeople',
+        icon: 'icon-note'
       },
       {
         name: 'Danh sách',
-        url: 'admin/people-management/listPeople',
-        icon: 'icon-cursor',
+        url: 'people-management/listPeople',
+        icon: 'icon-list',
         children: [
           {
             name: 'Bệnh nhân',
-            url: 'admin/people-management/listPeople',
-            icon: 'icon-cursor'
+            url: 'people-management/listPeople/a/sick',
+            icon: 'icon-list'
           },
           {
             name: 'F1',
-            url: 'admin/people-management/listPeople',
-            icon: 'icon-cursor'
+            url: 'people-management/listPeople/b/f1',
+            icon: 'icon-list'
           },
           {
             name: 'Khỏi bệnh',
-            url: 'admin/people-management/listPeople',
-            icon: 'icon-cursor'
+            url: 'people-management/listPeople/c/cured',
+            icon: 'icon-list'
           }
         ]
       }
@@ -73,107 +74,107 @@ export const navItems: INavData[] = [
   },
   {
     name: 'Base',
-    url: '/base',
+    url: '/admin/base',
     icon: 'icon-puzzle',
     children: [
       {
         name: 'Cards',
-        url: '/base/cards',
+        url: '/admin/base/cards',
         icon: 'icon-puzzle'
       },
       {
         name: 'Carousels',
-        url: '/base/carousels',
+        url: '/admin/base/carousels',
         icon: 'icon-puzzle'
       },
       {
         name: 'Collapses',
-        url: '/base/collapses',
+        url: '/admin/base/collapses',
         icon: 'icon-puzzle'
       },
       {
         name: 'Forms',
-        url: '/base/forms',
+        url: '/admin/base/forms',
         icon: 'icon-puzzle'
       },
       {
         name: 'Navbars',
-        url: '/base/navbars',
+        url: '/admin/base/navbars',
         icon: 'icon-puzzle'
 
       },
       {
         name: 'Pagination',
-        url: '/base/paginations',
+        url: '/admin/base/paginations',
         icon: 'icon-puzzle'
       },
       {
         name: 'Popovers',
-        url: '/base/popovers',
+        url: '/admin/base/popovers',
         icon: 'icon-puzzle'
       },
       {
         name: 'Progress',
-        url: '/base/progress',
+        url: '/admin/base/progress',
         icon: 'icon-puzzle'
       },
       {
         name: 'Switches',
-        url: '/base/switches',
+        url: '/admin/base/switches',
         icon: 'icon-puzzle'
       },
       {
         name: 'Tables',
-        url: '/base/tables',
+        url: '/admin/base/tables',
         icon: 'icon-puzzle'
       },
       {
         name: 'Tabs',
-        url: '/base/tabs',
+        url: '/admin/base/tabs',
         icon: 'icon-puzzle'
       },
       {
         name: 'Tooltips',
-        url: '/base/tooltips',
+        url: '/admin/base/tooltips',
         icon: 'icon-puzzle'
       }
     ]
   },
   {
     name: 'Buttons',
-    url: '/buttons',
+    url: '/admin/buttons',
     icon: 'icon-cursor',
     children: [
       {
         name: 'Buttons',
-        url: '/buttons/buttons',
+        url: '/admin/buttons/buttons',
         icon: 'icon-cursor'
       },
       {
         name: 'Dropdowns',
-        url: '/buttons/dropdowns',
+        url: '/admin/buttons/dropdowns',
         icon: 'icon-cursor'
       },
       {
         name: 'Brand Buttons',
-        url: '/buttons/brand-buttons',
+        url: '/admin/buttons/brand-buttons',
         icon: 'icon-cursor'
       }
     ]
   },
   {
     name: 'Charts',
-    url: '/charts',
+    url: '/admin/charts',
     icon: 'icon-pie-chart'
   },
   {
     name: 'Icons',
-    url: '/icons',
+    url: '/admin/icons',
     icon: 'icon-star',
     children: [
       {
         name: 'CoreUI Icons',
-        url: '/icons/coreui-icons',
+        url: '/admin/icons/coreui-icons',
         icon: 'icon-star',
         badge: {
           variant: 'success',
@@ -182,12 +183,12 @@ export const navItems: INavData[] = [
       },
       {
         name: 'Flags',
-        url: '/icons/flags',
+        url: '/admin/icons/flags',
         icon: 'icon-star'
       },
       {
         name: 'Font Awesome',
-        url: '/icons/font-awesome',
+        url: '/admin/icons/font-awesome',
         icon: 'icon-star',
         badge: {
           variant: 'secondary',
@@ -196,36 +197,36 @@ export const navItems: INavData[] = [
       },
       {
         name: 'Simple Line Icons',
-        url: '/icons/simple-line-icons',
+        url: '/admin/icons/simple-line-icons',
         icon: 'icon-star'
       }
     ]
   },
   {
     name: 'Notifications',
-    url: '/notifications',
+    url: '/admin/notifications',
     icon: 'icon-bell',
     children: [
       {
         name: 'Alerts',
-        url: '/notifications/alerts',
+        url: '/admin/notifications/alerts',
         icon: 'icon-bell'
       },
       {
         name: 'Badges',
-        url: '/notifications/badges',
+        url: '/admin/notifications/badges',
         icon: 'icon-bell'
       },
       {
         name: 'Modals',
-        url: '/notifications/modals',
+        url: '/admin/notifications/modals',
         icon: 'icon-bell'
       }
     ]
   },
   {
     name: 'Widgets',
-    url: '/widgets',
+    url: '/admin/widgets',
     icon: 'icon-calculator',
     badge: {
       variant: 'info',
@@ -268,7 +269,7 @@ export const navItems: INavData[] = [
   },
   {
     name: 'Disabled',
-    url: '/dashboard',
+    url: '/admin/dashboard',
     icon: 'icon-ban',
     badge: {
       variant: 'secondary',

@@ -8,21 +8,23 @@ import {NgxPaginationModule} from 'ngx-pagination';
 import {CollapseModule} from 'ngx-bootstrap/collapse';
 import {TooltipModule} from 'ngx-bootstrap/tooltip';
 import {BsDropdownModule} from 'ngx-bootstrap/dropdown';
+import {ModalModule} from 'ngx-bootstrap/modal';
 
 
 // Angular
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    PeopleManagamentRoutingModule,
-    ReactiveFormsModule,
-    NgxPaginationModule,
-    CollapseModule,
-    TooltipModule,
-    BsDropdownModule
-  ],
+    imports: [
+        CommonModule,
+        FormsModule,
+        PeopleManagamentRoutingModule,
+        ReactiveFormsModule,
+        NgxPaginationModule,
+        CollapseModule,
+        TooltipModule,
+        BsDropdownModule,
+        ModalModule
+    ],
   declarations: [
     CreatePeopleFormComponent,
     ShowListPeopleComponent

@@ -1,6 +1,6 @@
 export interface ProvinceModel {
-  idProvince?: number;
-  nameProvince: string;
+  provinceId?: number;
+  provinceName: string;
   type?: string;
   slug?: string;
 }

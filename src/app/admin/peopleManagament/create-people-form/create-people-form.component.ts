@@ -3,6 +3,10 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ToastrService} from 'ngx-toastr';
 import {PeopleModelRequest} from '../../../shared/model/request/people-model-request';
 import {PeopleManagementService} from '../peopleManagement.service';
+import {AddressService} from '../../../shared/service/service/address.service';
+import {ProvinceModel} from '../../../shared/model/province-model';
+import {DistrictModel} from '../../../shared/model/district-model';
+import {XaModel} from '../../../shared/model/xa-model';
 
 @Component({
   selector: 'app-create-people-form',
@@ -17,55 +21,76 @@ export class CreatePeopleFormComponent implements OnInit {
   stylePeople: string;        // xem là f1 hay bị bệnh
   isLoai: boolean;     // check xem là loại nhập cảnh hay trong nước
 
-  constructor(private toastrService: ToastrService, private peopleManagementService: PeopleManagementService) {
+  listProvince: Array<ProvinceModel> = [];
+  listDistrict: Array<DistrictModel> = [];
+  listCommune: Array<XaModel> = [];
+
+  constructor(private toastrService: ToastrService,
+              private peopleManagementService: PeopleManagementService,
+              private addressService: AddressService) {
   }
 
   ngOnInit(): void {
+    this.getAllAddress();
     this.isCheckForm = true;
     this.stylePeople = 'sick';
     this.isLoai = true;
     this.styleForm();
   }
 
-  createPerson() {
-
-    if (this.isCheckForm) {
-      this.inforPeople = {
-        name: this.peopleForm.value.name,
-        age: this.peopleForm.value.age,
-        gender: this.peopleForm.value.gender,
-        phone: this.peopleForm.value.phone,
-        idDistrict: this.peopleForm.value.district,
-        idProvince: this.peopleForm.value.province,
-        idCommune: this.peopleForm.value.commune,
-        schedule: this.peopleForm.value.schedule,
-        status: this.stylePeople,
-        type: this.peopleForm.value.loai,
-        idSourced: this.peopleForm.value.source,
-      };
-    } else {
-      this.inforPeople = {
-        name: this.peopleForm.value.name,
-        age: this.peopleForm.value.age,
-        gender: this.peopleForm.value.gender,
-        phone: this.peopleForm.value.phone,
-        idDistrict: this.peopleForm.value.district,
-        idProvince: this.peopleForm.value.province,
-        idCommune: this.peopleForm.value.commune,
-        schedule: this.peopleForm.value.schedule,
-        status: this.stylePeople,
-        idSourced: this.peopleForm.value.source,
-      };
-    }
-
-   this.peopleManagementService.createPeople(this.inforPeople).subscribe((data) => {
-      console.log(data);
-      this.toastrService.success(data.message);
-    }, (error) => {
-      console.log(error);
-      this.toastrService.error(error);
+  getAllAddress() {
+    this.addressService.getAllProvince().subscribe(data => {
+      this.listProvince = data;
     });
+    this.addressService.getAllDistricts().subscribe(data => {
+      this.listDistrict = data;
+    });
+    this.addressService.getAllCommune().subscribe(data => {
+      this.listCommune = data;
+    });
+  }
 
+  createPerson() {
+    if (this.peopleForm.value.district && this.peopleForm.value.province && this.peopleForm.value.commune) {
+      if (this.isCheckForm) {
+        this.inforPeople = {
+          name: this.peopleForm.value.name,
+          age: this.peopleForm.value.age,
+          gender: this.peopleForm.value.gender,
+          phone: this.peopleForm.value.phone,
+          idDistrict: this.peopleForm.value.district,
+          idProvince: this.peopleForm.value.province,
+          idCommune: this.peopleForm.value.commune,
+          schedule: this.peopleForm.value.schedule,
+          status: this.stylePeople,
+          type: this.peopleForm.value.loai,
+          idSourced: this.peopleForm.value.source,
+        };
+      } else {
+        this.inforPeople = {
+          name: this.peopleForm.value.name,
+          age: this.peopleForm.value.age,
+          gender: this.peopleForm.value.gender,
+          phone: this.peopleForm.value.phone,
+          idDistrict: this.peopleForm.value.district,
+          idProvince: this.peopleForm.value.province,
+          idCommune: this.peopleForm.value.commune,
+          schedule: this.peopleForm.value.schedule,
+          status: this.stylePeople,
+          idSourced: this.peopleForm.value.source,
+        };
+      }
+
+      this.peopleManagementService.createPeople(this.inforPeople).subscribe((data) => {
+        console.log(data);
+        this.toastrService.success(data.message);
+      }, (error) => {
+        console.log(error);
+        this.toastrService.error(error);
+      });
+    } else {
+      this.toastrService.show('Vui lòng chọn địa chỉ');
+    }
   }
 
   styleForm() {
@@ -74,13 +99,13 @@ export class CreatePeopleFormComponent implements OnInit {
         name: new FormControl('', [Validators.required]),
         age: new FormControl('', [Validators.required]),
         gender: new FormControl(true, [Validators.required]),
-        phone: new FormControl('', [ Validators.pattern('[0-9 ]{10}')]),
-        province: new FormControl(1, [Validators.required]),
-        district: new FormControl(1, [Validators.required]),
-        commune: new FormControl(1, [Validators.required]),
+        phone: new FormControl('', [Validators.pattern('[0-9 ]{10}')]),
+        province: new FormControl(0, [Validators.required]),
+        district: new FormControl(0, [Validators.required]),
+        commune: new FormControl(0, [Validators.required]),
         schedule: new FormControl('', [Validators.required]),
         loai: new FormControl(true, [Validators.required]),
-        source: new FormControl(1, [Validators.required])
+        source: new FormControl(0, [Validators.required])
       });
 
     } else {
@@ -88,16 +113,15 @@ export class CreatePeopleFormComponent implements OnInit {
         name: new FormControl('', [Validators.required]),
         age: new FormControl('', [Validators.required]),
         gender: new FormControl(true, [Validators.required]),
-        phone: new FormControl('', [Validators.required, Validators.pattern('[0-9 ]{10}')]),
-        province: new FormControl(1, [Validators.required]),
-        district: new FormControl(1, [Validators.required]),
-        commune: new FormControl(1, [Validators.required]),
+        phone: new FormControl('', [Validators.pattern('[0-9 ]{10}')]),
+        province: new FormControl(0, [Validators.required]),
+        district: new FormControl(0, [Validators.required]),
+        commune: new FormControl(0, [Validators.required]),
         schedule: new FormControl('', [Validators.required]),
-        source: new FormControl(1, [Validators.required])
+        source: new FormControl(0, [Validators.required])
       });
     }
   }
-
 
   checkForm() {
     this.isCheckForm = !this.isCheckForm;
@@ -133,4 +157,23 @@ export class CreatePeopleFormComponent implements OnInit {
     }
   }
 
+  getAllDistrictByProvinceId(value: any) {
+    this.peopleForm.controls.district.setValue(0);
+    this.peopleForm.controls.commune.setValue(0);
+    // console.log(value);
+    if (value && value !== 0) {
+      this.addressService.getAllDistrictByProvinceId(value).subscribe(data => {
+        this.listDistrict = data;
+      });
+    }
+
+  }
+
+  getAllCommuneByDistrictId(value: any) {
+    if (value !== 0 && value) {
+      this.addressService.getAllCommuneByDistrictId(value).subscribe(data => {
+        this.listCommune = data;
+      });
+    }
+  }
 }

@@ -57,6 +57,10 @@ export const routes: Routes = [
         loadChildren: () => import('./admin/peopleManagament/peopleManagament.module').then(m => m.PeopleManagamentModule)
       },
       {
+        path: 'dashboard',
+        loadChildren: () => import('./admin/dashboard/dashboard.module').then(m => m.DashboardModule)
+      },
+      {
         path: 'base',
         loadChildren: () => import('./views/base/base.module').then(m => m.BaseModule)
       },
@@ -68,10 +72,7 @@ export const routes: Routes = [
         path: 'charts',
         loadChildren: () => import('./views/chartjs/chartjs.module').then(m => m.ChartJSModule)
       },
-      {
-        path: 'dashboard',
-        loadChildren: () => import('./views/dashboard/dashboard.module').then(m => m.DashboardModule)
-      },
+
       {
         path: 'icons',
         loadChildren: () => import('./views/icons/icons.module').then(m => m.IconsModule)

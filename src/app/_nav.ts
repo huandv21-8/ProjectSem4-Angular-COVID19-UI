@@ -4,7 +4,7 @@ export const navItems: INavData[] = [
 
   {
     name: 'Dashboard',
-    url: '/dashboard',
+    url: 'dashboard',
     icon: 'icon-speedometer',
     badge: {
       variant: 'info',
@@ -43,6 +43,11 @@ export const navItems: INavData[] = [
           {
             name: 'Khỏi bệnh',
             url: 'people-management/listPeople/c/cured',
+            icon: 'icon-list'
+          },
+          {
+            name: 'Đã chết',
+            url: 'people-management/listPeople/d/died',
             icon: 'icon-list'
           }
         ]
@@ -269,7 +274,7 @@ export const navItems: INavData[] = [
   },
   {
     name: 'Disabled',
-    url: '/admin/dashboard',
+    url: '/admin/views/dashboard',
     icon: 'icon-ban',
     badge: {
       variant: 'secondary',

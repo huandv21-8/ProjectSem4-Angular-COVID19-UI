@@ -23,6 +23,7 @@
   display: inline;
   margin-right: 10px;
 }
+
 .select-limit :focus {
   outline: 0;
   border: none;
@@ -76,10 +77,31 @@
   color: black;
 }
 
-.alert-model{
+.alert-model {
   margin-top: 145px;
 }
 
-.people-detail-schedule{
-  background-color:#f5f5f5;
+.people-detail-schedule {
+  background-color: #f5f5f5;
+}
+
+.filter-icon {
+  margin-top: -8px;
+  float: right;
+}
+
+
+.icon-option-checkBox {
+  padding-right: 22px;
+  float: left;
+  cursor: pointer;
+}
+
+
+.action-all-people {
+  border-right: 1px solid #9a9999;
+}
+
+.choose-group {
+  margin-right: 12px;
 }

@@ -46,6 +46,10 @@ const routes: Routes = [
           {
             path: 'c/:key',
             component: ShowListPeopleComponent,
+          } ,
+          {
+            path: 'd/:key',
+            component: ShowListPeopleComponent,
           }
         ]
       }

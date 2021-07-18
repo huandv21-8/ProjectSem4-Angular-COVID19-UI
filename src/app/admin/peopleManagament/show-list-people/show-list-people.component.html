@@ -6,13 +6,54 @@
           <div class="row">
             <div class="col-md-7">
               <div class="row">
-                <div class="col-md-1" [ngStyle]="{'margin-top': '-8px', 'float': 'right'}">
+                <div class="col-md-1 filter-icon">
                   <i class="fa fa-filter fa-lg mt-4" [ngStyle]="{ 'float': 'right', 'cursor': 'pointer'}"
                      tooltip="Tìm kiếm."
                      placement="top"
                      (click)="isCollapsed = !isCollapsed"></i>
                 </div>
-                <div class="col-md-11" [ngStyle]="{'margin-top': '13px', 'height':'0px'}">
+                <div class="col-md-11" *ngIf=" listIdPeopleCheckbox.length > 0"
+                     [ngStyle]="{'margin-top': '13px', 'height':'0px'}">
+                  <div class="row" [ngStyle]="{ 'line-height': '18px'}">
+                    <div class="col-md-1 action-all-people">
+                      <div class="icon-option-checkBox" (click)="OptionPeopleModal.show()">
+                        <i class="fas fa-trash-alt fa-lg"
+                           tooltip="Xóa"
+                           (click)="setOptionChoice('deleteAllPeople')"
+                           placement="top"></i>
+                      </div>
+                    </div>
+                    <div class="col-md-9 choose-group" [ngStyle]="{'margin-left': '8px'}">
+                      <div class="icon-option-checkBox" *ngIf="status == 'f1' || status == 'cured'" (click)="OptionPeopleModal.show()" >
+                        <i class="fas fa-head-side-cough fa-lg"
+                           (click)="setOptionChoice('moveSickAllPeople')"
+                           tooltip="Đánh dấu bị bệnh"
+                           placement="top" [ngStyle]="{'color': '#fe2e2e'}"></i>
+                      </div>
+                      <div class="icon-option-checkBox" *ngIf="status == 'sick'" (click)="OptionPeopleModal.show()">
+                        <i class="fas fa-user-shield fa-lg"
+                           (click)="setOptionChoice('moveCuredAllPeople')"
+                           tooltip="Đánh dấu đã khỏi"
+                           placement="top" [ngStyle]="{'color': '#4dbd74'}"></i>
+                      </div>
+                      <div class="icon-option-checkBox" *ngIf="status == 'sick'" (click)="OptionPeopleModal.show()">
+                        <i class="fas fa-skull-crossbones fa-lg"
+                           (click)="setOptionChoice('moveDiedAllPeople')"
+                           tooltip="Đánh dấu đã chết"
+                           placement="top" [ngStyle]="{'color': '#000000'}"></i>
+                      </div>
+                      <div class="icon-option-checkBox" *ngIf="status != 'f1' && status != 'died'"
+                           (click)="OptionPeopleModal.show()">
+                        <i class="fas fa-house-user fa-lg"
+                           (click)="setOptionChoice('moveF1AllPeople')"
+                           tooltip="Đánh dấu đang cách ly"
+                           placement="top" [ngStyle]="{'color': '#1d7fae'}"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div *ngIf=" !listIdPeopleCheckbox.length > 0" class="col-md-11"
+                     [ngStyle]="{'margin-top': '13px', 'height':'0px'}">
                   <h6>Có tất cả {{listPeople.length}} người</h6>
                 </div>
               </div>
@@ -43,19 +84,27 @@
           <table class="table table-body-list">
             <thead>
             <tr>
-              <th [ngStyle]="{'width': '33px'}"><input [ngStyle]="{'width': '20px', 'height': '20px'}" type="checkbox" name="vehicle1"></th>
+              <th [ngStyle]="{'width': '33px'}">
+                <input (change)="checkBoxValue($event)"
+                       [ngStyle]="{'width': '20px', 'height': '20px'}"
+                       [checked]="isCheckedAllCheckBoxPeople"
+                       type="checkbox" name="checkBoxAllPeople">
+              </th>
               <th *ngIf=" status != 'f1'"><strong>Bệnh nhân</strong></th>
               <th><strong>Tên</strong></th>
               <th><strong>Tuổi</strong></th>
               <th><strong>Địa chỉ</strong></th>
               <th><strong>Tình trạng</strong></th>
-              <th *ngIf="status != 'f1'"><strong>Loại</strong></th>
+              <th *ngIf="status != 'f1' && status != 'died'"><strong>Loại</strong></th>
               <th></th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let item of listPeople | paginate: { itemsPerPage: itemsInPage, currentPage: p }">
-              <td><input type="checkbox" name="vehicle1" value="{{item.idPeople}}"></td>
+              <td><input (change)="checkBoxValue($event)"
+                         type="checkbox" name="people"
+                         [checked]="isCheckedCheckBoxPeople"
+                         [value]="item.idPeople"></td>
               <td *ngIf="status != 'f1'">BN{{item.idPeople}}</td>
               <td>{{item.name}}</td>
               <td>{{item.age}}</td>
@@ -78,8 +127,28 @@
                          <i class="fas fa-edit"></i> Sửa
                       </span>
                     </li>
-                    <li role="menuitem" data-toggle="modal" (click)="DeletePeopleModal.show()">
-                       <span class="dropdown-item" (click)="choicePeople(item.idPeople)">
+                    <li role="menuitem" *ngIf="status == 'f1' || status == 'cured'" (click)="OptionPeopleModal.show()">
+                       <span class="dropdown-item" (click)="setOptionChoice('moveSickPeople',item.idPeople)">
+                         <i class="fas fa-head-side-cough" [ngStyle]="{'color': '#fe2e2e'}"></i>Bị bệnh
+                      </span>
+                    </li>
+                    <li role="menuitem" *ngIf="status == 'sick'" (click)="OptionPeopleModal.show()">
+                       <span class="dropdown-item" (click)="setOptionChoice('moveCuredPeople',item.idPeople)">
+                        <i class="fas fa-user-shield" [ngStyle]="{'color': '#4dbd74'}"></i>Đã khỏi
+                      </span>
+                    </li>
+                    <li role="menuitem" *ngIf="status == 'sick'" (click)="OptionPeopleModal.show()">
+                       <span class="dropdown-item" (click)="setOptionChoice('moveDiedPeople',item.idPeople)">
+                            <i class="fas fa-skull-crossbones" [ngStyle]="{'color': '#000000'}"></i>Đã chết
+                      </span>
+                    </li>
+                    <li role="menuitem" *ngIf="status != 'f1' && status != 'died'" (click)="OptionPeopleModal.show()">
+                       <span class="dropdown-item" (click)="setOptionChoice('moveF1People',item.idPeople)">
+                          <i class="fas fa-house-user" [ngStyle]="{'color': '#1d7fae'}"></i>Cách ly
+                      </span>
+                    </li>
+                    <li role="menuitem" data-toggle="modal" (click)="OptionPeopleModal.show()">
+                       <span class="dropdown-item" (click)="setOptionChoice('deletePeople',item.idPeople)">
                        <i class="fas fa-trash-alt"></i> Xóa
                       </span>
                     </li>
@@ -102,13 +171,39 @@
   </div>
 </div>
 
-<div bsModal #DeletePeopleModal="bs-modal" class="modal fade alert-model" tabindex="-1" role="dialog"
+<div bsModal #OptionPeopleModal="bs-modal" class="modal fade alert-model" tabindex="-1" role="dialog"
      aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-danger" role="document">
     <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title" *ngIf="status == 'sick'">Xóa người bệnh này khỏi danh sách ?</h4>
-        <h4 class="modal-title" *ngIf="status == 'f1'">Xóa người này khỏi danh sách cách ly ?</h4>
+      <div class="modal-header" *ngIf="status == 'sick'">
+        <h4 class="modal-title" *ngIf="optionChoice == 'deletePeople'">Xóa người bệnh này khỏi danh sách ?</h4>
+        <h4 class="modal-title" *ngIf="optionChoice == 'deleteAllPeople'">Xóa tất cả những người được chọn khỏi danh
+          sách ?</h4>
+        <h4 class="modal-title" *ngIf="optionChoice == 'moveCuredPeople'">Đánh dấu người bệnh này đã được điều trị khỏi
+          ?</h4>
+        <h4 class="modal-title" *ngIf="optionChoice == 'moveCuredAllPeople'">Đánh dấu những người bệnh này đã được điều
+          trị khỏi ?</h4>
+        <h4 class="modal-title" *ngIf="optionChoice == 'moveDiedPeople'">Đánh dấu người bệnh này đã chết ?</h4>
+        <h4 class="modal-title" *ngIf="optionChoice == 'moveDiedAllPeople'">Đánh dấu những người bệnh này đã chết ?</h4>
+
+        <h4 class="modal-title" *ngIf="optionChoice == 'moveF1People'">Chuyển người này sang khu cách ly ?</h4>
+        <h4 class="modal-title" *ngIf="optionChoice == 'moveF1AllPeople'">Chuyển những người này sang khu cách ly ?</h4>
+      </div>
+      <div class="modal-header" *ngIf="status == 'f1'">
+        <h4 class="modal-title" *ngIf="optionChoice == 'deletePeople'">Xóa người này khỏi danh sách cách ly?</h4>
+        <h4 class="modal-title" *ngIf="optionChoice == 'deleteAllPeople'">Xóa tất cả những người được chọn này khỏi danh
+          sách cách ly ?</h4>
+        <h4 class="modal-title" *ngIf="optionChoice == 'moveSickPeople'">Đánh dấu người này bị bệnh ?</h4>
+        <h4 class="modal-title" *ngIf="optionChoice == 'moveSickAllPeople'">Đánh dấu những người này bị bệnh?</h4>
+      </div>
+      <div class="modal-header" *ngIf="status == 'cured'">
+        <h4 class="modal-title" *ngIf="optionChoice == 'moveSickPeople'">Đánh dấu người này bị bệnh ?</h4>
+        <h4 class="modal-title" *ngIf="optionChoice == 'moveSickAllPeople'">Đánh dấu những người này bị bệnh?</h4>
+        <h4 class="modal-title" *ngIf="optionChoice == 'deletePeople'">Xóa người này khỏi danh sách ?</h4>
+      </div>
+
+      <div class="modal-header" *ngIf="status == 'died'">
+        <h4 class="modal-title" *ngIf="optionChoice == 'deletePeople'">Xóa người này khỏi danh sách ?</h4>
       </div>
       <div class="modal-body" *ngIf="status == 'sick'">
         <p> Nếu xóa bệnh nhân này thì sẽ xóa hết các
@@ -117,8 +212,27 @@
       <div>
         <div class="modal-footer" [ngStyle]="{'text-align': 'center'}">
           <div>
-            <button type="button" class="btn btn-secondary" (click)="DeletePeopleModal.hide()">Hủy</button>
-            <button type="button" class="btn btn-danger" (click)="deletePeople()">Xác nhận</button>
+            <button type="button" class="btn btn-secondary" (click)="OptionPeopleModal.hide()">Hủy</button>
+            <button type="button" class="btn btn-danger"
+                    *ngIf="optionChoice == 'deletePeople' ||optionChoice == 'deleteAllPeople'"
+                    (click)="deletePeople()">Xác nhận
+            </button>
+            <button type="button" class="btn btn-danger"
+                    *ngIf="optionChoice == 'moveCuredPeople' ||optionChoice == 'moveCuredAllPeople'"
+                    (click)="moveCuredPeople()">Xác nhận
+            </button>
+            <button type="button" class="btn btn-danger"
+                    *ngIf="optionChoice == 'moveF1People' ||optionChoice == 'moveF1AllPeople'"
+                    (click)="moveF1People()">Xác nhận
+            </button>
+            <button type="button" class="btn btn-danger"
+                    *ngIf="optionChoice == 'moveSickPeople' ||optionChoice == 'moveSickAllPeople'"
+                    (click)="moveSickPeople()">Xác nhận
+            </button>
+            <button type="button" class="btn btn-danger"
+                    *ngIf="optionChoice == 'moveDiedPeople' ||optionChoice == 'moveDiedAllPeople'"
+                    (click)="moveDiedPeople()">Xác nhận
+            </button>
           </div>
         </div>
       </div>
@@ -184,16 +298,17 @@
           <p class="col-md-3 col-xs-3 col-lg-3 " *ngIf="peopleDetail.status == 'sick'">Ngày nhập viện :</p>
           <p class="col-md-3 col-xs-3 col-lg-3 " *ngIf="peopleDetail.status == 'f1'">Ngày cách ly :</p>
           <p class="col-md-3 col-xs-3 col-lg-3 " *ngIf="peopleDetail.status == 'cured'">Ngày xuất viện :</p>
+          <p class="col-md-3 col-xs-3 col-lg-3 " *ngIf="status == 'died'">Ngày chết :</p>
           <p [ngStyle]="{'margin-left': '-48px'}"><strong>{{peopleDetail.time | date:'MM/dd/yyyy' : 'ICT'}}</strong>
           </p>
         </div>
-        <div class="row">
+        <div class="row" *ngIf="status != 'died'">
           <p class="col-md-2 col-xs-2 col-lg-2 ">Tình trạng :</p>
           <p *ngIf="peopleDetail.status == 'sick'"><strong>Đang điều trị</strong></p>
           <p *ngIf="peopleDetail.status == 'f1'"><strong>Đang cách ly</strong></p>
           <p *ngIf="peopleDetail.status == 'cured'"><strong>Đã khỏi</strong></p>
         </div>
-        <div class="row" *ngIf="peopleDetail.status != 'f1'">
+        <div class="row" *ngIf="peopleDetail.status != 'f1' && status!= 'died'">
           <p class="col-md-2 col-xs-2 col-lg-2 ">Loại : </p>
           <p><strong>{{peopleDetail.type ? 'Lây nhiễm trong nước' : 'Sau khi nhập cảnh'}}</strong></p>
         </div>

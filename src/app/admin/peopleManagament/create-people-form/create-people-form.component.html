@@ -33,9 +33,9 @@
               <div class="col-md-9">
                 <input type="number" id="age-input" [formControlName]="'age'" name="age" class="form-control "
                        placeholder="Nhập tuổi">
-<!--                                <div class="invalid-feedback" *ngIf="f.age.errors.pattern">-->
-<!--                                  Please provide a valid information.-->
-<!--                                </div>-->
+                <!--                                <div class="invalid-feedback" *ngIf="f.age.errors.pattern">-->
+                <!--                                  Please provide a valid information.-->
+                <!--                                </div>-->
               </div>
             </div>
             <div class="form-group row">
@@ -64,27 +64,23 @@
             <div class="form-group row">
               <label class="col-md-1 col-form-label">Địa chỉ</label>
               <div class="col-md-3">
-                <select id="province" [formControlName]="'province'" name="province" class="form-control">
-                  <option [value]="1">Tỉnh</option>
-                  <option value="1">Option #1</option>
-                  <option value="2">Option #2</option>
-                  <option value="3">Option #3</option>
+                <select id="province" (change)="getAllDistrictByProvinceId($event.target.value)" [formControlName]="'province'" name="province" class="form-control">
+                  <option selected [value]="0">Tỉnh</option>
+                  <option *ngFor="let city of listProvince" value="{{city.provinceId}}">{{city.provinceName}}</option>
+
                 </select>
               </div>
               <div class="col-md-3">
-                <select id="district" name="district" [formControlName]="'district'" class="form-control">
-                  <option [value]="1">Huyện</option>
-                  <option value="1">Option #1</option>
-                  <option value="3">Option #2</option>
-                  <option value="4">Option #3</option>
+                <select id="district" (change)="getAllCommuneByDistrictId($event.target.value)" name="district" [formControlName]="'district'" class="form-control">
+                  <option selected [value]="0">Huyện</option>
+                  <option *ngFor="let district of listDistrict" value="{{district.districtId}}">{{district.districtName}}</option>
                 </select>
               </div>
               <div class="col-md-3">
                 <select id="commune" name="commune" [formControlName]="'commune'" class="form-control">
-                  <option [value]="1">Xã</option>
-                  <option value="1">Option #1</option>
-                  <option value="2">Option #2</option>
-                  <option value="3">Option #3</option>
+                  <option selected [value]="0">Xã</option>
+                  <option *ngFor="let commune of listCommune" value="{{commune.communeId}}">{{commune.communeName}}</option>
+
                 </select>
               </div>
             </div>
@@ -113,7 +109,7 @@
               <label class="col-md-1 col-form-label">Nguồn lây</label>
               <div class="col-md-3">
                 <select id="source" [formControlName]="'source'" name="source" class="form-control">
-                  <option>-- Lựa chọn --</option>
+                  <option [value]="0">-- Lựa chọn --</option>
                   <option [value]="3">Option #1</option>
                   <option [value]="2">Option #2</option>
                   <option [value]="4">Option #3</option>

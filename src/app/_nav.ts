@@ -17,8 +17,8 @@ export const navItems: INavData[] = [
   },
   {
     name: 'Thông tin',
-    url: 'people-management',
-    icon: 'icon-cursor',
+    // url: 'people-management',
+    icon: 'icon-folder-alt',
     children: [
       {
         name: 'Thêm thông tin',
@@ -52,27 +52,33 @@ export const navItems: INavData[] = [
           }
         ]
       }
-      // {
-      //   name: 'Brand Buttons',
-      //   url: '/buttons/brand-buttons',
-      //   icon: 'icon-cursor'
-      // }
     ]
   },
-  // {
-  //   title: true,
-  //   name: 'Theme'
-  // },
-  // {
-  //   name: 'Colors',
-  //   url: '/theme/colors',
-  //   icon: 'icon-drop'
-  // },
-  // {
-  //   name: 'Typography',
-  //   url: '/theme/typography',
-  //   icon: 'icon-pencil'
-  // },
+  {
+    title: true,
+    name: 'Quản lý thông tin tình hình dịch bệnh'
+  },
+  {
+    name: 'Tin tức',
+    icon: 'icon-folder-alt',
+    children: [
+      {
+        name: 'Tạo tin tức',
+        url: 'post/news',
+        icon: 'icon-note'
+      },
+      {
+        name: 'Danh dách tin tức',
+        url: 'post/news',
+        icon: 'icon-list'
+      }
+    ]
+  },
+  {
+    name: 'Diễn biến dịch',
+    url: 'theme/typography',
+    icon: 'icon-pencil'
+  },
   {
     title: true,
     name: 'Components'

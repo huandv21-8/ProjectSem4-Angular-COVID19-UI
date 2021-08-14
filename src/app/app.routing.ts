@@ -61,6 +61,10 @@ export const routes: Routes = [
         loadChildren: () => import('./admin/dashboard/dashboard.module').then(m => m.DashboardModule)
       },
       {
+        path: 'post',
+        loadChildren: () => import('./admin/post/post.module').then(m => m.PostModule)
+      },
+      {
         path: 'base',
         loadChildren: () => import('./views/base/base.module').then(m => m.BaseModule)
       },

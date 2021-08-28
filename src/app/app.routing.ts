@@ -45,6 +45,15 @@ export const routes: Routes = [
     }
   },
   {
+    path: 'client',
+    children: [
+      {
+        path: '',
+        loadChildren: () => import('./client/client.module').then(m => m.ClientModule)
+      }
+    ]
+  },
+  {
     path: 'admin',
     component: DefaultLayoutComponent,
     data: {

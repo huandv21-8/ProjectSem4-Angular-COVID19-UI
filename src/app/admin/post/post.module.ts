@@ -1,9 +1,10 @@
 import {NgModule} from '@angular/core';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ChartsModule} from 'ng2-charts';
 import {BsDropdownModule} from 'ngx-bootstrap/dropdown';
 import {ButtonsModule} from 'ngx-bootstrap/buttons';
 import {PostRouting} from './post.routing';
+import {CKEditorModule} from '@ckeditor/ckeditor5-angular';
 
 
 @NgModule({
@@ -12,9 +13,12 @@ import {PostRouting} from './post.routing';
     PostRouting,
     ChartsModule,
     BsDropdownModule,
-    ButtonsModule.forRoot()
+    ButtonsModule.forRoot(),
+    ReactiveFormsModule,
+    CKEditorModule
   ],
-  declarations: []
+  declarations: [
+  ]
 })
 export class PostModule {
 }

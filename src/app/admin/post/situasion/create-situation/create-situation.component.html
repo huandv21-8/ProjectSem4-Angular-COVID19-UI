@@ -6,17 +6,16 @@
           <strong>Form thêm diễn biến dịch</strong>
 
         </div>
-        <form id="form_dangtin" class="form-horizontal" [formGroup]="articleForm" (ngSubmit)="createArticle()">
+        <form id="form_dangtin" class="form-horizontal" [formGroup]="situationForm" (ngSubmit)="createSituation()">
           <div class="card-body situation">
             <div class="form-group">
 
-              <ckeditor class="ckeditor-style" [formControlName]="'rmDescription'" [editor]="Editor"
-                        (ready)="onReady($event)"></ckeditor>
+              <ckeditor class="ckeditor-style" [formControlName]="'content'" [editor]="Editor"></ckeditor>
             </div>
 
           </div>
           <div class="card-footer">
-            <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> Submit</button>
+            <button type="submit"  [disabled]="situationForm.invalid" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> SAVE</button>
           </div>
         </form>
       </div>

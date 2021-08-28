@@ -76,8 +76,19 @@ export const navItems: INavData[] = [
   },
   {
     name: 'Diễn biến dịch',
-    url: 'theme/typography',
-    icon: 'icon-pencil'
+    icon: 'icon-folder-alt',
+    children: [
+      {
+        name: 'Tạo diễn biến dịch',
+        url: 'post/situation',
+        icon: 'icon-note'
+      },
+      // {
+      //   name: 'Danh dách diễn biến',
+      //   url: 'post/news',
+      //   icon: 'icon-list'
+      // }
+    ]
   },
   {
     title: true,

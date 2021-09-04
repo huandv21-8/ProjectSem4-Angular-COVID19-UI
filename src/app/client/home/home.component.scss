@@ -1,0 +1,121 @@
+#content-top-home h3 {
+  padding: 18px 0;
+  color: #007bff;
+}
+#content-top-home h3:hover {
+  color: #0056b3;
+}
+.disease-data {
+  width: 100%;
+  height: 190px;
+  overflow: auto;
+  font-size: 16px;
+}
+#header-table {
+  position: sticky;
+  top: 0px;
+  z-index: 1;
+  background-color: #dddddd;
+}
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td,
+th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 14px;
+  height: 50px;
+}
+#number-today {
+  color: #c9302c;
+}
+
+tr:nth-child(even) {
+  background-color: #f8f9fa;
+}
+#center-home{
+    margin-top: 4%;
+}
+#img-content{
+    width: 450px;
+    margin-bottom: 5%;
+}
+.portlet{
+    margin-top: 4%;
+}
+.text-header-top-news{
+  padding: 20px 0;
+  color: #007BFF;
+}
+.text-header-top-news:hover{
+  color: #0D569F;
+}
+hr{
+  width: 485px;
+    background: #C9302C;
+    float: left;
+}
+// .epidemic-evolution{
+//   width: 510px;
+//   height: 510px;
+//   overflow: auto;
+// }
+.epidemic-evolution{
+  margin: -4% 0 0 -4%;
+  width: 510px;
+  height: 510px;
+  border-left: 2px solid rgb(86, 191, 240); 
+  padding-left: 22px;
+  overflow: auto;
+}
+.icon{
+  width: 20px;
+  height: 20px;
+  background-color: #95723F;
+  border: 3px solid #95723F;
+  border-radius: 100%;
+  margin-left: -21px;
+  margin-top: -1%;
+}
+.dropbtn {
+  background-color: #04AA6D;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  width:300px;
+  border: 1px solid #E4E5E6;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 210px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  margin-left: 70%;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  border: 1px solid #DDD;
+}
+
+.dropdown-content a:hover {background-color: #ddd;}
+
+.dropdown:hover .dropdown-content {display: block;}
+
+.dropdown:hover .dropbtn {background-color: #3e8e41;}

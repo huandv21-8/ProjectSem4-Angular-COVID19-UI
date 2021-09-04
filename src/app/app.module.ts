@@ -48,6 +48,7 @@ import {NgxWebstorageModule} from 'ngx-webstorage';
 import {TokenInterceptor} from './token-interceptor';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
+
 @NgModule({
   imports: [
     BrowserModule,
@@ -81,7 +82,9 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     P404Component,
     P500Component,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+   
+   
   ],
   providers: [
     {

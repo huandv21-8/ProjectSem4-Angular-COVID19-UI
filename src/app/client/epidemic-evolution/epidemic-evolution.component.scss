@@ -1,0 +1,72 @@
+.box-ddn{
+    text-align:center;
+    background-color: #2A3477;
+    height: 120px;
+    width: 100%;
+    padding-top: 28px;
+    color: white;
+    margin-bottom: 5%;
+}
+.box-text{
+    font-size:14px;
+    color: yellow;
+    padding-bottom: 10px;
+}
+#img-box{
+    width: 100%;
+    height: 250px;
+}
+.text-epidemic {
+    margin-bottom: 8%;
+}
+.epidemic-evolution{
+    margin: -4% 0 0 -4%;
+    width: 104%;
+    height: auto;
+    border-left: 2px solid rgb(86, 191, 240); 
+    padding-left: 10px;
+}
+.icon{
+    width: 20px;
+    height: 20px;
+    background-color: #95723F;
+    border: 3px solid #95723F;
+    border-radius: 100%;
+    margin-left: -21px;
+    margin-top: -1%;
+}
+.text-headding{ 
+    width: 100%;
+    height: 45px;
+    padding-left: 5%;
+    padding-top:12px;
+    color: #95723F;
+    background-color: #FAFAFA;
+}
+.text-content{
+    padding:3% 0 2% 5%;
+    background-color: #F5F5F5;
+}
+.card .card-body {
+    padding: 2rem 2% 0 2rem;
+}
+.pagination{
+    padding-bottom: 20px;
+    padding-top: 0px;
+    margin-left: 50%;
+}
+.pager {
+    list-style: none;
+    margin: 1.5 0;
+    padding-left: 0;
+    text-align: center;
+}
+.pager li {
+    display: inline;
+    padding: 7px 12px;
+    border: 2px solid #F1F1F1;
+    border-radius: 8px;
+}
+.pager li:hover{
+    background-color: #C1C1C1;
+}

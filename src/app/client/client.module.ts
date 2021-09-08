@@ -13,6 +13,8 @@ import { AppComponent } from '../app.component';
 import { HeaderComponent } from './header/header.component';
 import { IndexComponent } from './index/index.component';
 import { FooterComponent } from './footer/footer.component';
+import { ConfirmPhoneNumberComponent } from './confirm-phone-number/confirm-phone-number.component';
+import { RegisterPhoneNumberComponent } from './register-phone-number/register-phone-number.component';
 
 
 @NgModule({
@@ -24,6 +26,9 @@ import { FooterComponent } from './footer/footer.component';
     HeaderComponent,
     IndexComponent,
     FooterComponent,
+    ConfirmPhoneNumberComponent,
+    RegisterPhoneNumberComponent,
+    
   ],
   imports: [
     CommonModule, 

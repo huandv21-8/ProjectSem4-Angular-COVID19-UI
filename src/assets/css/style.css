@@ -11033,11 +11033,6 @@ header .navbar .navbar-brand img {
     display: none;
   }
 }
-
-header .navbar-top {
-  padding: 24px 0;
-}
-
 header .navbar-top .navbar-top-left-menu,
 header .navbar-top .navbar-top-right-menu {
   padding-left: 0;
@@ -11115,10 +11110,6 @@ header .navbar-top .navbar-top-right-menu .nav-item:last-child .nav-link {
   header .navbar-top {
     display: none;
   }
-}
-
-header .navbar-bottom {
-  padding-bottom: 24px;
 }
 
 @media (max-width: 999px) {

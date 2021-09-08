@@ -5,6 +5,9 @@ import { HealthDeclarationComponent } from "./health-declaration/health-declarat
 import { HomeComponent } from "./home/home.component";
 import { IndexComponent } from "./index/index.component";
 import { NewsComponent } from "./news/news.component";
+import { ConfirmPhoneNumberComponent } from './confirm-phone-number/confirm-phone-number.component';
+import { RegisterPhoneNumberComponent } from './register-phone-number/register-phone-number.component';
+
 
 const routes: Routes = [
 
@@ -27,6 +30,14 @@ const routes: Routes = [
       {
         path: "epidemic-evolution",
         component: EpidemicEvolutionComponent,
+      },
+      {
+        path: "register-phone-number",
+        component: RegisterPhoneNumberComponent,
+      },
+      {
+        path: "confirm-phone-number",
+        component: ConfirmPhoneNumberComponent,
       },
     ],
   }

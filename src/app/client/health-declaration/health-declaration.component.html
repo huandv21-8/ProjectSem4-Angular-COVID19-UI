@@ -115,11 +115,72 @@
                                                             placeholder="Default Input">
                                                     </div>
                                                 </div>
-                                                <h5 style="text-align:center;">Trong vòng 14 ngày (tính đến thời điểm
+                                                <h5 id="infor">Trong vòng 14 ngày, Anh/Chị có:</h5>
+                                                <div class="form-group row">
+                                                    <div class="col-md-9 col-sm-9 ">
+                                                        <div id="form-health">
+
+                                                        </div>
+                                                        <table style="width:100%">
+                                                            <tr>
+                                                                <th></th>
+                                                                <th id="text-table">Có</th>
+                                                                <th id="text-table">Không</th>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Có tiếp xúc với trường hợp bệnh hoặc nghi ngờ mắc bệnh COVID - 19 không?</td>
+                                                                <td>
+                                                                    <label>
+                                                                        <input type="radio" value="Fever1"
+                                                                            id="optionsRadios1" name="Fever">
+                                                                    </label>
+                                                                </td>
+                                                                <td>
+                                                                    <label>
+                                                                        <input type="radio" value="Fever2"
+                                                                            id="optionsRadios2" name="Fever">
+                                                                    </label>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Có đi về từ vùng có dịch COVID-19 không?</td>
+                                                                <td>
+                                                                    <label>
+                                                                        <input type="radio" value="Cough1"
+                                                                            id="optionsRadios1" name="Cough">
+                                                                    </label>
+                                                                </td>
+                                                                <td>
+                                                                    <label>
+                                                                        <input type="radio" value="Cough2"
+                                                                            id="optionsRadios2" name="Cough">
+                                                                    </label>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Có tiếp xúc với trường hợp đi về từ vùng dịch kh</td>
+                                                                <td>
+                                                                    <label>
+                                                                        <input type="radio" value="Shortness_of_breath1"
+                                                                            id="optionsRadios1"
+                                                                            name="Shortness_of_breath">
+                                                                    </label>
+                                                                </td>
+                                                                <td>
+                                                                    <label>
+                                                                        <input type="radio" value="Shortness_of_breath"
+                                                                            id="optionsRadios2"
+                                                                            name="Shortness_of_breath">
+                                                                    </label>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                <h5 id="infor">Trong vòng 14 ngày (tính đến thời điểm
                                                     làm thủ tục xuất cảnh, nhập cảnh, quá cảnh) Anh/Chị có thấy xuất
                                                     hiện dấu hiệu nào sau đây không? <span
                                                         id="text_input_health">(*)</span></h5>
-
                                                 <div class="form-group row">
                                                     <div class="col-md-9 col-sm-9 ">
                                                         <div id="form-health">
@@ -179,77 +240,147 @@
                                                                 </td>
                                                             </tr>
                                                             <tr>
-                                                                <td>Đau họng</td>
+                                                                <td>Viêm phổi</td>
                                                                 <td>
                                                                     <label>
-                                                                        <input type="radio" value="Sore_throat1"
+                                                                        <input type="radio" value="Pneumonia"
                                                                             id="optionsRadios1" name="Sore_throat">
                                                                     </label>
                                                                 </td>
                                                                 <td>
                                                                     <label>
-                                                                        <input type="radio" value="Sore_throat2"
+                                                                        <input type="radio" value="Pneumonia2"
                                                                             id="optionsRadios2" name="Sore_throat">
                                                                     </label>
                                                                 </td>
                                                             </tr>
                                                             <tr>
-                                                                <td>Nôn/Buồn nôn</td>
+                                                                <td>Đau họng</td>
                                                                 <td>
                                                                     <label>
-                                                                        <input type="radio" value="Nausea1"
+                                                                        <input type="radio" value="Sore_throat"
                                                                             id="optionsRadios1" name="Nausea">
                                                                     </label>
                                                                 </td>
                                                                 <td>
                                                                     <label>
-                                                                        <input type="radio" value="Nausea2"
+                                                                        <input type="radio" value="Sore_throat2"
                                                                             id="optionsRadios2" name="Nausea">
                                                                     </label>
                                                                 </td>
                                                             </tr>
                                                             <tr>
-                                                                <td>Tiêu chảy</td>
+                                                                <td>Mệt mõi</td>
                                                                 <td>
                                                                     <label>
-                                                                        <input type="radio" value="Diarrhea1"
+                                                                        <input type="radio" value="Tire"
                                                                             id="optionsRadios1" name="Diarrhea">
                                                                     </label>
                                                                 </td>
                                                                 <td>
                                                                     <label>
-                                                                        <input type="radio" value="Diarrhea2"
+                                                                        <input type="radio" value="Tire2"
                                                                             id="optionsRadios2" name="Diarrhea">
                                                                     </label>
                                                                 </td>
                                                             </tr>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                <h5 id="infor">Hiện tại Anh/Chị có các bệnh nào dưới đây:</h5>
+                                                <div class="form-group row">
+                                                    <div class="col-md-9 col-sm-9 ">
+                                                        <table style="width:100%">
                                                             <tr>
-                                                                <td>Xuất huyết ngoài da</td>
+                                                                <th></th>
+                                                                <th id="text-table">Không</th>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Bệnh gan mãn tính</td>
                                                                 <td>
                                                                     <label>
-                                                                        <input type="radio" value="Hemorrhage1"
-                                                                            id="optionsRadios1" name="Hemorrhage">
-                                                                    </label>
-                                                                </td>
-                                                                <td>
-                                                                    <label>
-                                                                        <input type="radio" value="Hemorrhage2"
-                                                                            id="optionsRadios2" name="Hemorrhage">
+                                                                        <input type="checkbox" class="flat">
                                                                     </label>
                                                                 </td>
                                                             </tr>
                                                             <tr>
-                                                                <td>Nổi ban ngoài da</td>
+                                                                <td>Bệnh máu mãn tính</td>
                                                                 <td>
                                                                     <label>
-                                                                        <input type="radio" value="Skin_rash1"
-                                                                            id="optionsRadios1" name="Skin_rash">
+                                                                        <input type="checkbox" class="flat">
                                                                     </label>
                                                                 </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Bệnh phổi mãn tính</td>
                                                                 <td>
                                                                     <label>
-                                                                        <input type="radio" value="Skin_rash2"
-                                                                            id="optionsRadios1" name="Skin_rash">
+                                                                        <input type="checkbox" class="flat">
+                                                                    </label>
+                                                                </td>
+                                                            </tr>
+
+                                                            <tr>
+                                                                <td>Bệnh thận mãn tính</td>
+                                                                <td>
+                                                                    <label>
+                                                                        <input type="checkbox" class="flat">
+                                                                    </label>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Bệnh tim mạch</td>
+                                                                <td>
+                                                                    <label>
+                                                                        <input type="checkbox" class="flat">
+                                                                    </label>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Huyết áp cao</td>
+                                                                <td>
+                                                                    <label>
+                                                                        <input type="checkbox" class="flat">
+                                                                    </label>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>HIV hoặc suy giảm miễn dịch</td>
+                                                                <td>
+                                                                    <label>
+                                                                        <input type="checkbox" class="flat">
+                                                                    </label>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Người nhận ghép tạng, tủy xương</td>
+                                                                <td>
+                                                                    <label>
+                                                                        <input type="checkbox" class="flat">
+                                                                    </label>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Tiểu đường</td>
+                                                                <td>
+                                                                    <label>
+                                                                        <input type="checkbox" class="flat">
+                                                                    </label>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Ung thư</td>
+                                                                <td>
+                                                                    <label>
+                                                                        <input type="checkbox" class="flat">
+                                                                    </label>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Có thai</td>
+                                                                <td>
+                                                                    <label>
+                                                                        <input type="checkbox" class="flat">
                                                                     </label>
                                                                 </td>
                                                             </tr>

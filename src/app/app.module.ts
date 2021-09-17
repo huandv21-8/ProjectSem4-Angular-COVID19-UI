@@ -47,6 +47,9 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {NgxWebstorageModule} from 'ngx-webstorage';
 import {TokenInterceptor} from './token-interceptor';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { ResetPasswordComponent } from './admin/reset-password/reset-password.component';
+import { SubmitPasswordComponent } from './admin/submit-password/submit-password.component';
+import { SubmitOtpEmailComponent } from './admin/submit-otp-email/submit-otp-email.component';
 
 @NgModule({
   imports: [
@@ -82,6 +85,9 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     P500Component,
     LoginComponent,
     RegisterComponent,
+    ResetPasswordComponent,
+    SubmitPasswordComponent,
+    SubmitOtpEmailComponent,
   ],
   providers: [
     {

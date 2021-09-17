@@ -12,7 +12,6 @@ export class SituationService {
   }
 
   createSituation(situationRequest: SituationRequest): Observable<any> {
-    console.log(situationRequest.content);
     return this.http.post('http://localhost:8082/v1/situation/createSituation', situationRequest);
   }
 

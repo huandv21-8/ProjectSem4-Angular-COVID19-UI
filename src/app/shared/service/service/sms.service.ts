@@ -20,7 +20,6 @@ export class SmsService {
 
   verifyOtp(otp: OtpRequest): Observable<any> {
     return this.http.post<boolean>('http://localhost:8082/v1/sms/verifyOtp', otp).pipe(map(data => {
-      console.log(data);
       this.localStorage.store('isCheckVerify', data);
     }));
   }

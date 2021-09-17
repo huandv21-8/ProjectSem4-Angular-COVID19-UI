@@ -9,6 +9,10 @@ import {P500Component} from './views/error/500.component';
 import {LoginComponent} from './views/login/login.component';
 import {RegisterComponent} from './views/register/register.component';
 import {AuthGuardGuard} from './shared/service/auth-guard.guard';
+import { ResetPasswordComponent } from './admin/reset-password/reset-password.component';
+import { SubmitPasswordComponent } from './admin/submit-password/submit-password.component';
+import { SubmitOtpEmailComponent } from './admin/submit-otp-email/submit-otp-email.component';
+
 
 export const routes: Routes = [
   {
@@ -103,6 +107,27 @@ export const routes: Routes = [
         loadChildren: () => import('./views/widgets/widgets.module').then(m => m.WidgetsModule)
       }
     ]
+  },
+  {
+    path: 'reset-password',
+    component: ResetPasswordComponent,
+    data: {
+      title: 'Reset Password Page'
+    }
+  },
+  {
+    path: 'submit-password',
+    component: SubmitPasswordComponent,
+    data: {
+      title: 'Submit Password Page'
+    }
+  },
+  {
+    path: 'submit-otp-email',
+    component: SubmitOtpEmailComponent,
+    data: {
+      title: 'Submit Password Page'
+    }
   },
   {path: '**', component: P404Component}
 ];

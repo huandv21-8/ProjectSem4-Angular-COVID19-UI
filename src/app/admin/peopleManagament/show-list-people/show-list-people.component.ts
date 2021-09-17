@@ -5,6 +5,7 @@ import {PeopleManagementService} from '../peopleManagement.service';
 import {PeopleModel} from '../../../shared/model/people-model';
 import {ToastrService} from 'ngx-toastr';
 import {ModalDirective} from 'ngx-bootstrap/modal';
+import {StatusEnum} from '../../../shared/model/status-enum';
 
 @Component({
   selector: 'app-show-list-people',
@@ -37,14 +38,14 @@ export class ShowListPeopleComponent implements OnInit {
     this.peopleDetail = {
       idPeople: 0,
       name: '',
-      age: 0,
+      birthDay: 0,
       gender: true,
       phone: '',
       province: '',
       district: '',
       commune: '',
-      schedule: '',
-      time: '',
+      travelSchedule: '',
+      updatedAt: '',
       status: '',
       type: true,
       idSource: 0,
@@ -65,8 +66,8 @@ export class ShowListPeopleComponent implements OnInit {
     }
   }
 
-  getPeopleDetail(idPeople: number) {
-    this.peopleManagementService.getPeopleDetailByStatus(this.status, idPeople).subscribe(data => {
+  getPeopleDetail(idStatusByTime: number) {
+    this.peopleManagementService.getPeopleDetailByStatus(this.status, idStatusByTime).subscribe(data => {
       console.log(data);
       this.peopleDetail = data;
     });
@@ -149,7 +150,7 @@ export class ShowListPeopleComponent implements OnInit {
 
   moveCuredPeople() {
     if (this.idChoicePeople && this.optionChoice === 'moveCuredPeople') {
-      this.peopleManagementService.moveCuredPeopleById(this.status, this.idChoicePeople).subscribe(data => {
+      this.peopleManagementService.movePeopleByStatusAndPeopleId(StatusEnum.CURED, this.idChoicePeople).subscribe(data => {
           this.getAllPeopleByStatus();
           this.toastrService.success('Thành công');
         },
@@ -159,7 +160,8 @@ export class ShowListPeopleComponent implements OnInit {
       this.optionPeopleModal.hide();
     }
     if (this.optionChoice === 'moveCuredAllPeople' && this.listIdPeopleCheckbox) {
-      this.peopleManagementService.moveAllCuredPeopleById(this.status, this.listIdPeopleCheckbox).subscribe(data => {
+      this.peopleManagementService.moveAllPeopleByStatusAndPeopleIdAndCheckbox(StatusEnum.CURED, this.listIdPeopleCheckbox)
+        .subscribe(data => {
           this.getAllPeopleByStatus();
           this.toastrService.success('Thành công');
         },
@@ -172,7 +174,7 @@ export class ShowListPeopleComponent implements OnInit {
 
   moveF1People() {
     if (this.idChoicePeople && this.optionChoice === 'moveF1People') {
-      this.peopleManagementService.moveF1PeopleById(this.status, this.idChoicePeople).subscribe(data => {
+      this.peopleManagementService.movePeopleByStatusAndPeopleId(StatusEnum.F1, this.idChoicePeople).subscribe(data => {
           this.getAllPeopleByStatus();
           this.toastrService.success('Thành công');
         },
@@ -182,7 +184,8 @@ export class ShowListPeopleComponent implements OnInit {
       this.optionPeopleModal.hide();
     }
     if (this.optionChoice === 'moveF1AllPeople' && this.listIdPeopleCheckbox) {
-      this.peopleManagementService.moveAllF1PeopleById(this.status, this.listIdPeopleCheckbox).subscribe(data => {
+      this.peopleManagementService.moveAllPeopleByStatusAndPeopleIdAndCheckbox(StatusEnum.F1, this.listIdPeopleCheckbox)
+        .subscribe(data => {
           this.getAllPeopleByStatus();
           this.toastrService.success('Thành công');
         },
@@ -195,7 +198,7 @@ export class ShowListPeopleComponent implements OnInit {
 
   moveDiedPeople() {
     if (this.idChoicePeople && this.optionChoice === 'moveDiedPeople') {
-      this.peopleManagementService.moveDiedPeopleById(this.status, this.idChoicePeople).subscribe(data => {
+      this.peopleManagementService.movePeopleByStatusAndPeopleId(StatusEnum.DIED, this.idChoicePeople).subscribe(data => {
           this.getAllPeopleByStatus();
           this.toastrService.success('Thành công');
         },
@@ -205,7 +208,8 @@ export class ShowListPeopleComponent implements OnInit {
       this.optionPeopleModal.hide();
     }
     if (this.optionChoice === 'moveDiedAllPeople' && this.listIdPeopleCheckbox) {
-      this.peopleManagementService.moveAllDiedPeopleById(this.status, this.listIdPeopleCheckbox).subscribe(data => {
+      this.peopleManagementService.moveAllPeopleByStatusAndPeopleIdAndCheckbox(StatusEnum.DIED, this.listIdPeopleCheckbox)
+        .subscribe(data => {
           this.getAllPeopleByStatus();
           this.toastrService.success('Thành công');
         },
@@ -218,7 +222,7 @@ export class ShowListPeopleComponent implements OnInit {
 
   moveSickPeople() {
     if (this.idChoicePeople && this.optionChoice === 'moveSickPeople') {
-      this.peopleManagementService.moveSickPeopleById(this.status, this.idChoicePeople).subscribe(data => {
+      this.peopleManagementService.movePeopleByStatusAndPeopleId(StatusEnum.Sick, this.idChoicePeople).subscribe(data => {
           this.getAllPeopleByStatus();
           this.toastrService.success('Thành công');
         },
@@ -228,7 +232,8 @@ export class ShowListPeopleComponent implements OnInit {
       this.optionPeopleModal.hide();
     }
     if (this.optionChoice === 'moveSickAllPeople' && this.listIdPeopleCheckbox) {
-      this.peopleManagementService.moveAllSickPeopleById(this.status, this.listIdPeopleCheckbox).subscribe(data => {
+      this.peopleManagementService.moveAllPeopleByStatusAndPeopleIdAndCheckbox(StatusEnum.Sick, this.listIdPeopleCheckbox)
+        .subscribe(data => {
           this.getAllPeopleByStatus();
           this.toastrService.success('Thành công');
         },

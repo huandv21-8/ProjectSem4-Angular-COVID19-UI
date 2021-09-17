@@ -2,14 +2,14 @@
 export interface PeopleModel {
   idPeople?: number;
   name: string;
-  age: number;
+  birthDay: any;
   gender: boolean;
   phone?: string;
   province?: string;
   district?: string;
   commune?: string;
-  schedule?: string;
-  time?: string;
+  travelSchedule?: string;
+  updatedAt?: string;
   status: string;
   type?: boolean;
   idSource?: number;

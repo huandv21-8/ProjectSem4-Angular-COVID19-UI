@@ -65,8 +65,8 @@ export class DashboardComponent implements OnInit {
         ticks: {
           beginAtZero: true,
           maxTicksLimit: 5,
-          stepSize: Math.ceil(250 / 15),
-          max: 250
+          stepSize: Math.ceil(50 / 15),
+          max: 50
         }
       }]
     },
@@ -109,33 +109,50 @@ export class DashboardComponent implements OnInit {
   data: {
     [sick: string]: [{ [key: string]: any }]
   };
+  staticalTotalPeople: {
+    [status: string]: number
+  };
+  staticalTotalPeopleByCured: number;
+  staticalTotalPeopleBySick: number;
+  staticalTotalPeopleByDied: number;
 
 
   ngOnInit(): void {
     this.dashboard();
+    this.staticalTotalPeopleByStatus();
   }
 
   onStatisticsChange(value: string) {
     this.timeForm = value;
-    // console.log(this.timeForm);
     this.dashboard();
-    // console.log(this.mainChartLabels);
-    // console.log(this.mainChartDataSick);
-    //  console.log(this.mainChartDataCured);
-    //  console.log(this.mainChartDataDied);
     this.mainChartLabels = [];
     this.mainChartDataCured = [];
     this.mainChartDataSick = [];
     this.mainChartDataDied = [];
-    // console.log(this.radioModel);
+  }
 
+  staticalTotalPeopleByStatus() {
+    this.dashboardService.staticalTotalPeopleByStatus().subscribe(data => {
+        this.staticalTotalPeople = data;
+        for (const entry of Object.entries(this.staticalTotalPeople)) {
+          if (entry[0] === 'cured') {
+            this.staticalTotalPeopleByCured = entry[1];
+          } else if (entry[0] === 'sick') {
+            this.staticalTotalPeopleBySick = entry[1];
+          } else if (entry[0] === 'died') {
+            this.staticalTotalPeopleByDied = entry[1];
+          }
+        }
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 
   dashboard() {
-    console.log(this.timeForm);
     this.dashboardService.dashboard(this.timeForm).subscribe(data => {
         this.data = data;
-        console.log(data);
         for (const entry of Object.entries(this.data)) {
           if (entry[0] === 'sick') {
             for (const entry1 of Object.entries(entry[1])) {
@@ -150,8 +167,6 @@ export class DashboardComponent implements OnInit {
               }
               this.mainChartDataSick.push(entry1[1]);
             }
-         //   console.log(this.mainChartDataSick);
-          //   console.log(this.mainChartLabels);
 
           }
           if (entry[0] === 'cured') {
@@ -164,10 +179,6 @@ export class DashboardComponent implements OnInit {
               this.mainChartDataDied.push(entry1[1]);
             }
           }
-          // console.log(this.mainChartDataSick.length);
-          // console.log(this.mainChartDataCured.length);
-          // console.log(this.mainChartDataDied.length);
-          // console.log(this.mainChartLabels.length);
         }
       }
     );

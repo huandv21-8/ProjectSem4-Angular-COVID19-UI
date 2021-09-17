@@ -1,25 +1,22 @@
 import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree} from '@angular/router';
 import {Observable} from 'rxjs';
-import {AuthService} from './service/auth.service';
-import {ToastrService} from 'ngx-toastr';
+import {SmsService} from './service/sms.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuardGuard implements CanActivate {
-  constructor(private authService: AuthService, private router: Router, private toastr: ToastrService) {
+export class SmsOtpGuardGuard implements CanActivate {
+  constructor(private smsService: SmsService, private router: Router) {
   }
 
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    if (!this.authService.isLoggedIn()) {
-      this.router.navigateByUrl('/login');
-    } else {
-      return this.authService.isLoggedIn();
+    if (!this.smsService.isCheckVerify()) {
+      this.router.navigateByUrl('/client/confirm-phone-number');
     }
-
+    return this.smsService.isCheckVerify();
   }
 
 }

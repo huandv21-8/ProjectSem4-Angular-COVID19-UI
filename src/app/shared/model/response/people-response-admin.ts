@@ -1,10 +1,10 @@
-
 export interface PeopleResponseAdmin {
   idPeople: number;
   name?: string;
-  age?: number;
+  birthDay?: string;
   nameProvince?: string;
   status?: string;
   type?: boolean;
+  idStatusByTime?: number;
 
 }

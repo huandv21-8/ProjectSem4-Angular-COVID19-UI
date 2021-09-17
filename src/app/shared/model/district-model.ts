@@ -6,3 +6,5 @@ export interface DistrictModel {
   type?: string;
   province?: ProvinceModel;
 }
+
+

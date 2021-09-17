@@ -92,7 +92,7 @@
               </th>
               <th *ngIf=" status != 'f1'"><strong>Bệnh nhân</strong></th>
               <th><strong>Tên</strong></th>
-              <th><strong>Tuổi</strong></th>
+              <th><strong>Ngày sinh</strong></th>
               <th><strong>Địa chỉ</strong></th>
               <th><strong>Tình trạng</strong></th>
               <th *ngIf="status != 'f1' && status != 'died'"><strong>Loại</strong></th>
@@ -107,7 +107,7 @@
                          [value]="item.idPeople"></td>
               <td *ngIf="status != 'f1'">BN{{item.idPeople}}</td>
               <td>{{item.name}}</td>
-              <td>{{item.age}}</td>
+              <td>{{item.birthDay}}</td>
               <td>{{item.nameProvince}}</td>
               <td *ngIf="item.status == 'sick'">Đang điều trị</td>
               <td *ngIf="item.status == 'f1'">Đang cách ly</td>
@@ -118,7 +118,7 @@
                   <button dropdownToggle class="option-btn">...</button>
                   <ul *dropdownMenu class="dropdown-menu dropdown" role="menu">
                     <li role="menuitem" data-toggle="modal" (click)="peopleDetailModel.show()">
-                      <span class="dropdown-item" (click)="getPeopleDetail(item.idPeople)">
+                      <span class="dropdown-item" (click)="getPeopleDetail(item.idStatusByTime)">
                         <i class="fa fa-eye"></i> Xem chi tiết
                       </span>
                     </li>
@@ -163,7 +163,7 @@
                                  nextLabel="Tiếp theo"></pagination-controls>
           </div>
         </div>
-        <div class="card-body" *ngIf="listPeople.length <= 0">
+        <div class="card-body" *ngIf="listPeople && listPeople.length <= 0">
           <h4 class="">Không có ai !!!</h4>
         </div>
       </div>
@@ -265,8 +265,8 @@
           </div>
           <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
             <div class="Container row ">
-              <p class="col-md-4 col-xs-4 col-lg-4 ">Tuổi :</p>
-              <p><strong>{{peopleDetail.age}}</strong></p>
+              <p class="col-md-4 col-xs-4 col-lg-4 ">Ngày sinh :</p>
+              <p><strong>{{peopleDetail.birthDay}}</strong></p>
             </div>
           </div>
           <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
@@ -290,7 +290,7 @@
           <p class="col-md-4 col-xs-4 col-lg-4">Lịch trình di chuyển:</p>
           <div class="col-md-12 col-xs-12 col-lg-12" [ngStyle]="{'margin-top': '-14px'}">
             <div class="container people-detail-schedule">
-              <p class="col-md-12 col-xs-12 col-lg-12">{{peopleDetail.schedule}}</p>
+              <p class="col-md-12 col-xs-12 col-lg-12">{{peopleDetail.travelSchedule}}</p>
             </div>
           </div>
         </div>
@@ -299,7 +299,7 @@
           <p class="col-md-3 col-xs-3 col-lg-3 " *ngIf="peopleDetail.status == 'f1'">Ngày cách ly :</p>
           <p class="col-md-3 col-xs-3 col-lg-3 " *ngIf="peopleDetail.status == 'cured'">Ngày xuất viện :</p>
           <p class="col-md-3 col-xs-3 col-lg-3 " *ngIf="status == 'died'">Ngày chết :</p>
-          <p [ngStyle]="{'margin-left': '-48px'}"><strong>{{peopleDetail.time | date:'MM/dd/yyyy' : 'ICT'}}</strong>
+          <p [ngStyle]="{'margin-left': '-48px'}"><strong>{{peopleDetail.updatedAt | date:'MM/dd/yyyy' : 'ICT'}}</strong>
           </p>
         </div>
         <div class="row" *ngIf="status != 'died'">

@@ -21,8 +21,9 @@ export class PeopleManagementService {
     return this.http.post('http://localhost:8082/v1/managementPeople/createPeople', inforPeople);
   }
 
-  getPeopleDetailByStatus(status: string, idPeople: number): Observable<PeopleModel> {
-    return this.http.get<PeopleModel>(`http://localhost:8082/v1/managementPeople/peopleDetailByStatus?status=${status}&&idPeople=${idPeople}`);
+  getPeopleDetailByStatus(status: string, idStatusByTime: number): Observable<PeopleModel> {
+    console.log(idStatusByTime);
+    return this.http.get<PeopleModel>(`http://localhost:8082/v1/managementPeople/peopleDetailByStatus?status=${status}&&idStatusByTime=${idStatusByTime}`);
   }
 
   deletePeopleById(status: string, idPeople: number): Observable<any> {
@@ -33,37 +34,15 @@ export class PeopleManagementService {
     return this.http.post(`http://localhost:8082/v1/managementPeople/deleteAllPeopleByCheckbox?status=${status}`, listIdPeopleCheckbox);
   }
 
-  moveCuredPeopleById(status: string, idChoicePeople: number): Observable<any> {
-    return this.http.post(`http://localhost:8082/v1/optionPeople/moveCuredPeopleById?status=${status}`, idChoicePeople);
+  movePeopleByStatusAndPeopleId(status: string, idChoicePeople: number): Observable<any> {
+    console.log(status);
+    console.log(idChoicePeople);
+    return this.http.post(`http://localhost:8082/v1/optionPeople/movePeopleByStatusAndPeopleId?status=${status}`, idChoicePeople);
   }
 
-  moveAllCuredPeopleById(status: string, listIdPeopleCheckbox: Array<number>): Observable<any> {
-    return this.http.post(`http://localhost:8082/v1/optionPeople/moveCuredAllPeopleByCheckbox?status=${status}`, listIdPeopleCheckbox);
+  moveAllPeopleByStatusAndPeopleIdAndCheckbox(status: string, listIdPeopleCheckbox: Array<number>): Observable<any> {
+    return this.http.post(`http://localhost:8082/v1/optionPeople/moveAllPeopleByStatusAndPeopleIdAndCheckbox?status=${status}`,
+      listIdPeopleCheckbox);
   }
 
-  moveF1PeopleById(status: string, idChoicePeople: number): Observable<any> {
-    return this.http.post(`http://localhost:8082/v1/optionPeople/moveF1PeopleById?status=${status}`, idChoicePeople);
-  }
-
-  moveAllF1PeopleById(status: string, listIdPeopleCheckbox: Array<number>): Observable<any> {
-    return this.http.post(`http://localhost:8082/v1/optionPeople/moveF1AllPeopleByCheckbox?status=${status}`, listIdPeopleCheckbox);
-  }
-
-  moveDiedPeopleById(status: string, idChoicePeople: number): Observable<any> {
-    return this.http.post(`http://localhost:8082/v1/optionPeople/moveDiedPeopleById?status=${status}`, idChoicePeople);
-  }
-
-  moveAllDiedPeopleById(status: string, listIdPeopleCheckbox: Array<number>): Observable<any> {
-    return this.http.post(`http://localhost:8082/v1/optionPeople/moveDiedAllPeopleByCheckbox?status=${status}`, listIdPeopleCheckbox);
-  }
-
-  moveSickPeopleById(status: string, idChoicePeople: number): Observable<any> {
-    return this.http.post(`http://localhost:8082/v1/optionPeople/moveSickPeopleById?status=${status}`, idChoicePeople);
-
-  }
-
-  moveAllSickPeopleById(status: string, listIdPeopleCheckbox: Array<number>): Observable<any> {
-    return this.http.post(`http://localhost:8082/v1/optionPeople/moveSickAllPeopleByCheckbox?status=${status}`, listIdPeopleCheckbox);
-
-  }
 }

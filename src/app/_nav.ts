@@ -92,6 +92,27 @@ export const navItems: INavData[] = [
   },
   {
     title: true,
+    name: 'Quản lý khai báo ý tế'
+  },
+  {
+    name: 'Danh sách khai báo',
+    icon: 'icon-folder-alt',
+    children: [
+      // {
+      //   name: 'Tạo tin tức',
+      //   url: 'post/news',
+      //   icon: 'icon-note'
+      // },
+      // {
+      //   name: 'Danh dách tin tức',
+      //   url: 'post/news',
+      //   icon: 'icon-list'
+      // }
+    ]
+  },
+
+  {
+    title: true,
     name: 'Components'
   },
   {

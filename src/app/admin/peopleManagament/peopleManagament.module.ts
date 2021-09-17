@@ -9,7 +9,6 @@ import {CollapseModule} from 'ngx-bootstrap/collapse';
 import {TooltipModule} from 'ngx-bootstrap/tooltip';
 import {BsDropdownModule} from 'ngx-bootstrap/dropdown';
 import {ModalModule} from 'ngx-bootstrap/modal';
-import { ButtonShowListComponent } from './show-list-people/button-show-list/button-show-list.component';
 
 
 // Angular
@@ -29,7 +28,6 @@ import { ButtonShowListComponent } from './show-list-people/button-show-list/but
   declarations: [
     CreatePeopleFormComponent,
     ShowListPeopleComponent,
-    ButtonShowListComponent
   ]
 })
 export class PeopleManagamentModule {

@@ -1,7 +1,8 @@
 export interface PeopleModelRequest {   // dùng để create people
   idPeople?: number;
   name: string;
-  age: number;
+  birthDay: any;
+  cmt: string;
   gender: boolean;
   phone: string;
   idProvince?: number;

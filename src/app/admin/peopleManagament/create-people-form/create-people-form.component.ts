@@ -54,8 +54,9 @@ export class CreatePeopleFormComponent implements OnInit {
     if (this.peopleForm.value.district && this.peopleForm.value.province && this.peopleForm.value.commune) {
       if (this.isCheckForm) {
         this.inforPeople = {
+          cmt: this.peopleForm.value.cmt,
           name: this.peopleForm.value.name,
-          age: this.peopleForm.value.age,
+          birthDay: this.peopleForm.value.age,
           gender: this.peopleForm.value.gender,
           phone: this.peopleForm.value.phone,
           idDistrict: this.peopleForm.value.district,
@@ -64,12 +65,13 @@ export class CreatePeopleFormComponent implements OnInit {
           schedule: this.peopleForm.value.schedule,
           status: this.stylePeople,
           type: this.peopleForm.value.loai,
-          idSourced: this.peopleForm.value.source,
+          idSourced: this.peopleForm.value.source
         };
       } else {
         this.inforPeople = {
+          cmt: this.peopleForm.value.cmt,
           name: this.peopleForm.value.name,
-          age: this.peopleForm.value.age,
+          birthDay: this.peopleForm.value.age,
           gender: this.peopleForm.value.gender,
           phone: this.peopleForm.value.phone,
           idDistrict: this.peopleForm.value.district,
@@ -82,11 +84,9 @@ export class CreatePeopleFormComponent implements OnInit {
       }
 
       this.peopleManagementService.createPeople(this.inforPeople).subscribe((data) => {
-        console.log(data);
         this.toastrService.success(data.message);
       }, (error) => {
-        console.log(error);
-        this.toastrService.error(error);
+        this.toastrService.error('Sai roi');
       });
     } else {
       this.toastrService.show('Vui lòng chọn địa chỉ');
@@ -98,12 +98,13 @@ export class CreatePeopleFormComponent implements OnInit {
       this.peopleForm = new FormGroup({
         name: new FormControl('', [Validators.required]),
         age: new FormControl('', [Validators.required]),
+        cmt: new FormControl(''),
         gender: new FormControl(true, [Validators.required]),
         phone: new FormControl('', [Validators.pattern('[0-9 ]{10}')]),
         province: new FormControl(0, [Validators.required]),
         district: new FormControl(0, [Validators.required]),
         commune: new FormControl(0, [Validators.required]),
-        schedule: new FormControl('', [Validators.required]),
+        schedule: new FormControl('', ),
         loai: new FormControl(true, [Validators.required]),
         source: new FormControl(0, [Validators.required])
       });
@@ -112,12 +113,13 @@ export class CreatePeopleFormComponent implements OnInit {
       this.peopleForm = new FormGroup({
         name: new FormControl('', [Validators.required]),
         age: new FormControl('', [Validators.required]),
+        cmt: new FormControl(''),
         gender: new FormControl(true, [Validators.required]),
         phone: new FormControl('', [Validators.pattern('[0-9 ]{10}')]),
         province: new FormControl(0, [Validators.required]),
         district: new FormControl(0, [Validators.required]),
         commune: new FormControl(0, [Validators.required]),
-        schedule: new FormControl('', [Validators.required]),
+        schedule: new FormControl('', ),
         source: new FormControl(0, [Validators.required])
       });
     }
@@ -160,7 +162,6 @@ export class CreatePeopleFormComponent implements OnInit {
   getAllDistrictByProvinceId(value: any) {
     this.peopleForm.controls.district.setValue(0);
     this.peopleForm.controls.commune.setValue(0);
-    // console.log(value);
     if (value && value !== 0) {
       this.addressService.getAllDistrictByProvinceId(value).subscribe(data => {
         this.listDistrict = data;

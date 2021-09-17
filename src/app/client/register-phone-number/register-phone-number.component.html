@@ -1,51 +1,63 @@
 <div class="content-wrapper">
-    <div class="container">
-      <div class="col-sm-12">
-        <div class="card" data-aos="fade-up">
-          <div class="card-body">
-            <div class="row">
-              <div class="col-lg-9">
+  <div class="container">
+    <div class="col-sm-12">
+      <div class="card" data-aos="fade-up">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-lg-9">
+              <form [formGroup]="otpForm" (ngSubmit)="summitOtp()">
                 <div id="container-text">
-                    <div class="form-group row ">
-                        <div class="col-md-8 col-sm-8 ">
-                            <label class="control-label col-md-12 col-sm-12">Nhập số điện thoại để xác thức</label>
-                            <input type="text" class="form-control" placeholder="Nhập số điện thoại">
-                        </div>
+                  <div class="form-group row ">
+                    <div class="col-md-8 col-sm-8 ">
+                      <label class="control-label col-md-12 col-sm-12">Số điện thoại xác thức</label>
+                      <input type="text" [formControlName]="'phone'" class="form-control"
+                             placeholder="Nhập số điện thoại" readonly>
                     </div>
-                    <div class="form-group row ">
-                        <div class="col-md-8 col-sm-8 ">
-                            <label class="control-label col-md-12 col-sm-12">Mã xác thực OTP</label>
-                            <input type="text" class="form-control" placeholder="">
-                        </div>
+                  </div>
+                  <div class="form-group row ">
+                    <div class="col-md-8 col-sm-8 ">
+                      <label class="control-label col-md-12 col-sm-12">Mã xác thực OTP</label>
+                      <input type="text" (change)="checkOtp()" [ngClass]="checkOtp() ? 'is-invalid' : ''"
+                             [formControlName]="'otp'" class="form-control" placeholder="Nhập otp">
+                      <div class="invalid-feedback" *ngIf="checkOtp()">
+                        Nhập sai phone !!!
+                      </div>
+
                     </div>
+
+                  </div>
                 </div>
                 <div class="form-group">
-                    <div class="col-md-9 col-sm-9  offset-md-5">
-                        <button type="submit" class="btn btn-success"><a class="nav-link" [routerLink]="['/client/confirm-phone-number']" >Tiếp tục</a></button>
-                    </div>
-                </div>
-                <div >
-                    <a id="confirm" [routerLink]="['/client']" ><u>Gửi lại OTP</u></a>
-                </div> 
-                  <div class="text_botton">
-                    <p>Từ ngày <span>13/8/2021</span>, hệ thống tờ khai y tế nâng cấp các chức năng sau:</p>
-                    <p>1. Danh sách trường hợp cách ly bổ sung xem log lịch sử khai báo</p>
-                    <p>2. Danh sách các trường hợp các ly và dấu hiệu bắt thường bổ sung tìm kiếm theo địa bàn và xuất dữ liệu</p>
-                    <p>3. Bổ sung báo cáo số liệu người cách ly tại đại bàn</p>
-                    <p>4. Bổ sung danh sách đăng ký cách ly và chức năng duyệt đăng ký</p>
-                    <p>5. Bổ sung danh sách đăng ký cách ly trên ứng dụng người dân</p>
-                    <p>6. Bổ sung cho cán bộ y tế xã phường</p>
-                    <p>7. Bổ sung chức năng log định vị</p>
+                  <div class="col-md-9 col-sm-9  offset-md-5">
+                    <button type="submit" class="btn btn-success"
+                            [ngStyle]="{'cursor': otpForm.invalid? 'no-drop' : 'pointer'}" [disabled]="otpForm.invalid">
+                      Tiếp tục
+                    </button>
                   </div>
+                </div>
+              </form>
+              <div>
+                <a id="confirm" [ngStyle]="{'cursor': 'pointer'}" (click)="sendOtp()"><u>Gửi lại OTP</u></a>
               </div>
-              <div class="col-lg-3">
-               <div class="box-ddn">
-                 <span class="box-text">Đường dây nóng</span><br>
-                 <h2>19009095</h2>
-               </div>
-               <div class="box-phone">
+              <div class="text_botton">
+                <p>Từ ngày <span>13/8/2021</span>, hệ thống tờ khai y tế nâng cấp các chức năng sau:</p>
+                <p>1. Danh sách trường hợp cách ly bổ sung xem log lịch sử khai báo</p>
+                <p>2. Danh sách các trường hợp các ly và dấu hiệu bắt thường bổ sung tìm kiếm theo địa bàn và xuất dữ
+                  liệu</p>
+                <p>3. Bổ sung báo cáo số liệu người cách ly tại đại bàn</p>
+                <p>4. Bổ sung danh sách đăng ký cách ly và chức năng duyệt đăng ký</p>
+                <p>5. Bổ sung danh sách đăng ký cách ly trên ứng dụng người dân</p>
+                <p>6. Bổ sung cho cán bộ y tế xã phường</p>
+                <p>7. Bổ sung chức năng log định vị</p>
+              </div>
+            </div>
+            <div class="col-lg-3">
+              <div class="box-ddn">
+                <span class="box-text">Đường dây nóng</span><br>
+                <h2>19009095</h2>
+              </div>
+              <div class="box-phone">
                 <img id="img-box" src="../assets/img/avatars/3.png" alt="banner">
-              </div>
               </div>
             </div>
           </div>
@@ -53,4 +65,5 @@
       </div>
     </div>
   </div>
-  <!-- main-panel ends -->
+</div>
+<!-- main-panel ends -->

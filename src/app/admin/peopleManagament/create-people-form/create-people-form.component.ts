@@ -85,6 +85,7 @@ export class CreatePeopleFormComponent implements OnInit {
 
       this.peopleManagementService.createPeople(this.inforPeople).subscribe((data) => {
         this.toastrService.success(data.message);
+        this.reset();
       }, (error) => {
         this.toastrService.error('Sai roi');
       });

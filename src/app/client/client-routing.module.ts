@@ -26,7 +26,7 @@ const routes: Routes = [
         component: NewsComponent,
       },
       {
-        // canActivate: [SmsOtpGuardGuard],
+        canActivate: [SmsOtpGuardGuard],
         path: 'health-declaration',
         component: HealthDeclarationComponent,
       },

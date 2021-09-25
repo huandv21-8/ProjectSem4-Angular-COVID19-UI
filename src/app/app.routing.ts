@@ -8,7 +8,7 @@ import {P404Component} from './views/error/404.component';
 import {P500Component} from './views/error/500.component';
 import {LoginComponent} from './views/login/login.component';
 import {RegisterComponent} from './views/register/register.component';
-import {AuthGuardGuard} from './shared/service/auth-guard.guard';
+//import {AuthGuardGuard} from './shared/service/auth-guard.guard';
 import { ResetPasswordComponent } from './admin/reset-password/reset-password.component';
 import { SubmitPasswordComponent } from './admin/submit-password/submit-password.component';
 import { SubmitOtpEmailComponent } from './admin/submit-otp-email/submit-otp-email.component';
@@ -63,7 +63,7 @@ export const routes: Routes = [
     data: {
       title: 'Home'
     },
-    canActivate: [AuthGuardGuard],
+    // canActivate: [AuthGuardGuard],
     children: [
       {
         path: '',

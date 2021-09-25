@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {SituationResponse} from '../../shared/model/response/situationResponse';
+import {HomeService} from '../home/home.service';
 
 @Component({
   selector: 'app-epidemic-evolution',
@@ -7,9 +9,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EpidemicEvolutionComponent implements OnInit {
 
-  constructor() { }
+
+  listSituation: Array<SituationResponse>;
+
+  constructor(private homeService: HomeService) {
+  }
 
   ngOnInit(): void {
+    this.getSituation();
+  }
+
+  getSituation() {
+    this.homeService.listSituation().subscribe(data => {
+      if (data) {
+
+        this.listSituation = data;
+      }
+    }, error => {
+    });
   }
 
 }

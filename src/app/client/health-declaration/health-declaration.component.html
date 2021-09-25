@@ -19,24 +19,24 @@
                       <br/>
                       <form class="form-horizontal form-label-left" [formGroup]="declareForm"
                             enctype="multipart/form-data" (ngSubmit)="declare()">
-                        <div class="form-group row ">
+                        <div class="form-group row">
                           <div class="col-md-4 col-sm-4 ">
                             <label class="control-label col-md-12 col-sm-12">Họ và tên <span
                               class="text_input_health">*</span> </label>
-                            <input formControlName="name" type="text" class="form-control"
+                            <input  formControlName="name" type="text" class="form-control"
                                    placeholder="Họ và tên">
                           </div>
                           <div class="col-md-4 col-sm-4 ">
                             <label class="control-label col-md-12 col-sm-12">Số CMT/CCCD
                               chiếu </label>
-                            <input formControlName="cmt" type="text" class="form-control"
+                            <input  formControlName="cmt" type="text" class="form-control"
                                    placeholder="CMT/CCCD">
                           </div>
                           <div class="form-group row">
                             <div class="col-md-12 col-sm-12 ">
                               <label class="control-label col-md-12 col-sm-12 ">Giới
                                 tính</label>
-                              <select formControlName="gender" class="form-control">
+                              <select  formControlName="gender" class="form-control">
                                 <option [value]="true">Nam</option>
                                 <option [value]="false"> Nữ</option>
                               </select>
@@ -76,7 +76,7 @@
                           <div class="col-md-4 col-sm-4">
                             <label class="control-label col-md-12 col-sm-12 ">Chọn Xã/Phường
                               <span class="text_input_health">*</span></label>
-                            <select id="commune" name="commune" [formControlName]="'commune'" class="form-control">
+                            <select id="commune" name="idCommune" [formControlName]="'idCommune'" class="form-control">
                               <option selected [value]="0">Xã</option>
                               <option *ngFor="let commune of listCommune"
                                       value="{{commune.communeId}}">{{commune.communeName}}</option>
@@ -331,7 +331,7 @@
                                 <td>Huyết áp cao</td>
                                 <td>
                                   <label>
-                                    <input [formControlName]="'HighBloodPressure'" type="checkbox" class="flat">
+                                    <input [formControlName]="'highBloodPressure'" type="checkbox" class="flat">
                                   </label>
                                 </td>
                               </tr>
@@ -386,7 +386,8 @@
                         </div>
                         <div class="form-group">
                           <div class="col-md-9 col-sm-9  offset-md-5">
-                            <button type="submit" class="btn btn-success">Gửi tờ khai</button>
+                            <button type="submit" [ngStyle]="{'cursor': declareForm.invalid? 'no-drop' : 'pointer'}"
+                                    [disabled]="declareForm.invalid" class="btn btn-success">Gửi tờ khai</button>
                           </div>
                         </div>
                       </form>

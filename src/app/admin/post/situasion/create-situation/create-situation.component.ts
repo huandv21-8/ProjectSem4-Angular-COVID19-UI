@@ -31,12 +31,11 @@ export class CreateSituationComponent implements OnInit {
     this.situationRequest = {
       content: this.situationForm.value.content
     };
-  //  console.log(this.situationRequest);
     this.situationService.createSituation(this.situationRequest).subscribe((data) => {
-        this.toastrService.success(data.message);
+        this.toastrService.success("Thanh cong");
       },
       (error) => {
-        this.toastrService.error(error);
+        this.toastrService.error("Loi roi");
       }
     );
  //   console.log(this.situationForm.get('content').value);

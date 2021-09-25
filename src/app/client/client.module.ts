@@ -12,6 +12,7 @@ import {IndexComponent} from './index/index.component';
 import {FooterComponent} from './footer/footer.component';
 import {ConfirmPhoneNumberComponent} from './confirm-phone-number/confirm-phone-number.component';
 import {RegisterPhoneNumberComponent} from './register-phone-number/register-phone-number.component';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import {RegisterPhoneNumberComponent} from './register-phone-number/register-pho
     FormsModule,
     ClientRoutingModule,
     ReactiveFormsModule,
+    NgxPaginationModule,
   ],
 
 })

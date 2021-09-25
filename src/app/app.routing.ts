@@ -8,10 +8,14 @@ import {P404Component} from './views/error/404.component';
 import {P500Component} from './views/error/500.component';
 import {LoginComponent} from './views/login/login.component';
 import {RegisterComponent} from './views/register/register.component';
-//import {AuthGuardGuard} from './shared/service/auth-guard.guard';
-import { ResetPasswordComponent } from './admin/reset-password/reset-password.component';
-import { SubmitPasswordComponent } from './admin/submit-password/submit-password.component';
-import { SubmitOtpEmailComponent } from './admin/submit-otp-email/submit-otp-email.component';
+
+
+import {AuthGuardGuard} from './shared/service/auth-guard.guard';
+import { ResetPasswordComponent } from './admin/resetPassword/reset-password/reset-password.component';
+import { SubmitPasswordComponent } from './admin/resetPassword/submit-password/submit-password.component';
+import { SubmitOtpEmailComponent } from './admin/resetPassword/submit-otp-email/submit-otp-email.component';
+import {ResetPassModule} from './admin/resetPassword/resetPass.module';
+
 
 
 export const routes: Routes = [
@@ -63,7 +67,7 @@ export const routes: Routes = [
     data: {
       title: 'Home'
     },
-    // canActivate: [AuthGuardGuard],
+    canActivate: [AuthGuardGuard],
     children: [
       {
         path: '',
@@ -110,25 +114,27 @@ export const routes: Routes = [
   },
   {
     path: 'reset-password',
-    component: ResetPasswordComponent,
-    data: {
-      title: 'Reset Password Page'
-    }
+    children: [
+      {
+        path: '',
+        loadChildren: () => import('./admin/resetPassword/resetPass.module').then(m => m.ResetPassModule)
+      }
+    ]
   },
-  {
-    path: 'submit-password',
-    component: SubmitPasswordComponent,
-    data: {
-      title: 'Submit Password Page'
-    }
-  },
-  {
-    path: 'submit-otp-email',
-    component: SubmitOtpEmailComponent,
-    data: {
-      title: 'Submit Password Page'
-    }
-  },
+  // {
+  //   path: 'submit-password',
+  //   component: SubmitPasswordComponent,
+  //   data: {
+  //     title: 'Submit Password Page'
+  //   }
+  // },
+  // {
+  //   path: 'submit-otp-email',
+  //   component: SubmitOtpEmailComponent,
+  //   data: {
+  //     title: 'Submit Password Page'
+  //   }
+  // },
   {path: '**', component: P404Component}
 ];
 

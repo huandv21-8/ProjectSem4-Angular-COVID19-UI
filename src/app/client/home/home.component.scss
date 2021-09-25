@@ -59,16 +59,12 @@ hr{
     background: #C9302C;
     float: left;
 }
-// .epidemic-evolution{
-//   width: 510px;
-//   height: 510px;
-//   overflow: auto;
-// }
+
 .epidemic-evolution{
-  margin: -4% 0 0 -4%;
+  margin: -4% 0 30px -4%;
   width: 510px;
-  height: 510px;
-  border-left: 2px solid rgb(86, 191, 240); 
+  height: auto;
+  border-left: 2px solid rgb(86, 191, 240);
   padding-left: 22px;
   overflow: auto;
 }

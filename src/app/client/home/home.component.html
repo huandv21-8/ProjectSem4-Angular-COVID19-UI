@@ -59,39 +59,15 @@
                   <table>
                     <tr id="header-table">
                       <th>Tỉnh/TP</th>
-                      <th>Tổng số ca </th>
-                      <th>Hôm nay </th>
+                      <th>Tổng số ca</th>
+                      <th>Đã Khỏi</th>
                       <th>Tử vong</th>
                     </tr>
-                    <tr>
-                      <td>TP. Hồ Chí Minh</td>
-                      <td>232.600</td>
-                      <td id="number-today">0</td>
-                      <td>9.724</td>
-                    </tr>
-                    <tr>
-                      <td>TP. Hồ Chí Minh</td>
-                      <td>232.600</td>
-                      <td id="number-today">0</td>
-                      <td>9.724</td>
-                    </tr>
-                    <tr>
-                      <td>TP. Hồ Chí Minh</td>
-                      <td>232.600</td>
-                      <td id="number-today">0</td>
-                      <td>9.724</td>
-                    </tr>
-                    <tr>
-                      <td>TP. Hồ Chí Minh</td>
-                      <td>232.600</td>
-                      <td id="number-today">0</td>
-                      <td>9.724</td>
-                    </tr>
-                    <tr>
-                      <td>TP. Hồ Chí Minh</td>
-                      <td>232.600</td>
-                      <td id="number-today">0</td>
-                      <td>9.724</td>
+                    <tr *ngFor="let item of listCountPeopleByProvinces">
+                      <td>{{item.provinceName}}</td>
+                      <td>{{item.countPeopleSick}}</td>
+                      <td>{{item.countPeopleCured}}</td>
+                      <td>{{item.countPeopleDied}}</td>
                     </tr>
                   </table>
                 </div>
@@ -118,71 +94,19 @@
                   <div class="col-md-6 col-sm-6 ">
                     <h2>DIỄN BIẾN DỊCH</h2>
                     <hr>
-                    <div class="epidemic-evolution">
+                    <div *ngFor="let item of listSituation| paginate: { itemsPerPage: 2, currentPage: p }"
+                         class="epidemic-evolution">
                       <img src="../assets/img/avatars/icon.png" class="icon" alt="banner">
                       <div class="text-epidemic">
                         <div class="text-headding">
-                          <h5>18:25 02/09/2021</h5>
+                          <h5>{{item.updatedAt}}</h5>
                         </div>
-                        <div class="text-content">
-                          <p id="text-headding-content">THÔNG BÁO VỀ 13.197 CA MẮC MỚI </p>
-                          <p id="content-epidemic">Trong đó 11 ca nhập cảnh và 13.186 ca ghi nhận trong
-                            nước
-                            tại TP. Hồ Chí Minh (5.963), Bình Dương (4.504), Đồng Nai (803), Long An
-                            (583),
-                            Tiền Giang (290), Kiên Giang (122), Đồng Tháp (102), Bình Phước (70), Nghệ
-                            An
-                            (66), Tây Ninh (62),
-                            Khánh Hòa (58), Bà Rịa - Vũng Tàu (57), Quảng Bình (56), An Giang (51),
-                            Thanh
-                            Hóa (50), Hà Nội (48),
-                            Đà Nẵng (42), Cần Thơ (42), Bình Thuận (34), Đắk Lắk (34), Thừa Thiên Huế
-                            (25),
-                            Bình Định (20), Quảng Ngãi (19), Sóc Trăng (13), Cà Mau (11), Bạc Liêu (8 ),
-                            Bến
-                            Tre (8 ), Trà Vinh (7),
-                            Lạng Sơn (6), Phú Yên (6), Vĩnh Long (5), Quảng Nam (4), Đắk Nông (4), Bắc
-                            Ninh
-                            (3), Bắc Giang (3),
-                            Ninh Thuận (2), Nam Định (2), Hậu Giang (2), Thái Bình (1) trong đó có 7.255
-                            ca
-                            trong cộng đồng.
-                          </p>
-                          <p id="content-epidemic">- Như vậy trong 24h giờ qua số ca nhiễm ghi nhận trong
-                            nước
-                            tăng 1.757 ca. Tại TP. Hồ Chí Minh tăng 595 ca, Bình Dương tăng 1.064 ca,
-                            Đồng
-                            Nai tăng 44 ca,
-                            Long An giảm 11 ca, Tiền Giang tăng 96 ca.</p>
-                          <p id="content-epidemic">* Tình hình dịch COVID-19 tại Việt Nam:</p>
-                          <p id="content-epidemic">- Kể từ đầu dịch đến nay Việt Nam có 486.727 ca nhiễm,
-                            đứng
-                            thứ 55/222 quốc gia và vùng lãnh thổ, trong khi với tỷ lệ số ca nhiễm/1
-                            triệu
-                            dân,
-                            Việt Nam đứng thứ 161/222 quốc gia và vùng lãnh thổ (bình quân cứ 1 triệu
-                            người
-                            có 4.951 ca nhiễm).</p>
-                          <p id="content-epidemic">- Đợt dịch thứ 4 (từ ngày 27/4/2021 đến nay):</p>
-                          <p id="content-epidemic">+ Số ca nhiễm mới ghi nhận trong nước là 482.497 ca,
-                            trong
-                            đó có 256.550 bệnh nhân đã được công bố khỏi bệnh.</p>
-                          <p id="content-epidemic">+ Có 10/62 tỉnh, thành phố đã qua 14 ngày không ghi
-                            nhận
-                            trường hợp nhiễm mới trong nước: Quảng Ninh, Bắc Kạn, Tuyên Quang, Lai Châu,
-                            Hoà
-                            Bình, Yên Bái, Hà Giang, Thái Nguyên, Điện Biên, Vĩnh Phúc.</p>
-                          <p id="content-epidemic">+ Có 05 tỉnh, thành phố không có ca lây nhiễm thứ phát
-                            trên
-                            địa bàn trong 14 ngày qua: Thái Bình, Hải Phòng, Phú Thọ, Kon Tum, Hà Nam.
-                          </p>
-                          <p id="content-epidemic">+ 05 tỉnh, thành phố ghi nhận số mắc cao là TP. Hồ Chí
-                            Minh
-                            (232.585), Bình Dương (122.732), Đồng Nai (25.328), Long An (23.221), Tiền
-                            Giang
-                            (10.136).</p>
-                        </div>
+                        <div class="text-content" innerHtml="{{item.content}}"></div>
                       </div>
+                    </div>
+                    <div class="page" [ngStyle]="{'text-align': 'center'}">
+                      <pagination-controls (pageChange)="p = $event" previousLabel="Trước"
+                                           nextLabel="Tiếp theo"></pagination-controls>
                     </div>
                   </div>
                 </div>

@@ -8,11 +8,14 @@ import {P404Component} from './views/error/404.component';
 import {P500Component} from './views/error/500.component';
 import {LoginComponent} from './views/login/login.component';
 import {RegisterComponent} from './views/register/register.component';
+
+
 import {AuthGuardGuard} from './shared/service/auth-guard.guard';
 import { ResetPasswordComponent } from './admin/resetPassword/reset-password/reset-password.component';
 import { SubmitPasswordComponent } from './admin/resetPassword/submit-password/submit-password.component';
 import { SubmitOtpEmailComponent } from './admin/resetPassword/submit-otp-email/submit-otp-email.component';
 import {ResetPassModule} from './admin/resetPassword/resetPass.module';
+
 
 
 export const routes: Routes = [

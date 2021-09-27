@@ -6,6 +6,9 @@ import {PeopleModel} from '../../../shared/model/people-model';
 import {ToastrService} from 'ngx-toastr';
 import {ModalDirective} from 'ngx-bootstrap/modal';
 import {StatusEnum} from '../../../shared/model/status-enum';
+import {FormControl, FormGroup} from '@angular/forms';
+import {ProvinceModel} from '../../../shared/model/province-model';
+import {AddressService} from '../../../shared/service/service/address.service';
 
 @Component({
   selector: 'app-show-list-people',
@@ -14,10 +17,12 @@ import {StatusEnum} from '../../../shared/model/status-enum';
 })
 export class ShowListPeopleComponent implements OnInit {
 
+  searchForm: FormGroup;
   isCollapsed: boolean = true;
   itemsInPage: number = 5;
   listPeople: Array<PeopleResponseAdmin> = [];
   listIdPeopleCheckbox: Array<number> = [];
+  listProvince: Array<ProvinceModel> = [];
   isCheckedCheckBoxPeople: boolean = false;
   isCheckedAllCheckBoxPeople: boolean = false;
   peopleDetail: PeopleModel;
@@ -29,12 +34,15 @@ export class ShowListPeopleComponent implements OnInit {
 
   constructor(private peopleManagementService: PeopleManagementService,
               private activatedRoute: ActivatedRoute,
-              private toastrService: ToastrService) {
+              private toastrService: ToastrService,
+              private addressService: AddressService) {
   }
 
   ngOnInit(): void {
     this.status = this.activatedRoute.snapshot.params.key;
+    this.setStyleFormSearch();
     this.getAllPeopleByStatus();
+    this.getAllAddress();
     this.peopleDetail = {
       idPeople: 0,
       name: '',
@@ -51,6 +59,21 @@ export class ShowListPeopleComponent implements OnInit {
       idSource: 0,
       nameSource: ''
     };
+  }
+
+  getAllAddress() {
+    this.addressService.getAllProvince().subscribe(data => {
+      this.listProvince = data;
+    });
+  }
+
+  setStyleFormSearch() {
+    this.searchForm = new FormGroup({
+      txtName: new FormControl(''),
+      txtBirthDay: new FormControl(''),
+      txtProvince: new FormControl(''),
+      txtType: new FormControl(null),
+    });
   }
 
   getAllPeopleByStatus() {
@@ -162,12 +185,12 @@ export class ShowListPeopleComponent implements OnInit {
     if (this.optionChoice === 'moveCuredAllPeople' && this.listIdPeopleCheckbox) {
       this.peopleManagementService.moveAllPeopleByStatusAndPeopleIdAndCheckbox(StatusEnum.CURED, this.listIdPeopleCheckbox)
         .subscribe(data => {
-          this.getAllPeopleByStatus();
-          this.toastrService.success('Thành công');
-        },
-        error => {
-          this.toastrService.error('Lỗi rồi.');
-        });
+            this.getAllPeopleByStatus();
+            this.toastrService.success('Thành công');
+          },
+          error => {
+            this.toastrService.error('Lỗi rồi.');
+          });
       this.optionPeopleModal.hide();
     }
   }
@@ -186,12 +209,12 @@ export class ShowListPeopleComponent implements OnInit {
     if (this.optionChoice === 'moveF1AllPeople' && this.listIdPeopleCheckbox) {
       this.peopleManagementService.moveAllPeopleByStatusAndPeopleIdAndCheckbox(StatusEnum.F1, this.listIdPeopleCheckbox)
         .subscribe(data => {
-          this.getAllPeopleByStatus();
-          this.toastrService.success('Thành công');
-        },
-        error => {
-          this.toastrService.error('Lỗi rồi.');
-        });
+            this.getAllPeopleByStatus();
+            this.toastrService.success('Thành công');
+          },
+          error => {
+            this.toastrService.error('Lỗi rồi.');
+          });
       this.optionPeopleModal.hide();
     }
   }
@@ -210,12 +233,12 @@ export class ShowListPeopleComponent implements OnInit {
     if (this.optionChoice === 'moveDiedAllPeople' && this.listIdPeopleCheckbox) {
       this.peopleManagementService.moveAllPeopleByStatusAndPeopleIdAndCheckbox(StatusEnum.DIED, this.listIdPeopleCheckbox)
         .subscribe(data => {
-          this.getAllPeopleByStatus();
-          this.toastrService.success('Thành công');
-        },
-        error => {
-          this.toastrService.error('Lỗi rồi.');
-        });
+            this.getAllPeopleByStatus();
+            this.toastrService.success('Thành công');
+          },
+          error => {
+            this.toastrService.error('Lỗi rồi.');
+          });
       this.optionPeopleModal.hide();
     }
   }
@@ -234,13 +257,37 @@ export class ShowListPeopleComponent implements OnInit {
     if (this.optionChoice === 'moveSickAllPeople' && this.listIdPeopleCheckbox) {
       this.peopleManagementService.moveAllPeopleByStatusAndPeopleIdAndCheckbox(StatusEnum.Sick, this.listIdPeopleCheckbox)
         .subscribe(data => {
-          this.getAllPeopleByStatus();
-          this.toastrService.success('Thành công');
-        },
-        error => {
-          this.toastrService.error('Lỗi rồi.');
-        });
+            this.getAllPeopleByStatus();
+            this.toastrService.success('Thành công');
+          },
+          error => {
+            this.toastrService.error('Lỗi rồi.');
+          });
       this.optionPeopleModal.hide();
     }
+  }
+
+  Search() {
+    // console.log(this.searchForm.value.txtType);
+    this.peopleManagementService.getAllPeopleByStatusAndSearch(this.status, this.searchForm.value.txtName,
+      this.searchForm.value.txtBirthDay,
+      this.searchForm.value.txtProvince,
+      this.searchForm.value.txtType).subscribe(data => {
+
+
+      if (this.searchForm.value.txtType == null || this.searchForm.value.txtType === 'all') {
+        this.listPeople = data;
+      } else {
+        this.listPeople = data.filter(item => {
+          return (item.type.toString() === this.searchForm.value.txtType);
+        });
+
+      }
+
+    });
+  }
+
+  resetSearch() {
+    this.getAllPeopleByStatus();
   }
 }

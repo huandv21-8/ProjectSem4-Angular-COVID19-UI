@@ -17,12 +17,19 @@ export class PeopleManagementService {
     return this.http.get<Array<PeopleResponseAdmin>>(`http://localhost:8082/v1/managementPeople/listPeople?status=${status}`);
   }
 
+  getAllPeopleByStatusAndSearch(status: string, name: string, birthDay: any, province: any, type: boolean): Observable<Array<PeopleResponseAdmin>> {
+    // console.log(birthDay);
+    // console.log(province);
+    // console.log(type);
+    return this.http.get<Array<PeopleResponseAdmin>>(`http://localhost:8082/v1/managementPeople/listPeopleSearch?status=${status}&name=${name}&birthDay=${birthDay}&provinceId=${province}&type=${type}`);
+  }
+
+
   createPeople(inforPeople: PeopleModelRequest): Observable<any> {
     return this.http.post('http://localhost:8082/v1/managementPeople/createPeople', inforPeople);
   }
 
   getPeopleDetailByStatus(status: string, idStatusByTime: number): Observable<PeopleModel> {
-    console.log(idStatusByTime);
     return this.http.get<PeopleModel>(`http://localhost:8082/v1/managementPeople/peopleDetailByStatus?status=${status}&&idStatusByTime=${idStatusByTime}`);
   }
 
@@ -35,8 +42,6 @@ export class PeopleManagementService {
   }
 
   movePeopleByStatusAndPeopleId(status: string, idChoicePeople: number): Observable<any> {
-    console.log(status);
-    console.log(idChoicePeople);
     return this.http.post(`http://localhost:8082/v1/optionPeople/movePeopleByStatusAndPeopleId?status=${status}`, idChoicePeople);
   }
 

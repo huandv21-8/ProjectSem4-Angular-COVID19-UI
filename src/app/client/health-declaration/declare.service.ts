@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {DeclareRequest} from '../../shared/model/request/declareRequest';
 
@@ -16,8 +16,11 @@ export class DeclareService {
   }
 
 
-  findAccountByPhone(phone: string ): Observable<any> {
-    return this.http.post('http://localhost:8082/v1/declare/findAccountByPhone', phone);
+  findAccountByPhone(phone: string  ): Observable<any> {
+
+    const params = new HttpParams()
+      .set('phone', phone);
+    return this.http.post(`http://localhost:8082/v1/declare/findAccountByPhone`, null, {params});
   }
 
 

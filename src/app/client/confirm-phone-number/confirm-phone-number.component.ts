@@ -34,7 +34,7 @@ export class ConfirmPhoneNumberComponent implements OnInit {
   summitPhone() {
 
     this.phoneRequest = {
-      phone: ('+84' + this.phoneForm.value.phone)
+      phone: (this.phoneForm.value.phone)
     };
     this.smsService.sms(this.phoneRequest).subscribe(() => {
         this.toastrService.success('Gui ma thanh cong');

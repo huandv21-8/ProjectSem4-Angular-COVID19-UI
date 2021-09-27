@@ -1,6 +1,6 @@
-export interface AccountByPhoneReponse {
+export interface AccountByPhoneResponse {
   name: string;
-  birthDay: any;
+  birthDay: Date;
   cmt?: string;
   gender: boolean;
   phone?: string;

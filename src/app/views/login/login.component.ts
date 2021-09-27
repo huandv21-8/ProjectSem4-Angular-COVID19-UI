@@ -35,7 +35,6 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.loginRequest).subscribe(() => {
       this.toastr.success('Đăng nhập thành công');
       this.router.navigateByUrl('admin/people-management/listPeople');
-      console.log('anufhbdcshxj');
     }, (error) => {
       this.isCheckLogin = true;
       this.toastr.error('Đăng nhập thất bại');

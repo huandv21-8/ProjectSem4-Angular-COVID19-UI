@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-reset-password',
@@ -7,9 +8,30 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ResetPasswordComponent implements OnInit {
 
-  constructor() { }
+  formEmail: FormGroup;
 
-  ngOnInit(): void {
+  constructor() {
   }
 
+
+  ngOnInit(): void {
+    this.formEmail = new FormGroup({
+      email: new FormControl(null, [Validators.pattern('^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+$'), Validators.required])
+    });
+
+  }
+
+  summitEmail() {
+
+
+
+  }
+
+  checkEmail(): boolean {
+    if (this.formEmail.controls.email.errors) {
+      if (this.formEmail.controls.email.errors.pattern) {
+        return true;
+      }
+    }
+  }
 }

@@ -1,0 +1,122 @@
+.limit {
+  float: right;
+  margin-right: 13px;
+}
+
+.select-limit {
+  //float:right;
+  display: block;
+  height: calc(1.5em + 0.75rem + 2px);
+  padding: 0.375rem 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #5c6873;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #e4e7ea;
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.show-limit {
+  display: inline;
+  margin-right: 10px;
+}
+
+.select-limit :focus {
+  outline: 0;
+  border: none;
+}
+
+.option-td {
+  text-align: -webkit-right;
+  line-height: 0px;
+  cursor: pointer;
+}
+
+.option-td :hover {
+  color: #8feed1;
+}
+
+.dropdown {
+  //position: absolute;
+  border: 1px solid #fafafa;
+  line-height: 17px;
+  margin-left: -131px;
+}
+
+.dropdown :hover {
+  color: black;
+}
+
+.option-btn {
+  font-size: 33px;
+  color: black;
+  background-color: rgba(255, 255, 255, 0);
+  border-color: rgba(255, 255, 255, 0);
+  line-height: 32px;
+  margin-top: -20px;
+}
+
+.option-btn:focus {
+  outline: 0;
+}
+
+.table-body-list {
+  background-color: #fafafa;
+  table-layout: fixed;
+}
+
+
+.dropdown-item :focus {
+  color: #fafafa;
+}
+
+.dropdown-item i {
+  color: black;
+}
+
+.alert-model {
+  margin-top: 145px;
+}
+
+.people-detail-schedule {
+  background-color: #f5f5f5;
+}
+
+.filter-icon {
+  margin-top: -8px;
+  float: right;
+}
+
+
+.icon-option-checkBox {
+  padding-right: 22px;
+  float: left;
+  cursor: pointer;
+}
+
+
+.action-all-people {
+  border-right: 1px solid #9a9999;
+}
+
+.choose-group {
+  margin-right: 12px;
+}
+
+input.txtSearch {
+  margin-right: 20px;
+  width: 240px;
+}
+input#btn-search {
+  margin-left: 10px;
+  width: 85px;
+}
+select#Loai {
+  margin-right: 20px;
+}
+dt.col3 {
+  margin-left: auto;
+}

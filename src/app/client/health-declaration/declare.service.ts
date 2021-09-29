@@ -15,7 +15,6 @@ export class DeclareService {
     return this.http.post('http://localhost:8082/v1/declare', declareRequest);
   }
 
-
   findAccountByPhone(phone: string  ): Observable<any> {
 
     const params = new HttpParams()

@@ -58,22 +58,22 @@ export const navItems: INavData[] = [
     title: true,
     name: 'Quản lý thông tin tình hình dịch bệnh'
   },
-  {
-    name: 'Tin tức',
-    icon: 'icon-folder-alt',
-    children: [
-      {
-        name: 'Tạo tin tức',
-        url: 'post/news',
-        icon: 'icon-note'
-      },
-      {
-        name: 'Danh dách tin tức',
-        url: 'post/news',
-        icon: 'icon-list'
-      }
-    ]
-  },
+  // {
+  //   name: 'Tin tức',
+  //   icon: 'icon-folder-alt',
+  //   children: [
+  //     {
+  //       name: 'Tạo tin tức',
+  //       url: 'post/news',
+  //       icon: 'icon-note'
+  //     },
+  //     {
+  //       name: 'Danh dách tin tức',
+  //       url: 'post/news',
+  //       icon: 'icon-list'
+  //     }
+  //   ]
+  // },
   {
     name: 'Diễn biến dịch',
     icon: 'icon-folder-alt',
@@ -98,11 +98,11 @@ export const navItems: INavData[] = [
     name: 'Danh sách khai báo',
     icon: 'icon-folder-alt',
     children: [
-      // {
-      //   name: 'Tạo tin tức',
-      //   url: 'post/news',
-      //   icon: 'icon-note'
-      // },
+      {
+        name: 'Danh sách tài account',
+        url: 'declare',
+        icon: 'icon-note'
+      },
       // {
       //   name: 'Danh dách tin tức',
       //   url: 'post/news',

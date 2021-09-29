@@ -18,9 +18,6 @@ export class PeopleManagementService {
   }
 
   getAllPeopleByStatusAndSearch(status: string, name: string, birthDay: any, province: any, type: boolean): Observable<Array<PeopleResponseAdmin>> {
-    // console.log(birthDay);
-    // console.log(province);
-    // console.log(type);
     return this.http.get<Array<PeopleResponseAdmin>>(`http://localhost:8082/v1/managementPeople/listPeopleSearch?status=${status}&name=${name}&birthDay=${birthDay}&provinceId=${province}&type=${type}`);
   }
 

@@ -82,6 +82,10 @@ export const routes: Routes = [
         loadChildren: () => import('./admin/post/post.module').then(m => m.PostModule)
       },
       {
+        path: 'declare',
+        loadChildren: () => import('./admin/declare/declare.module').then(m => m.DeclareModule)
+      },
+      {
         path: 'base',
         loadChildren: () => import('./views/base/base.module').then(m => m.BaseModule)
       },

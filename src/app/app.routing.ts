@@ -67,7 +67,7 @@ export const routes: Routes = [
     data: {
       title: 'Home'
     },
-    canActivate: [AuthGuardGuard],
+    //canActivate: [AuthGuardGuard],
     children: [
       {
         path: '',

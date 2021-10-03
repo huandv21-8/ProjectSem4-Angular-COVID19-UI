@@ -1,3 +1,4 @@
+import { ModalModule } from 'ngx-bootstrap/modal';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {LocationStrategy, HashLocationStrategy, PathLocationStrategy} from '@angular/common';
@@ -76,7 +77,8 @@ import { SubmitOtpEmailComponent } from './admin/resetPassword/submit-otp-email/
       preventDuplicates: true
     }),
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ModalModule
   ],
   declarations: [
     AppComponent,

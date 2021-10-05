@@ -72,7 +72,7 @@
                         <form  [formGroup]="searchForm">
                           <dl class="row row1">
                             <dt class="col3">
-                              <p>Nhập thên người bệnh:</p>
+                              <p>Nhập tên:</p>
                               <input type="text" (keyup)="Search()" [formControlName]="'txtName'" class="txtSearch" placeholder="Nhập tên người bệnh"/>
                             </dt>
                             <dt class="col3">
@@ -80,7 +80,7 @@
                               <input type="date" (change)="Search()" [formControlName]="'txtBirthDay'" class="txtSearch">
                             </dt>
                             <dt class="col3">
-                              <p>Nhập Tỉnh:</p>
+                              <p>Chọn tỉnh:</p>
                               <select id="province" (change)="Search()" [formControlName]="'txtProvince'" class="txtSearch">
                                 <option selected [value]="0">Tất cả</option>
                                 <option *ngFor="let city of listProvince" value="{{city.provinceId}}">{{city.provinceName}}</option>
@@ -88,11 +88,11 @@
                               </select>
                             </dt>
                             <dt class="col3">
-                              <p>Chọn nguồn lây:</p>
+                              <p>Chọn loại:</p>
                               <select id="Loai" (change)="Search()" [formControlName]="'txtType'"  class="txtSearch">
                                 <option value="all">Tất cả</option>
                                 <option [value]="true">Trước khi nhập cảnh</option>
-                                <option [value]="false">Lây lan trong nước</option>
+                                <option [value]="false">Lây nhiễm trong nước</option>
                               </select>
                             </dt>
                           </dl>

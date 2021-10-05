@@ -1,6 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {DeclareManagementService} from '../declare-management.service';
 import {AccountByAllResponse} from '../../../shared/model/response/accountByAllResponse';
+import {ToastrService} from 'ngx-toastr';
+import {ModalDirective} from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-show-list-declare',
@@ -12,9 +14,13 @@ export class ShowListDeclareComponent implements OnInit {
   isCheckedCheckBoxPeople: boolean = false;
   isCheckedAllCheckBoxPeople: boolean = false;
   itemsInPage: number = 5;
+  listIdAccountCheckbox: Array<number> = [];
   listAccount: Array<AccountByAllResponse> = [];
+  optionChoice: string;
+  idChoiceAccount: number;
+  @ViewChild('OptionAccountModal') public optionAccountModal: ModalDirective;
 
-  constructor(private declareManagementService: DeclareManagementService) {
+  constructor(private declareManagementService: DeclareManagementService, private toastrService: ToastrService,) {
   }
 
   ngOnInit(): void {
@@ -25,59 +31,107 @@ export class ShowListDeclareComponent implements OnInit {
   getAllAccount() {
     this.declareManagementService.getAllAccount().subscribe(data => {
       this.listAccount = data;
-      console.log(data);
     });
   }
 
   checkBoxValue(event) {
-    // console.log(event.target.value);
+    if (event.target.name === 'checkBoxAllPeople') {
+      if (event.target.checked) {
+        if (this.listIdAccountCheckbox.length > 0) {
+          this.listIdAccountCheckbox.splice(0, this.listIdAccountCheckbox.length);
+        }
+        this.listAccount.forEach(account => {
+          this.listIdAccountCheckbox.push(account.accountId);
+        });
+        this.isCheckedCheckBoxPeople = true;
+      } else {
+        this.listIdAccountCheckbox.splice(0, this.listIdAccountCheckbox.length);
+        this.isCheckedCheckBoxPeople = false;
+      }
+    } else {
+      if (event.target.checked) {
+        this.listIdAccountCheckbox.push(event.target.value);
+      } else {
+        this.listIdAccountCheckbox.forEach((element, index) => {
 
-    // if (event.target.name === 'checkBoxAllPeople') {
-    //   console.log('trên: ' + event.target.checked);
-    //   if (event.target.checked) {
-    //     if (this.listIdPeopleCheckbox.length > 0) {
-    //       this.listIdPeopleCheckbox.splice(0, this.listIdPeopleCheckbox.length);
-    //     }
-    //     this.listPeople.forEach(people => {
-    //       this.listIdPeopleCheckbox.push(people.idPeople);
-    //     });
-    //     this.isCheckedCheckBoxPeople = true;
-    //   } else {
-    //     this.listIdPeopleCheckbox.splice(0, this.listIdPeopleCheckbox.length);
-    //     this.isCheckedCheckBoxPeople = false;
-    //   }
-    //
-    // } else {
-    //   // console.log('dưới: ' + event.target.checked);
-    //   if (event.target.checked) {
-    //     this.listIdPeopleCheckbox.push(event.target.value);
-    //   } else {
-    //     this.listIdPeopleCheckbox.forEach((element, index) => {
-    //
-    //       // tslint:disable-next-line:triple-equals
-    //       if (element == event.target.value) {
-    //         this.listIdPeopleCheckbox.splice(index, 1);
-    //       }
-    //     });
-    //   }
-    //   // console.log('test');
-    //   this.isCheckedAllCheckBoxPeople = false;
-    //   // tslint:disable-next-line:triple-equals
-    //   if (this.listIdPeopleCheckbox.length == this.listPeople.length) {
-    //     // console.log('test');
-    //     this.isCheckedAllCheckBoxPeople = true;
-    //   }
-    //
-    //   // console.log(this.isCheckedAllCheckBoxPeople);
-    // }
-    //
-    // // console.log(this.listIdPeopleCheckbox);
+          if (element === event.target.value) {
+            this.listIdAccountCheckbox.splice(index, 1);
+          }
+        });
+      }
+      this.isCheckedAllCheckBoxPeople = false;
+      if (this.listIdAccountCheckbox.length === this.listAccount.length) {
+        this.isCheckedAllCheckBoxPeople = true;
+      }
+    }
   }
 
   showChoose(value: any) {
     this.itemsInPage = value;
     if (value === '0') {
       // this.itemsInPage = this.listPeople.length;
+    }
+  }
+
+  setOptionChoice(choice: string, idAccount?: number) {
+    this.optionChoice = choice;
+    if (idAccount) {
+      this.idChoiceAccount = idAccount;
+    }
+  }
+
+  managementPeople() {
+    if (this.idChoiceAccount && this.optionChoice === 'deleteAccount' || this.optionChoice === 'f1Account' || this.optionChoice === 'sickAccount') {
+      this.declareManagementService.managementAccountById(this.optionChoice, this.idChoiceAccount).subscribe(data => {
+          this.getAllAccount();
+          this.toastrService.success('Thành công');
+        },
+        error => {
+          this.toastrService.error('Lỗi rồi.');
+        });
+      this.optionAccountModal.hide();
+    }
+
+
+    // if (this.idChoiceAccount && this.optionChoice === 'deleteAccount') {
+    //   this.declareManagementService.deleteAccountById(this.idChoiceAccount).subscribe(data => {
+    //       this.getAllAccount();
+    //       this.toastrService.success('Thành công');
+    //     },
+    //     error => {
+    //       this.toastrService.error('Lỗi rồi.');
+    //     });
+    //   this.optionAccountModal.hide();
+    // }
+    // if (this.idChoiceAccount && this.optionChoice === 'sickAccount') {
+    //   this.declareManagementService.deleteAccountById(this.idChoiceAccount).subscribe(data => {
+    //       this.getAllAccount();
+    //       this.toastrService.success('Thành công');
+    //     },
+    //     error => {
+    //       this.toastrService.error('Lỗi rồi.');
+    //     });
+    //   this.optionAccountModal.hide();
+    // }
+    // if (this.idChoiceAccount && this.optionChoice === 'f1Account') {
+    //   this.declareManagementService.deleteAccountById(this.idChoiceAccount).subscribe(data => {
+    //       this.getAllAccount();
+    //       this.toastrService.success('Thành công');
+    //     },
+    //     error => {
+    //       this.toastrService.error('Lỗi rồi.');
+    //     });
+    //   this.optionAccountModal.hide();
+    // }
+    if (this.optionChoice === 'deleteAllAccount' || this.optionChoice === 'f1AllAccount' || this.optionChoice === 'sickAllAccount' && this.listIdAccountCheckbox) {
+      this.declareManagementService.managementAllAccountById(this.optionChoice, this.listIdAccountCheckbox).subscribe(data => {
+          this.getAllAccount();
+          this.toastrService.success('Thành công');
+        },
+        error => {
+          this.toastrService.error('Lỗi rồi.');
+        });
+      this.optionAccountModal.hide();
     }
   }
 }

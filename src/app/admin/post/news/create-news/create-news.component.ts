@@ -24,10 +24,10 @@ export class CreateNewsComponent implements OnInit {
   }
 
   onReady(eventData) {
-    console.log(eventData);
+    // console.log(eventData);
   }
 
   createArticle() {
-    console.log(this.articleForm.get('rmDescription').value);
+    // console.log(this.articleForm.get('rmDescription').value);
   }
 }

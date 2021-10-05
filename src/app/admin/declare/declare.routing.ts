@@ -6,7 +6,10 @@ import {ShowListDeclareComponent} from './show-list-declare/show-list-declare.co
 const routes: Routes = [
   {
     path: '',
-    component: ShowListDeclareComponent
+    component: ShowListDeclareComponent,
+    data: {
+      title: 'Danh sách Account'
+    }
   },
 
 ];

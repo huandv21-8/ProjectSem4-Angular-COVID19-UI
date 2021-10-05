@@ -33,8 +33,8 @@ export class HomeComponent implements OnInit {
   getSituation() {
     this.homeService.listSituation().subscribe(data => {
       if (data) {
-        console.log(this.listSituation);
-        console.log(data);
+        // console.log(this.listSituation);
+        // console.log(data);
         this.listSituation = data;
       }
     }, error => {

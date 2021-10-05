@@ -18,18 +18,18 @@ export class SubmitPasswordComponent implements OnInit {
   }
 
   submitPass(){
-    console.log(this.formCheckPass.value.password)
-    console.log(this.formCheckPass.value.checkPass)
-    
+    // console.log(this.formCheckPass.value.password)
+    // console.log(this.formCheckPass.value.checkPass)
+
     if(this.formCheckPass.value.password === this.formCheckPass.value.checkPass
        && this.formCheckPass.value.password.length > 0){
-         console.log("chay vao day");
-         
+         // console.log("chay vao day");
+
          this.isCheckPass = true;
          this.router.navigateByUrl('/client');
 
        }
-      
+
   }
 
   setData() {

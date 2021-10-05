@@ -10,41 +10,33 @@
                   <i class="fa fa-filter fa-lg mt-4" [ngStyle]="{ 'float': 'right', 'cursor': 'pointer'}"
                      tooltip="Tìm kiếm." placement="top" (click)="isCollapsed = !isCollapsed"></i>
                 </div>
-                <div class="col-md-11"
+                <div class="col-md-11" *ngIf=" listIdAccountCheckbox.length > 0"
                      [ngStyle]="{'margin-top': '13px', 'height':'0px'}">
                   <div class="row" [ngStyle]="{ 'line-height': '18px'}">
                     <div class="col-md-1 action-all-people">
                       <div class="icon-option-checkBox" (click)="OptionAccountModal.show()">
-                        <i class="fas fa-trash-alt fa-lg" tooltip="Xóa"
+                        <i class="fas fa-trash-alt fa-lg" tooltip="Xóa" (click)="setOptionChoice('deleteAllAccount')"
                            placement="top"></i>
                       </div>
                     </div>
                     <div class="col-md-9 choose-group" [ngStyle]="{'margin-left': '8px'}">
                       <div class="icon-option-checkBox"
                            (click)="OptionAccountModal.show()">
-                        <i class="fas fa-head-side-cough fa-lg"
+                        <i class="fas fa-head-side-cough fa-lg" (click)="setOptionChoice('sickAllAccount')"
                            tooltip="Đánh dấu bị bệnh" placement="top" [ngStyle]="{'color': '#fe2e2e'}"></i>
-                      </div>
-                      <div class="icon-option-checkBox" (click)="OptionAccountModal.show()">
-                        <i class="fas fa-user-shield fa-lg"
-                           tooltip="Đánh dấu đã khỏi" placement="top" [ngStyle]="{'color': '#4dbd74'}"></i>
-                      </div>
-                      <div class="icon-option-checkBox" (click)="OptionAccountModal.show()">
-                        <i class="fas fa-skull-crossbones fa-lg"
-                           tooltip="Đánh dấu đã chết" placement="top" [ngStyle]="{'color': '#000000'}"></i>
                       </div>
                       <div class="icon-option-checkBox"
                            (click)="OptionAccountModal.show()">
-                        <i class="fas fa-house-user fa-lg"
+                        <i class="fas fa-house-user fa-lg" (click)="setOptionChoice('f1AllAccount')"
                            tooltip="Đánh dấu đang cách ly" placement="top" [ngStyle]="{'color': '#1d7fae'}"></i>
                       </div>
                     </div>
                   </div>
                 </div>
-<!--                                <div *ngIf=" !listIdPeopleCheckbox.length > 0" class="col-md-11"-->
-<!--                                     [ngStyle]="{'margin-top': '13px', 'height':'0px'}">-->
-<!--                                  <h6>Có tất cả {{listAccount.length}} người</h6>-->
-<!--                                </div>-->
+                <div *ngIf=" !listIdAccountCheckbox.length > 0" class="col-md-11"
+                     [ngStyle]="{'margin-top': '13px', 'height':'0px'}">
+                  <h6>Có tất cả {{listAccount.length}} người</h6>
+                </div>
               </div>
             </div>
             <div class="col-md-5 ">
@@ -123,7 +115,7 @@
               <th><strong>Ngày sinh</strong></th>
               <th><strong>Địa chỉ</strong></th>
               <th><strong>Giới tính</strong></th>
-<!--              <th><strong>Loại</strong></th>-->
+              <!--              <th><strong>Loại</strong></th>-->
               <th></th>
             </tr>
             </thead>
@@ -141,41 +133,27 @@
                   <button dropdownToggle class="option-btn">...</button>
                   <ul *dropdownMenu class="dropdown-menu dropdown" role="menu">
                     <!--                    <li role="menuitem" data-toggle="modal" (click)="peopleDetailModel.show()">-->
-                    <!--                        <span class="dropdown-item" (click)="getPeopleDetail(item.idStatusByTime)">-->
-                    <!--                          <i class="fa fa-eye"></i> Xem chi tiết-->
-                    <!--                        </span>-->
+                    <!--                                            <span class="dropdown-item" (click)="getPeopleDetail(item.idStatusByTime)">-->
+                    <!--                                              <i class="fa fa-eye"></i> Xem chi tiết-->
+                    <!--                                            </span>-->
                     <!--                    </li>-->
-                    <li role="menuitem">
-                        <span class="dropdown-item">
-                          <i class="fas fa-edit"></i> Sửa
+                    <li role="menuitem" (click)="OptionAccountModal.show()">
+                        <span class="dropdown-item" (click)="setOptionChoice('sickAccount',item.accountId)">
+                          <i class="fas fa-head-side-cough" [ngStyle]="{'color': '#fe2e2e'}"></i>Bị bệnh
+                         </span>
+                    </li>
+
+                    <li role="menuitem" (click)="OptionAccountModal.show()">
+                        <span class="dropdown-item" (click)="setOptionChoice('f1Account',item.accountId)">
+                           <i class="fas fa-house-user" [ngStyle]="{'color': '#1d7fae'}"></i>Cách ly
                         </span>
                     </li>
-                    <!--                    <li role="menuitem" *ngIf="status == 'f1' || status == 'cured'"-->
-                    <!--                        (click)="OptionPeopleModal.show()">-->
-                    <!--                        <span class="dropdown-item" (click)="setOptionChoice('moveSickPeople',item.idPeople)">-->
-                    <!--                          <i class="fas fa-head-side-cough" [ngStyle]="{'color': '#fe2e2e'}"></i>Bị bệnh-->
-                    <!--                        </span>-->
-                    <!--                    </li>-->
-                    <!--                    <li role="menuitem" *ngIf="status == 'sick'" (click)="OptionPeopleModal.show()">-->
-                    <!--                        <span class="dropdown-item" (click)="setOptionChoice('moveCuredPeople',item.idPeople)">-->
-                    <!--                          <i class="fas fa-user-shield" [ngStyle]="{'color': '#4dbd74'}"></i>Đã khỏi-->
-                    <!--                        </span>-->
-                    <!--                    </li>-->
-                    <!--                    <li role="menuitem" *ngIf="status == 'sick'" (click)="OptionPeopleModal.show()">-->
-                    <!--                        <span class="dropdown-item" (click)="setOptionChoice('moveDiedPeople',item.idPeople)">-->
-                    <!--                          <i class="fas fa-skull-crossbones" [ngStyle]="{'color': '#000000'}"></i>Đã chết-->
-                    <!--                        </span>-->
-                    <!--                    </li>-->
-                    <!--                    <li role="menuitem" *ngIf="status != 'f1' && status != 'died'" (click)="OptionPeopleModal.show()">-->
-                    <!--                        <span class="dropdown-item" (click)="setOptionChoice('moveF1People',item.idPeople)">-->
-                    <!--                          <i class="fas fa-house-user" [ngStyle]="{'color': '#1d7fae'}"></i>Cách ly-->
-                    <!--                        </span>-->
-                    <!--                    </li>-->
-                    <!--                    <li role="menuitem" data-toggle="modal" (click)="OptionAccountModal.show()">-->
-                    <!--                        <span class="dropdown-item" (click)="setOptionChoice('deletePeople',item.idPeople)">-->
-                    <!--                          <i class="fas fa-trash-alt"></i> Xóa-->
-                    <!--                        </span>-->
-                    <!--                    </li>-->
+                    <li role="menuitem" data-toggle="modal" (click)="OptionAccountModal.show()">
+                                            <span class="dropdown-item"
+                                                  (click)="setOptionChoice('deleteAccount',item.accountId)">
+                                              <i class="fas fa-trash-alt"></i> Xóa
+                                            </span>
+                    </li>
                   </ul>
                 </div>
               </td>
@@ -212,7 +190,9 @@
         <div class="modal-footer" [ngStyle]="{'text-align': 'center'}">
           <div>
             <button type="button" class="btn btn-secondary" (click)="OptionAccountModal.hide()">Hủy</button>
-            <button type="button" class="btn btn-danger">Xác nhận</button>
+            <button type="button" class="btn btn-danger"(click)="managementPeople()">
+              Xác nhận
+            </button>
           </div>
         </div>
       </div>
@@ -220,6 +200,7 @@
   </div>
 </div>
 
+<!--*ngIf="optionChoice == 'deleteAccount' || optionChoice == 'deleteAllAccount'"-->
 
 <!--<div bsModal #peopleDetailModel="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"-->
 <!--     aria-hidden="true">-->

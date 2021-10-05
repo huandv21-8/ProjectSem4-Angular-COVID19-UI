@@ -91,7 +91,7 @@ export class ShowListPeopleComponent implements OnInit {
 
   getPeopleDetail(idStatusByTime: number) {
     this.peopleManagementService.getPeopleDetailByStatus(this.status, idStatusByTime).subscribe(data => {
-      console.log(data);
+      // console.log(data);
       this.peopleDetail = data;
     });
   }
@@ -100,7 +100,7 @@ export class ShowListPeopleComponent implements OnInit {
     // console.log(event.target.value);
 
     if (event.target.name === 'checkBoxAllPeople') {
-      console.log('trên: ' + event.target.checked);
+      // console.log('trên: ' + event.target.checked);
       if (event.target.checked) {
         if (this.listIdPeopleCheckbox.length > 0) {
           this.listIdPeopleCheckbox.splice(0, this.listIdPeopleCheckbox.length);

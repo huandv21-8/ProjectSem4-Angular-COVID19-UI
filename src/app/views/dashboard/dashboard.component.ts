@@ -116,7 +116,7 @@ export class DashboardComponent implements OnInit {
   }
 
   onStatisticsChange(value: string) {
-    console.log(this.radioModel);
+    // console.log(this.radioModel);
     if (value === 'Day') {
       // tslint:disable-next-line:max-line-length
       this.mainChartLabels = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday', 'Monday', 'Thursday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];

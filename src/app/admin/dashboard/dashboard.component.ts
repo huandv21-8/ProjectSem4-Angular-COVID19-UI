@@ -65,8 +65,8 @@ export class DashboardComponent implements OnInit {
         ticks: {
           beginAtZero: true,
           maxTicksLimit: 5,
-          stepSize: Math.ceil(50 / 15),
-          max: 50
+          stepSize: Math.ceil(25 / 15),
+          max: 25
         }
       }]
     },
@@ -145,7 +145,7 @@ export class DashboardComponent implements OnInit {
         }
       },
       error => {
-        console.log(error);
+        // console.log(error);
       }
     );
   }

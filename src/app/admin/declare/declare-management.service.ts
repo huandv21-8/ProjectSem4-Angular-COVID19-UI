@@ -17,5 +17,14 @@ export class DeclareManagementService {
   }
 
 
+  managementAccountById(optionChoose: string, idChoiceAccount: number): Observable<any> {
+    return this.http.delete(`http://localhost:8082/v1/declare/managementAccount/${idChoiceAccount}?optionChoose=${optionChoose}`);
+  }
 
+
+  managementAllAccountById(optionChoose: string, listIdAccountCheckbox: Array<number>): Observable<any> {
+    const params = new HttpParams()
+      .set('optionChoose', optionChoose);
+    return this.http.post('http://localhost:8082/v1/declare/managementAllAccount', listIdAccountCheckbox, {params});
+  }
 }

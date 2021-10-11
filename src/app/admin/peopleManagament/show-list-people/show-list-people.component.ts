@@ -268,7 +268,6 @@ export class ShowListPeopleComponent implements OnInit {
   }
 
   Search() {
-    // console.log(this.searchForm.value.txtType);
     this.peopleManagementService.getAllPeopleByStatusAndSearch(this.status, this.searchForm.value.txtName,
       this.searchForm.value.txtBirthDay,
       this.searchForm.value.txtProvince,
@@ -288,6 +287,9 @@ export class ShowListPeopleComponent implements OnInit {
   }
 
   resetSearch() {
+    this.setStyleFormSearch();
     this.getAllPeopleByStatus();
   }
+
+
 }

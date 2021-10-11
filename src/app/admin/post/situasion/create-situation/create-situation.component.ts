@@ -32,13 +32,15 @@ export class CreateSituationComponent implements OnInit {
       content: this.situationForm.value.content
     };
     this.situationService.createSituation(this.situationRequest).subscribe((data) => {
-        this.toastrService.success("Thanh cong");
+        this.toastrService.success('Thành công');
+        this.situationForm = new FormGroup({
+          content: new FormControl('', [Validators.required])
+        });
       },
       (error) => {
-        this.toastrService.error("Loi roi");
+        this.toastrService.error('Loi roi');
       }
     );
- //   console.log(this.situationForm.get('content').value);
   }
 
 }

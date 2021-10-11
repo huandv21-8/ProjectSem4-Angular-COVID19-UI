@@ -65,7 +65,6 @@ export class CreatePeopleFormComponent implements OnInit {
           schedule: this.peopleForm.value.schedule,
           status: this.stylePeople,
           type: this.peopleForm.value.loai,
-          idSourced: this.peopleForm.value.source
         };
       } else {
         this.inforPeople = {
@@ -79,7 +78,6 @@ export class CreatePeopleFormComponent implements OnInit {
           idCommune: this.peopleForm.value.commune,
           schedule: this.peopleForm.value.schedule,
           status: this.stylePeople,
-          idSourced: this.peopleForm.value.source,
         };
       }
 
@@ -101,13 +99,12 @@ export class CreatePeopleFormComponent implements OnInit {
         age: new FormControl('', [Validators.required]),
         cmt: new FormControl(''),
         gender: new FormControl(true, [Validators.required]),
-        phone: new FormControl('', [Validators.pattern('[0-9 ]{10}')]),
+        phone: new FormControl('', [Validators.pattern('[0-9 ]{10}'), Validators.required]),
         province: new FormControl(0, [Validators.required]),
         district: new FormControl(0, [Validators.required]),
         commune: new FormControl(0, [Validators.required]),
-        schedule: new FormControl('', ),
+        schedule: new FormControl(''),
         loai: new FormControl(true, [Validators.required]),
-        source: new FormControl(0, [Validators.required])
       });
 
     } else {
@@ -116,12 +113,11 @@ export class CreatePeopleFormComponent implements OnInit {
         age: new FormControl('', [Validators.required]),
         cmt: new FormControl(''),
         gender: new FormControl(true, [Validators.required]),
-        phone: new FormControl('', [Validators.pattern('[0-9 ]{10}')]),
+        phone: new FormControl('', [Validators.pattern('[0-9 ]{10}'), Validators.required]),
         province: new FormControl(0, [Validators.required]),
         district: new FormControl(0, [Validators.required]),
         commune: new FormControl(0, [Validators.required]),
-        schedule: new FormControl('', ),
-        source: new FormControl(0, [Validators.required])
+        schedule: new FormControl(''),
       });
     }
   }

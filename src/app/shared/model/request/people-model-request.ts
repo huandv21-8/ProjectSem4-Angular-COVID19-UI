@@ -11,5 +11,4 @@ export interface PeopleModelRequest {   // dùng để create people
   schedule: string;  // lich trinh
   status: string;
   type?: boolean;
-  idSourced?: number;
 }

@@ -33,27 +33,24 @@ export class HealthDeclarationComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.getAllAddress();
-
-    // console.log(this.accountByPhone);
     this.setValue();
     this.findAccountByPhone();
   }
 
   findAccountByPhone() {
     this.declareService.findAccountByPhone(this.localStorage.retrieve('phone')).subscribe(data => {
-    // this.declareService.findAccountByPhone('0966469746').subscribe(data => {
       if (data) {
         this.accountByPhone = data;
         this.declareForm = new FormGroup({
           name: new FormControl(this.accountByPhone.name, [Validators.required]),
           birthDay: new FormControl(this.accountByPhone.birthDay, [Validators.required]),
-          cmt: new FormControl(this.accountByPhone.cmt,),
+          cmt: new FormControl(this.accountByPhone.cmt),
           gender: new FormControl(this.accountByPhone.gender, [Validators.required]),
-          phone: new FormControl(this.accountByPhone.phone, [Validators.pattern('[0-9 ]{10}'), Validators.required]),
+          phone: new FormControl(this.localStorage.retrieve('phone'), [Validators.pattern('[0-9 ]{10}'), Validators.required]),
           province: new FormControl(null, [Validators.required]),
           district: new FormControl(null, [Validators.required]),
           idCommune: new FormControl(null, [Validators.required]),
-          address: new FormControl(this.accountByPhone.address,),
+          address: new FormControl(this.accountByPhone.address),
           exposureToF0: new FormControl(false, [Validators.required]),
           comeBackFromEpidemicArea: new FormControl(false, [Validators.required]),
           contactWithPeopleReturningFromEpidemicAreas: new FormControl(false, [Validators.required]),
@@ -74,7 +71,7 @@ export class HealthDeclarationComponent implements OnInit, OnDestroy {
           diabetes: new FormControl(false, [Validators.required]),
           cancer: new FormControl(false, [Validators.required]),
           pregnant: new FormControl(false, [Validators.required]),
-          check: new FormControl(null, [Validators.required]),
+          check: new FormControl(null, [Validators.requiredTrue]),
           travelSchedule: new FormControl(null),
         });
       }
@@ -87,13 +84,13 @@ export class HealthDeclarationComponent implements OnInit, OnDestroy {
     this.declareForm = new FormGroup({
       name: new FormControl(null, [Validators.required]),
       birthDay: new FormControl(null, [Validators.required]),
-      cmt: new FormControl(null,),
+      cmt: new FormControl(null),
       gender: new FormControl(false, [Validators.required]),
-      phone: new FormControl(null, [Validators.pattern('[0-9 ]{10}'), Validators.required]),
+      phone: new FormControl(this.localStorage.retrieve('phone'), [Validators.pattern('[0-9 ]{10}'), Validators.required]),
       province: new FormControl(null, [Validators.required]),
       district: new FormControl(null, [Validators.required]),
       idCommune: new FormControl(null, [Validators.required]),
-      address: new FormControl(null,),
+      address: new FormControl(null),
       exposureToF0: new FormControl(false, [Validators.required]),
       comeBackFromEpidemicArea: new FormControl(false, [Validators.required]),
       contactWithPeopleReturningFromEpidemicAreas: new FormControl(false, [Validators.required]),
@@ -114,7 +111,7 @@ export class HealthDeclarationComponent implements OnInit, OnDestroy {
       diabetes: new FormControl(false, [Validators.required]),
       cancer: new FormControl(false, [Validators.required]),
       pregnant: new FormControl(false, [Validators.required]),
-      check: new FormControl(null, [Validators.required]),
+      check: new FormControl(null, [Validators.requiredTrue]),
       travelSchedule: new FormControl(null),
     });
   }
@@ -133,8 +130,6 @@ export class HealthDeclarationComponent implements OnInit, OnDestroy {
   }
 
   getAllDistrictByProvinceId(value: any) {
-    // this.declareForm.controls.district.setValue(0);
-    // this.declareForm.controls.commune.setValue(0);
     if (value && value !== 0) {
       this.addressService.getAllDistrictByProvinceId(value).subscribe(data => {
         this.listDistrict = data;
@@ -194,5 +189,6 @@ export class HealthDeclarationComponent implements OnInit, OnDestroy {
       this.toastrService.error('Sai roi');
     });
   }
+
 
 }

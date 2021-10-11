@@ -1,59 +1,65 @@
 <div class="content-wrapper">
-    <div class="container">
-        <div class="col-sm-12">
-            <div class="card" data-aos="fade-up">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-lg-9">
-                            <div class="form-gap"></div>
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-md-5 col-md-offset-5">
-                                        <div class="panel panel-default">
-                                            <div class="panel-body">
-                                                <div class="text-center">
-                                                    <h3><i class="fa fa-lock fa-4x"></i></h3>
-                                                    <h2 class="text-center">Nhập OTP</h2>
-                                                    <p>Bạn có thể nhập mã OTP của bạn ở đây.</p>
-                                                    <div class="panel-body">
-                                                        <form id="submit-OTP" role="form" autocomplete="off"
-                                                            class="form" method="post">
-                                                            <div class="form-group">
-                                                                <div class="input-group">
-                                                                    <input id="OTP" name="OTP"
-                                                                        placeholder="Nhập mã OTP đã nhận"
-                                                                        class="form-control" type="OTP">
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group-email">
-                                                                <button type="submit"
-                                                                    class="btn btn-lg btn-primary btn-block"><a
-                                                                        class="nav-link"
-                                                                        [routerLink]="['/submit-password']">Tiếp
-                                                                        tục</a></button>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+  <div class="container">
+    <div class="col-sm-12">
+      <div class="card" data-aos="fade-up">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-lg-9">
+              <div class="form-gap"></div>
+              <div class="container">
+                <div class="row">
+                  <div class="col-md-5 col-md-offset-5">
+                    <div class="panel panel-default">
+                      <div class="panel-body">
+                        <div class="text-center">
+                          <h3><i class="fa fa-lock fa-4x"></i></h3>
+                          <h2 class="text-center">Nhập mã</h2>
+                          <p>Bạn có thể nhập mã đã gửi đến email của bạn ở đây.</p>
+                          <div class="panel-body">
+                            <form [formGroup]="formOtp" (ngSubmit)="summitOtp()" class="form">
+                              <div class="form-group">
+                                <div class="input-group">
+                                  <input
+                                         placeholder="Nhập mã đã nhận"
+                                         class="form-control"
+                                         [formControlName]="'otp'"
+                                         (change)="checkOtp()"
+                                         [ngClass]="checkOtp() ? 'is-invalid' : ''"
+                                         type="text">
+                                  <div class="invalid-feedback" *ngIf="checkOtp()">
+                                    Nhập sai định dạng OTP !!!
+                                  </div>
                                 </div>
-                            </div>
+                              </div>
+                              <div class="form-group-email">
+                                <button type="submit"
+                                        [ngStyle]="{'cursor': formOtp.invalid? 'no-drop' : 'pointer'}"
+                                        [disabled]="formOtp.invalid"
+                                        class="btn btn-lg btn-primary btn-block">Tiếp tục
+                                </button>
+                              </div>
+                            </form>
+                          </div>
                         </div>
-                        <div class="col-lg-3">
-                            <div class="box-ddn">
-                                <span class="box-text">Đường dây nóng</span><br>
-                                <h2>19009095</h2>
-                            </div>
-                            <div class="box-phone">
-                                <img id="img-box" src="../assets/img/avatars/3.png" alt="banner">
-                            </div>
-                        </div>
+                      </div>
                     </div>
+                  </div>
                 </div>
+              </div>
             </div>
+            <div class="col-lg-3">
+              <div class="box-ddn">
+                <span class="box-text">Đường dây nóng</span><br>
+                <h2>19009095</h2>
+              </div>
+              <div class="box-phone">
+                <img id="img-box" src="../assets/img/avatars/3.png" alt="banner">
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </div>
 <!-- main-panel ends -->

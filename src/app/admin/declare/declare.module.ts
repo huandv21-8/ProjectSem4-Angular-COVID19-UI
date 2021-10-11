@@ -11,6 +11,7 @@ import {CollapseModule} from 'ngx-bootstrap/collapse';
 import {TooltipModule} from 'ngx-bootstrap/tooltip';
 import {ModalModule} from 'ngx-bootstrap/modal';
 import {NgxPaginationModule} from 'ngx-pagination';
+import { ShowListAccountComponent } from './show-list-account/show-list-account.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import {NgxPaginationModule} from 'ngx-pagination';
     NgxPaginationModule
   ],
   declarations: [
-    ShowListDeclareComponent
+    ShowListDeclareComponent,
+    ShowListAccountComponent
   ]
 })
 export class DeclareModule {

@@ -20,7 +20,7 @@
                       <input type="text" (change)="checkOtp()" [ngClass]="checkOtp() ? 'is-invalid' : ''"
                              [formControlName]="'otp'" class="form-control" placeholder="Nhập otp">
                       <div class="invalid-feedback" *ngIf="checkOtp()">
-                        Nhập sai phone !!!
+                        Nhập sai định dạng OTP !!!
                       </div>
 
                     </div>

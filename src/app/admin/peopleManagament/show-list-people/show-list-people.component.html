@@ -61,7 +61,7 @@
             </div>
           </div>
         </div>
-        <div class="card-body" [collapse]="isCollapsed">
+        <div class="card-body" [ngStyle]="{'padding': '15px'}" [collapse]="isCollapsed">
           <div id="dnn_ContentPane" class="contentPane">
             <div class="DnnModule DnnModule-Viectimnguoi DnnModule-471">
               <div id="dnn_ctr471_ContentPane">
@@ -94,6 +94,9 @@
                                 <option [value]="true">Trước khi nhập cảnh</option>
                                 <option [value]="false">Lây nhiễm trong nước</option>
                               </select>
+                            </dt>
+                            <dt>
+                              <button type="button" class="btn-reset" (click)="resetSearch()">Đặt lại</button>
                             </dt>
                           </dl>
                         </form>
@@ -221,8 +224,7 @@
         <h4 class="modal-title" *ngIf="optionChoice == 'deletePeople'">Xóa người này khỏi danh sách cách ly?
         </h4>
         <h4 class="modal-title" *ngIf="optionChoice == 'deleteAllPeople'">Xóa tất cả những người được chọn này
-          khỏi danh
-          sách cách ly ?</h4>
+          khỏi danh sách cách ly ?</h4>
         <h4 class="modal-title" *ngIf="optionChoice == 'moveSickPeople'">Đánh dấu người này bị bệnh ?</h4>
         <h4 class="modal-title" *ngIf="optionChoice == 'moveSickAllPeople'">Đánh dấu những người này bị bệnh?
         </h4>
@@ -236,10 +238,7 @@
 
       <div class="modal-header" *ngIf="status == 'died'">
         <h4 class="modal-title" *ngIf="optionChoice == 'deletePeople'">Xóa người này khỏi danh sách ?</h4>
-      </div>
-      <div class="modal-body" *ngIf="status == 'sick'">
-        <p> Nếu xóa bệnh nhân này thì sẽ xóa hết các
-          trường hợp f1 có liên quan đến bệnh nhân khỏi danh sách.</p>
+        <h4 class="modal-title" *ngIf="optionChoice == 'deleteAllPeople'">Xóa những người này khỏi danh sách ?</h4>
       </div>
       <div>
         <div class="modal-footer" [ngStyle]="{'text-align': 'center'}">

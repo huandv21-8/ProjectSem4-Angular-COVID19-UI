@@ -1,8 +1,13 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {DeclareManagementService} from '../declare-management.service';
-import {AccountByAllResponse} from '../../../shared/model/response/accountByAllResponse';
 import {ToastrService} from 'ngx-toastr';
 import {ModalDirective} from 'ngx-bootstrap/modal';
+import {FormControl, FormGroup} from '@angular/forms';
+import {ProvinceModel} from '../../../shared/model/province-model';
+import {AddressService} from '../../../shared/service/service/address.service';
+import {ActivatedRoute} from '@angular/router';
+import {DeclareResponse} from '../../../shared/model/response/declareResponse';
+import {DeclareRequest} from '../../../shared/model/request/declareRequest';
 
 @Component({
   selector: 'app-show-list-declare',
@@ -11,127 +16,154 @@ import {ModalDirective} from 'ngx-bootstrap/modal';
 })
 export class ShowListDeclareComponent implements OnInit {
   isCollapsed: boolean = true;
-  isCheckedCheckBoxPeople: boolean = false;
-  isCheckedAllCheckBoxPeople: boolean = false;
+
   itemsInPage: number = 5;
   listIdAccountCheckbox: Array<number> = [];
-  listAccount: Array<AccountByAllResponse> = [];
-  optionChoice: string;
-  idChoiceAccount: number;
+  listDeclare: Array<DeclareResponse> = [];
+  listProvince: Array<ProvinceModel> = [];
+  declareRequest: DeclareRequest;
+  no: number = 0;
+  searchForm: FormGroup;
+  nameAccount: string;
+  accountId: number;
+  orderByDate: boolean;
   @ViewChild('OptionAccountModal') public optionAccountModal: ModalDirective;
 
-  constructor(private declareManagementService: DeclareManagementService, private toastrService: ToastrService,) {
+  constructor(private declareManagementService: DeclareManagementService,
+              private toastrService: ToastrService,
+              private addressService: AddressService,
+              private activatedRoute: ActivatedRoute) {
   }
 
   ngOnInit(): void {
-    this.getAllAccount();
+    this.activatedRoute.queryParams.subscribe(params => {
+      this.accountId = params['accountId'];
+    });
+    this.orderByDate = true;
+    this.getAllDeclareByAccountId(this.accountId, 'ASC');
+
+    this.setStyleFormSearch();
+    this.getAllAddress();
+    this.setDeclareDetail();
   }
 
-
-  getAllAccount() {
-    this.declareManagementService.getAllAccount().subscribe(data => {
-      this.listAccount = data;
+  setStyleFormSearch() {
+    this.searchForm = new FormGroup({
+      txtName: new FormControl(''),
+      txtBirthDay: new FormControl(''),
+      txtProvince: new FormControl(''),
+      txtPhone: new FormControl(''),
     });
   }
 
-  checkBoxValue(event) {
-    if (event.target.name === 'checkBoxAllPeople') {
-      if (event.target.checked) {
-        if (this.listIdAccountCheckbox.length > 0) {
-          this.listIdAccountCheckbox.splice(0, this.listIdAccountCheckbox.length);
-        }
-        this.listAccount.forEach(account => {
-          this.listIdAccountCheckbox.push(account.accountId);
-        });
-        this.isCheckedCheckBoxPeople = true;
-      } else {
-        this.listIdAccountCheckbox.splice(0, this.listIdAccountCheckbox.length);
-        this.isCheckedCheckBoxPeople = false;
-      }
-    } else {
-      if (event.target.checked) {
-        this.listIdAccountCheckbox.push(event.target.value);
-      } else {
-        this.listIdAccountCheckbox.forEach((element, index) => {
 
-          if (element === event.target.value) {
-            this.listIdAccountCheckbox.splice(index, 1);
-          }
+  getAllDeclareByAccountId(accountId: number, orderByDate: string) {
+    this.declareManagementService.getAllDeclareByAccountId(accountId, orderByDate).subscribe(data => {
+      this.listDeclare = data;
+      if (this.listDeclare.length > 0) {
+        this.nameAccount = this.listDeclare[0].name;
+        this.listDeclare.forEach(item => {
+          item.stt = (this.no += 1);
         });
       }
-      this.isCheckedAllCheckBoxPeople = false;
-      if (this.listIdAccountCheckbox.length === this.listAccount.length) {
-        this.isCheckedAllCheckBoxPeople = true;
-      }
+    });
+  }
+
+  sort() {
+    this.orderByDate = !this.orderByDate;
+    this.no = 0;
+    if (this.orderByDate) {
+      this.getAllDeclareByAccountId(this.accountId, 'ASC');
+    } else {
+      this.getAllDeclareByAccountId(this.accountId, 'DESC');
     }
   }
+
+  getAllAddress() {
+    this.addressService.getAllProvince().subscribe(data => {
+      this.listProvince = data;
+    });
+  }
+
+  setDeclareDetail() {
+    this.declareRequest = {
+      name: '',
+      birthDay: '',
+      cmt: '',
+      gender: true,
+      phone: '',
+      provinceName: '',
+      districtName: '',
+      communeName: '',
+      address: '',
+      updatedAt: '',
+      exposureToF0: false,
+      comeBackFromEpidemicArea: false,
+      contactWithPeopleReturningFromEpidemicAreas: false,
+      fever: false,
+      cough: false,
+      shortnessOfBreath: false,
+      pneumonia: false,
+      soreThroat: false,
+      tired: false,
+      chronicLiverDisease: false,
+      chronicBloodDisease: false,
+      chronicLungDisease: false,
+      chronicKideyDisease: false,
+      heartRelatedDiseaes: false,
+      highBloodPressure: false,
+      hivOrImmunocompromised: false,
+      organTransplantRecipient: false,
+      diabetes: false,
+      cancer: false,
+      pregnant: false,
+      travelSchedule: ''
+    };
+  }
+
 
   showChoose(value: any) {
     this.itemsInPage = value;
     if (value === '0') {
-      // this.itemsInPage = this.listPeople.length;
     }
   }
 
-  setOptionChoice(choice: string, idAccount?: number) {
-    this.optionChoice = choice;
-    if (idAccount) {
-      this.idChoiceAccount = idAccount;
-    }
+  getDeclareDetail(declareId: number) {
+    this.declareManagementService.detailDeclare(declareId).subscribe(data => {
+      // console.log(data);
+      this.declareRequest = data;
+      console.log(this.declareRequest);
+    });
   }
 
-  managementPeople() {
-    if (this.idChoiceAccount && this.optionChoice === 'deleteAccount' || this.optionChoice === 'f1Account' || this.optionChoice === 'sickAccount') {
-      this.declareManagementService.managementAccountById(this.optionChoice, this.idChoiceAccount).subscribe(data => {
-          this.getAllAccount();
-          this.toastrService.success('Thành công');
-        },
-        error => {
-          this.toastrService.error('Lỗi rồi.');
-        });
-      this.optionAccountModal.hide();
-    }
-
-
-    // if (this.idChoiceAccount && this.optionChoice === 'deleteAccount') {
-    //   this.declareManagementService.deleteAccountById(this.idChoiceAccount).subscribe(data => {
-    //       this.getAllAccount();
-    //       this.toastrService.success('Thành công');
-    //     },
-    //     error => {
-    //       this.toastrService.error('Lỗi rồi.');
-    //     });
-    //   this.optionAccountModal.hide();
-    // }
-    // if (this.idChoiceAccount && this.optionChoice === 'sickAccount') {
-    //   this.declareManagementService.deleteAccountById(this.idChoiceAccount).subscribe(data => {
-    //       this.getAllAccount();
-    //       this.toastrService.success('Thành công');
-    //     },
-    //     error => {
-    //       this.toastrService.error('Lỗi rồi.');
-    //     });
-    //   this.optionAccountModal.hide();
-    // }
-    // if (this.idChoiceAccount && this.optionChoice === 'f1Account') {
-    //   this.declareManagementService.deleteAccountById(this.idChoiceAccount).subscribe(data => {
-    //       this.getAllAccount();
-    //       this.toastrService.success('Thành công');
-    //     },
-    //     error => {
-    //       this.toastrService.error('Lỗi rồi.');
-    //     });
-    //   this.optionAccountModal.hide();
-    // }
-    if (this.optionChoice === 'deleteAllAccount' || this.optionChoice === 'f1AllAccount' || this.optionChoice === 'sickAllAccount' && this.listIdAccountCheckbox) {
-      this.declareManagementService.managementAllAccountById(this.optionChoice, this.listIdAccountCheckbox).subscribe(data => {
-          this.getAllAccount();
-          this.toastrService.success('Thành công');
-        },
-        error => {
-          this.toastrService.error('Lỗi rồi.');
-        });
-      this.optionAccountModal.hide();
-    }
+  checkSymptom(): boolean {
+    return (this.declareRequest.fever ||
+      this.declareRequest.cough ||
+      this.declareRequest.shortnessOfBreath ||
+      this.declareRequest.pneumonia ||
+      this.declareRequest.soreThroat ||
+      this.declareRequest.tired);
   }
+
+  checkSickCurrent(): boolean {
+    return (this.declareRequest.chronicLiverDisease ||
+      this.declareRequest.chronicBloodDisease ||
+      this.declareRequest.shortnessOfBreath ||
+      this.declareRequest.chronicLungDisease ||
+      this.declareRequest.chronicKideyDisease ||
+      this.declareRequest.heartRelatedDiseaes ||
+      this.declareRequest.highBloodPressure ||
+      this.declareRequest.hivOrImmunocompromised ||
+      this.declareRequest.organTransplantRecipient ||
+      this.declareRequest.diabetes ||
+      this.declareRequest.cancer ||
+      this.declareRequest.pregnant);
+  }
+
+  checkTravel(): boolean {
+    return (this.declareRequest.exposureToF0 ||
+      this.declareRequest.comeBackFromEpidemicArea ||
+      this.declareRequest.contactWithPeopleReturningFromEpidemicAreas);
+  }
+
 }

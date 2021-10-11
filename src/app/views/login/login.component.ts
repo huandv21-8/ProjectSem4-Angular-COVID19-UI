@@ -4,6 +4,7 @@ import {Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
 import {LoginRequest} from '../../shared/model/request/loginRequest';
 import {AuthService} from '../../shared/service/service/auth.service';
+import {LocalStorageService} from 'ngx-webstorage';
 
 @Component({
   selector: 'app-dashboard',
@@ -17,13 +18,19 @@ export class LoginComponent implements OnInit {
   isCheckPassword: boolean;
   isCheckLogin: boolean = false;
 
-  constructor(private authService: AuthService, private router: Router, private toastr: ToastrService) {
+  constructor(private authService: AuthService,
+              private router: Router,
+              private toastr: ToastrService,
+              private localStorage: LocalStorageService) {
   }
 
   ngOnInit(): void {
+    if (this.localStorage.retrieve('email') && this.localStorage.retrieve('authenticationToken')) {
+      this.router.navigateByUrl('admin/dashboard');
+    }
     this.loginForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', [Validators.required, Validators.minLength(6)]),
+      password: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(50)]),
     });
   }
 
@@ -34,7 +41,7 @@ export class LoginComponent implements OnInit {
     };
     this.authService.login(this.loginRequest).subscribe(() => {
       this.toastr.success('Đăng nhập thành công');
-      this.router.navigateByUrl('admin/people-management/listPeople');
+      this.router.navigateByUrl('admin/dashboard');
     }, (error) => {
       this.isCheckLogin = true;
       this.toastr.error('Đăng nhập thất bại');

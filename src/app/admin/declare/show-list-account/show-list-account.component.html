@@ -1,0 +1,259 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-header">
+          <div class="row">
+            <div class="col-md-7">
+              <div class="row">
+                <div class="col-md-1 filter-icon">
+                  <i class="fa fa-filter fa-lg mt-4" [ngStyle]="{ 'float': 'right', 'cursor': 'pointer'}"
+                     tooltip="Tìm kiếm." placement="top" (click)="isCollapsed = !isCollapsed"></i>
+                </div>
+                <div class="col-md-11" *ngIf=" listIdAccountCheckbox.length > 0"
+                     [ngStyle]="{'margin-top': '13px', 'height':'0px'}">
+                  <div class="row" [ngStyle]="{ 'line-height': '18px'}">
+                    <div class="col-md-1 action-all-people">
+                      <div class="icon-option-checkBox" (click)="OptionAccountModal.show()">
+                        <i class="fas fa-trash-alt fa-lg" tooltip="Xóa" (click)="setOptionChoice('deleteAllAccount')"
+                           placement="top"></i>
+                      </div>
+                    </div>
+                    <div class="col-md-9 choose-group" [ngStyle]="{'margin-left': '8px'}">
+                      <div class="icon-option-checkBox"
+                           (click)="OptionAccountModal.show()">
+                        <i class="fas fa-head-side-cough fa-lg" (click)="setOptionChoice('sickAllAccount')"
+                           tooltip="Đánh dấu bị bệnh" placement="top" [ngStyle]="{'color': '#fe2e2e'}"></i>
+                      </div>
+                      <div class="icon-option-checkBox"
+                           (click)="OptionAccountModal.show()">
+                        <i class="fas fa-house-user fa-lg" (click)="setOptionChoice('f1AllAccount')"
+                           tooltip="Đánh dấu đang cách ly" placement="top" [ngStyle]="{'color': '#1d7fae'}"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div *ngIf=" !listIdAccountCheckbox.length > 0" class="col-md-11"
+                     [ngStyle]="{'margin-top': '13px', 'height':'0px'}">
+                  <h6>Có tất cả {{listAccount.length}} người</h6>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-5 ">
+              <div class="limit">
+                <h6 class="show-limit">Show</h6>
+                <select name="show" class="select-limit show-limit" (change)="showChoose($event.currentTarget.value)">
+                  <option value="5" select>5</option>
+                  <option value="10">10</option>
+                  <option value="25">25</option>
+                  <option value="50">50</option>
+                  <option value="0">Tất cả</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body" [ngStyle]="{'padding': '15px'}" [collapse]="isCollapsed">
+          <div id="dnn_ContentPane" class="contentPane">
+            <div class="DnnModule DnnModule-Viectimnguoi DnnModule-471">
+              <div id="dnn_ctr471_ContentPane">
+                <div id="" class="DNNModuleContent ModViectimnguoiC">
+                  <div class="Invisible">
+                    <div class="panelSearch changebg">
+                      <div class="panel-box simple-search">
+                        <form [formGroup]="searchForm">
+                          <dl class="row row1">
+                            <dt class="col3">
+                              <p>Nhập tên:</p>
+                              <input type="text" (keyup)="Search()" [formControlName]="'txtName'" class="txtSearch"
+                                     placeholder="Nhập tên người bệnh"/>
+                            </dt>
+                            <dt class="col3">
+                              <p>Chọn ngày sinh:</p>
+                              <input type="date" (change)="Search()" [formControlName]="'txtBirthDay'"
+                                     class="txtSearch">
+                            </dt>
+                            <dt class="col3">
+                              <p>Nhập số điện thoại:</p>
+                              <input type="text" (keyup)="Search()" [formControlName]="'txtPhone'" class="txtSearch"
+                                     placeholder="Nhập số điện thoại"/>
+                            </dt>
+                            <dt class="col3">
+                              <p>Chọn Tỉnh:</p>
+                              <select id="province" (change)="Search()" [formControlName]="'txtProvince'"
+                                      class="txtSearch">
+                                <option selected [value]="0">Tất cả</option>
+                                <option *ngFor="let city of listProvince"
+                                        value="{{city.provinceId}}">{{city.provinceName}}</option>
+
+                              </select>
+                            </dt>
+                            <dt>
+                              <button type="button" class="btn-reset"(click)="reset()">Đặt lại</button>
+                            </dt>
+
+                          </dl>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body" *ngIf="listAccount.length > 0">
+          <table class="table table-body-list">
+            <thead>
+            <tr>
+              <th [ngStyle]="{'width': '33px'}">
+                <input (change)="checkBoxValue($event)" [ngStyle]="{'width': '20px', 'height': '20px'}"
+                       [checked]="isCheckedAllCheckBoxPeople" type="checkbox" name="checkBoxAllPeople">
+              </th>
+              <th><strong>Stt</strong></th>
+              <th><strong>Tên</strong></th>
+              <th><strong>Ngày sinh</strong></th>
+              <th><strong>Số điện thoại</strong></th>
+              <th><strong>Địa chỉ</strong></th>
+              <th><strong>Giới tính</strong></th>
+              <!--              <th><strong>Loại</strong></th>-->
+              <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let item of listAccount | paginate: { itemsPerPage: itemsInPage, currentPage: p }">
+              <td><input (change)="checkBoxValue($event)" type="checkbox" name="people"
+                         [checked]="isCheckedCheckBoxPeople" [value]="item.accountId"></td>
+              <td>{{item.stt}}</td>
+              <td>{{item.name}}</td>
+              <td>{{item.birthDay}}</td>
+              <td>{{item.phone}}</td>
+              <td>{{item.provinceName}}</td>
+              <td>{{item.gender ? "Nam" : "Nữ"}}</td>
+              <td class="option-td">
+                <div class="btn-group" dropdown>
+                  <button dropdownToggle class="option-btn">...</button>
+                  <ul *dropdownMenu class="dropdown-menu dropdown" role="menu">
+                    <li role="menuitem" data-toggle="modal" (click)="accountDetailModel.show()">
+                       <span class="dropdown-item" (click)="getAccountDetail(item.accountId)">
+                                 <i class="fa fa-eye"></i> Xem chi tiết
+                          </span>
+                    </li>
+                    <li role="menuitem" data-toggle="modal" (click)="accountDetailModel.show()">
+                       <span class="dropdown-item" (click)="redirectToListDeclare(item.accountId)">
+                                 <i class="fas fa-list"></i> Danh sách khai báo
+                          </span>
+                    </li>
+                    <li role="menuitem" (click)="OptionAccountModal.show()">
+                        <span class="dropdown-item" (click)="setOptionChoice('sickAccount',item.accountId)">
+                          <i class="fas fa-head-side-cough" [ngStyle]="{'color': '#fe2e2e'}"></i>Bị bệnh
+                         </span>
+                    </li>
+
+                    <li role="menuitem" (click)="OptionAccountModal.show()">
+                        <span class="dropdown-item" (click)="setOptionChoice('f1Account',item.accountId)">
+                           <i class="fas fa-house-user" [ngStyle]="{'color': '#1d7fae'}"></i>Cách ly
+                        </span>
+                    </li>
+                    <li role="menuitem" data-toggle="modal" (click)="OptionAccountModal.show()">
+                                            <span class="dropdown-item"
+                                                  (click)="setOptionChoice('deleteAccount',item.accountId)">
+                                              <i class="fas fa-trash-alt"></i> Xóa
+                                            </span>
+                    </li>
+                  </ul>
+                </div>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+          <div class="page" [ngStyle]="{'text-align': 'center'}">
+            <pagination-controls (pageChange)="p = $event" previousLabel="Trước" nextLabel="Tiếp theo">
+            </pagination-controls>
+          </div>
+        </div>
+        <div class="card-body" *ngIf="listAccount && listAccount.length <= 0">
+          <h4 class="">Không có ai !!!</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div bsModal #OptionAccountModal="bs-modal" class="modal fade alert-model" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-danger" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Xác nhận hành động này ?</h4>
+      </div>
+      <div>
+        <div class="modal-footer" [ngStyle]="{'text-align': 'center'}">
+          <div>
+            <button type="button" class="btn btn-secondary" (click)="OptionAccountModal.hide()">Hủy</button>
+            <button type="button" class="btn btn-danger" (click)="managementAccount()">
+              Xác nhận
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div bsModal #accountDetailModel="bs-modal" class="modal fade" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Thông tin chi tiết</h4>
+        <button type="button" class="close" (click)="accountDetailModel.hide()" aria-label="Close">
+          <span aria-hidden="true">x</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <div class="row">
+          <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+            <div class="Container row ">
+              <p class="col-md-3 col-xs-3 col-lg-3 ">Tên :</p>
+              <p><strong>{{accountDetail.name}}</strong></p>
+            </div>
+          </div>
+          <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+            <div class="Container row ">
+              <p class="col-md-4 col-xs-4 col-lg-4 ">Ngày sinh :</p>
+              <p><strong>{{accountDetail.birthDay}}</strong></p>
+            </div>
+          </div>
+          <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+            <div class="Container row ">
+              <p class="col-md-6 col-xs-6 col-lg-6 ">Giới tính :</p>
+              <p><strong>{{accountDetail.gender ? 'Nam' : 'Nữ'}}</strong></p>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <p class="col-md-2 col-xs-2 col-lg-2 ">Số điện thoại :</p>
+          <p><strong>{{accountDetail.phone}}</strong></p>
+        </div>
+        <div class="row">
+          <p class="col-md-2 col-xs-2 col-lg-2">Địa chỉ:</p>
+          <p [ngStyle]="{'margin-left': '-48px'}"><strong>{{accountDetail.communeName}}</strong></p>
+          <p>, <strong>{{accountDetail.districtName}}</strong></p>
+          <p>, <strong>{{accountDetail.provinceName}}</strong></p>
+        </div>
+        <div class="row">
+          <p class="col-md-3 col-xs-3 col-lg-3 ">CMT/CCCD :</p>
+          <p [ngStyle]="{'margin-left': '-48px'}"><strong>{{accountDetail.cmt}}</strong>
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="accountDetailModel.hide()">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

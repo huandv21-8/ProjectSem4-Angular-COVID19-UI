@@ -4,8 +4,12 @@ export interface DeclareRequest {
   cmt?: string;
   gender: boolean;
   phone?: string;
-  idCommune: number;
+  idCommune?: number;
+  provinceName?: string;
+  districtName?: string;
+  communeName?: string;
   address?: string;
+  updatedAt?: String;
   exposureToF0: boolean;
   comeBackFromEpidemicArea: boolean;
   contactWithPeopleReturningFromEpidemicAreas: boolean;
@@ -26,5 +30,5 @@ export interface DeclareRequest {
   diabetes: boolean;
   cancer: boolean;
   pregnant: boolean;
-  travelSchedule?: string;
+  travelSchedule: string;
 }

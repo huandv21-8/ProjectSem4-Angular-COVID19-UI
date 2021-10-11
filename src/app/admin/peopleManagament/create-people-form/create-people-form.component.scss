@@ -1,0 +1,11 @@
+.switch-label.switch-lg {
+  width: 35% !important;
+}
+
+.switch-label.switch-lg .switch-input:checked ~ .switch-slider::before {
+  margin-left: 43px !important;
+}
+
+.span-required {
+  color: red;
+}

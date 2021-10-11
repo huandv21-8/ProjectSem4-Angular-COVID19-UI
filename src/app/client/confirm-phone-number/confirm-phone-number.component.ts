@@ -16,7 +16,6 @@ export class ConfirmPhoneNumberComponent implements OnInit {
   phoneForm: FormGroup;
   phoneRequest: PhoneRequest;
 
-
   constructor(private router: Router,
               private smsService: SmsService,
               private toastrService: ToastrService,
@@ -44,7 +43,6 @@ export class ConfirmPhoneNumberComponent implements OnInit {
       error => {
         this.toastrService.error('Gui ma khong thanh cong');
       });
-
 
   }
 

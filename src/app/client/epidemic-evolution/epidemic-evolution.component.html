@@ -5,10 +5,10 @@
         <div class="card-body">
           <div class="row">
             <div class="col-lg-9">
-              <div class="epidemic-evolution">
-                <img src="../assets/img/avatars/icon.png" class="icon" alt="banner">
-                <div class="text-epidemic"
-                     *ngFor="let item of listSituation| paginate: { itemsPerPage: 2, currentPage: p }">
+              <div class="epidemic-evolution"
+                   *ngFor="let item of listSituation| paginate: { itemsPerPage: 5, currentPage: p }">
+                <img src="./assets/img/avatars/icon.png" class="icon" alt="banner">
+                <div class="text-epidemic">
                   <div class="text-headding">
                     <h5>{{item.updatedAt}}</h5>
                   </div>
@@ -27,7 +27,7 @@
                 <h2>19009095</h2>
               </div>
               <div class="box-phone">
-                <img id="img-box" src="../assets/img/avatars/3.png" alt="banner">
+                <img id="img-box" src="./assets/img/avatars/3.png" alt="banner">
               </div>
             </div>
           </div>

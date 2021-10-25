@@ -96,7 +96,7 @@ export class ShowListDeclareComponent implements OnInit {
       districtName: '',
       communeName: '',
       address: '',
-      updatedAt: '',
+      updateAt: '',
       exposureToF0: false,
       comeBackFromEpidemicArea: false,
       contactWithPeopleReturningFromEpidemicAreas: false,

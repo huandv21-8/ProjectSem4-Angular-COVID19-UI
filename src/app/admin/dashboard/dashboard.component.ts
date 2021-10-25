@@ -64,9 +64,9 @@ export class DashboardComponent implements OnInit {
       yAxes: [{
         ticks: {
           beginAtZero: true,
-          maxTicksLimit: 5,
-          stepSize: Math.ceil(25 / 15),
-          max: 25
+          maxTicksLimit: 6,
+          stepSize: Math.ceil(10000 / 15),
+          max: 10000
         }
       }]
     },
@@ -109,79 +109,74 @@ export class DashboardComponent implements OnInit {
   data: {
     [sick: string]: [{ [key: string]: any }]
   };
-  staticalTotalPeople: {
-    [status: string]: number
-  };
+  // staticalTotalPeople: CommonTotal;
   staticalTotalPeopleByCured: number;
   staticalTotalPeopleBySick: number;
   staticalTotalPeopleByDied: number;
 
 
   ngOnInit(): void {
-    this.dashboard();
+    // this.dashboard();
     this.staticalTotalPeopleByStatus();
   }
 
-  onStatisticsChange(value: string) {
-    this.timeForm = value;
-    this.dashboard();
-    this.mainChartLabels = [];
-    this.mainChartDataCured = [];
-    this.mainChartDataSick = [];
-    this.mainChartDataDied = [];
-  }
+  // onStatisticsChange(value: string) {
+  //   this.timeForm = value;
+  //   // this.dashboard();
+  //   this.mainChartLabels = [];
+  //   this.mainChartDataCured = [];
+  //   this.mainChartDataSick = [];
+  //   this.mainChartDataDied = [];
+  // }
 
   staticalTotalPeopleByStatus() {
     this.dashboardService.staticalTotalPeopleByStatus().subscribe(data => {
-        this.staticalTotalPeople = data;
-        for (const entry of Object.entries(this.staticalTotalPeople)) {
-          if (entry[0] === 'cured') {
-            this.staticalTotalPeopleByCured = entry[1];
-          } else if (entry[0] === 'sick') {
-            this.staticalTotalPeopleBySick = entry[1];
-          } else if (entry[0] === 'died') {
-            this.staticalTotalPeopleByDied = entry[1];
-          }
+        this.staticalTotalPeopleByCured = data.total.internal.recovered;
+        this.staticalTotalPeopleBySick = data.total.internal.cases;
+        this.staticalTotalPeopleByDied = data.total.internal.death;
+        for (const entry of data.overview) {
+          this.mainChartLabels.push(entry.date);
+          this.mainChartDataCured.push(entry.recovered);
+          this.mainChartDataSick.push(entry.cases);
+          this.mainChartDataDied.push(entry.death);
         }
-      },
-      error => {
-        // console.log(error);
+
       }
     );
   }
 
-  dashboard() {
-    this.dashboardService.dashboard(this.timeForm).subscribe(data => {
-        this.data = data;
-        for (const entry of Object.entries(this.data)) {
-          if (entry[0] === 'sick') {
-            for (const entry1 of Object.entries(entry[1])) {
-              if (this.timeForm === 'Day') {
-                this.mainChartLabels.push(entry1[0].slice(0, 10));
-              }
-              if (this.timeForm === 'Month') {
-                this.mainChartLabels.push(entry1[0].slice(0, 7));
-              }
-              if (this.timeForm === 'Year') {
-                this.mainChartLabels.push(entry1[0].slice(0, 4));
-              }
-              this.mainChartDataSick.push(entry1[1]);
-            }
-
-          }
-          if (entry[0] === 'cured') {
-            for (const entry1 of Object.entries(entry[1])) {
-              this.mainChartDataCured.push(entry1[1]);
-            }
-          }
-          if (entry[0] === 'died') {
-            for (const entry1 of Object.entries(entry[1])) {
-              this.mainChartDataDied.push(entry1[1]);
-            }
-          }
-        }
-      }
-    );
-  }
+  // dashboard() {
+  //   this.dashboardService.dashboard(this.timeForm).subscribe(data => {
+  //       this.data = data;
+  //       for (const entry of Object.entries(this.data)) {
+  //         if (entry[0] === 'sick') {
+  //           for (const entry1 of Object.entries(entry[1])) {
+  //             if (this.timeForm === 'Day') {
+  //               this.mainChartLabels.push(entry1[0].slice(0, 10));
+  //             }
+  //             if (this.timeForm === 'Month') {
+  //               this.mainChartLabels.push(entry1[0].slice(0, 7));
+  //             }
+  //             if (this.timeForm === 'Year') {
+  //               this.mainChartLabels.push(entry1[0].slice(0, 4));
+  //             }
+  //             this.mainChartDataSick.push(entry1[1]);
+  //           }
+  //
+  //         }
+  //         if (entry[0] === 'cured') {
+  //           for (const entry1 of Object.entries(entry[1])) {
+  //             this.mainChartDataCured.push(entry1[1]);
+  //           }
+  //         }
+  //         if (entry[0] === 'died') {
+  //           for (const entry1 of Object.entries(entry[1])) {
+  //             this.mainChartDataDied.push(entry1[1]);
+  //           }
+  //         }
+  //       }
+  //     }
+  //   );
+  // }
 
 }

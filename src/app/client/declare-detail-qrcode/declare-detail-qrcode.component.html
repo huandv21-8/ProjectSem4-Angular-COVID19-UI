@@ -1,0 +1,65 @@
+<div class="content-wrapper">
+  <div class="container">
+    <div class="col-sm-12">
+      <div class="card" data-aos="fade-up">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-lg-9 ">
+              <div class="container ">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 content-qr">
+                  <h1>Tờ Khai y tế/Vietnam Health Declaration</h1>
+                  <ngx-qrcode
+                    [elementType]="elementType"
+                    [value]="value"
+                    [width]="200"
+                    class="bshadow"
+                    errorCorrectionLevel="L">
+                  </ngx-qrcode>
+                  <p><i>Mã QRCode dùng để Check in, Check out</i></p>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                  <h3>Xin chào: <span [ngStyle]="{'font-size': '35px'}"> {{declareDetail.name}}</span></h3>
+                  <h3>Ngày sinh : {{declareDetail.birthDay}}</h3>
+                  <h3>Giới tính: {{declareDetail.gender ? 'Nam' : 'Nữ'}}</h3>
+                  <h3>Ngày khai báo: {{declareDetail.updateAt}}</h3>
+<!--                  <h3>Khả năng nhiễm bệnh : Cao</h3>-->
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 content-qr">
+                  <h3 [ngStyle]="{'color': 'blue'}">Cảm ơn bạn đã tham gia khai báo thông tin y tế!</h3>
+                  <p>Mọi thông tin chi tiết xin vui lòng liên hệ đường dây nóng <span [ngStyle]="{'color': 'red'}">1900.9095</span>
+                  </p>
+                </div>
+
+              </div>
+              <br>
+              <div class="container text_botton">
+                <p><strong>Để phòng tránh và ngăn chặn sự lây lan của virus, hãy chủ động thực hiện tốt các biện pháp
+                  sau:</strong></p>
+                <p>– Cần che mũi và miệng khi ho, xì mũi bằng khăn/giấy dùng 1 lần</p>
+                <p>– Thường xuyên súc họng bằng nước sát khuẩn miệng</p>
+                <p>– Tránh tiếp xúc bất kỳ ai có dấu hiệu/triệu chứng cảm lạnh hoặc triệu chứng như cúm</p>
+                <p>– Nên hạn chế đi ra ngoài, hạn chế đám đông, bớt đi lễ hội, chùa chiền</p>
+                <p>– Ăn uống điều độ, uống nhiều nước, vận động đều đặn</p>
+                <p>– Khi ra ngoài cần đeo khẩu trang, thường xuyên rửa tay, hạn chế ngồi phòng máy lạnh</p>
+                <p>– Nhà cửa giữ sạch sẽ, thông thoáng, có ánh nắng càng tốt</p>
+                <p>– Nếu thấy có biểu hiện của bệnh viêm đường hô hấp cấp tính, phải thông báo ngay cho cơ sở y tế gần
+                  nhất để được tư vấn, cách ly và điều trị phù hợp</p>
+              </div>
+            </div>
+
+            <div class="col-lg-3">
+              <div class="box-ddn">
+                <span class="box-text">Đường dây nóng</span><br>
+                <h2>19009095</h2>
+              </div>
+              <div class="box-phone">
+                <img id="img-box" src="../assets/img/avatars/3.png" alt="banner">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -23,6 +23,7 @@ export class HealthDeclarationComponent implements OnInit, OnDestroy {
   listDistrict: Array<DistrictModel> = [];
   listCommune: Array<XaModel> = [];
   accountByPhone: AccountByPhoneResponse;
+  declareResponse: DeclareRequest;
 
   constructor(private router: Router,
               private toastrService: ToastrService,
@@ -35,6 +36,7 @@ export class HealthDeclarationComponent implements OnInit, OnDestroy {
     this.getAllAddress();
     this.setValue();
     this.findAccountByPhone();
+    this.setDeclareDetail();
   }
 
   findAccountByPhone() {
@@ -129,6 +131,42 @@ export class HealthDeclarationComponent implements OnInit, OnDestroy {
     });
   }
 
+  setDeclareDetail() {
+    this.declareResponse = {
+      name: '',
+      birthDay: '',
+      cmt: '',
+      gender: true,
+      phone: '',
+      provinceName: '',
+      districtName: '',
+      communeName: '',
+      address: '',
+      updateAt: '',
+      exposureToF0: false,
+      comeBackFromEpidemicArea: false,
+      contactWithPeopleReturningFromEpidemicAreas: false,
+      fever: false,
+      cough: false,
+      shortnessOfBreath: false,
+      pneumonia: false,
+      soreThroat: false,
+      tired: false,
+      chronicLiverDisease: false,
+      chronicBloodDisease: false,
+      chronicLungDisease: false,
+      chronicKideyDisease: false,
+      heartRelatedDiseaes: false,
+      highBloodPressure: false,
+      hivOrImmunocompromised: false,
+      organTransplantRecipient: false,
+      diabetes: false,
+      cancer: false,
+      pregnant: false,
+      travelSchedule: ''
+    };
+  }
+
   getAllDistrictByProvinceId(value: any) {
     if (value && value !== 0) {
       this.addressService.getAllDistrictByProvinceId(value).subscribe(data => {
@@ -183,12 +221,19 @@ export class HealthDeclarationComponent implements OnInit, OnDestroy {
       travelSchedule: this.declareForm.value.travelSchedule,
     };
     this.declareService.declare(this.declareRequest).subscribe(data => {
-      this.toastrService.success(data.message);
-      this.router.navigateByUrl('/client');
+
+      this.declareResponse = data;
+      // console.log(this.declareResponse);
+      this.toastrService.success('Khai báo thành công');
+
+      this.localStorage.store('declare-detail-qrcode', this.declareResponse);
+      this.router.navigateByUrl('/client/declare-detail-qrcode');
     }, error => {
       this.toastrService.error('Sai roi');
     });
   }
+
+
 
 
 }

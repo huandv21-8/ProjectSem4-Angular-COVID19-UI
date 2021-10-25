@@ -28,7 +28,7 @@ export class TokenInterceptor implements HttpInterceptor {
     if (jwtToken) {
       return next.handle(this.addToken(req, jwtToken)).pipe(catchError(error => {
         if (error instanceof HttpErrorResponse && error.status === 401) {
-           console.log('Token hết hạn, đang làm mới Token');
+          console.log('Token hết hạn, đang làm mới Token');
           return this.handleAuthErrors(req, next);
 
         } // lỗi 403 là do chúng ta có token đã hết hạn, ko có quyền truy cập mà chúng ta cần làm mới.
@@ -40,7 +40,7 @@ export class TokenInterceptor implements HttpInterceptor {
           this.router.navigateByUrl('login');
           return throwError(error);
         } else {
-          console.log('loi roi');
+          console.log( error);
           return throwError(error);
         }
       }));

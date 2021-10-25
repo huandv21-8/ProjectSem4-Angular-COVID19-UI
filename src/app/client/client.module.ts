@@ -13,7 +13,9 @@ import {FooterComponent} from './footer/footer.component';
 import {ConfirmPhoneNumberComponent} from './confirm-phone-number/confirm-phone-number.component';
 import {RegisterPhoneNumberComponent} from './register-phone-number/register-phone-number.component';
 import {NgxPaginationModule} from 'ngx-pagination';
-
+import {DeclareDetailQrcodeComponent} from './declare-detail-qrcode/declare-detail-qrcode.component';
+import { NgxQRCodeModule } from 'ngx-qrcode2';
+import {PaginationModule} from 'ngx-bootstrap/pagination';
 
 @NgModule({
   declarations: [
@@ -26,17 +28,19 @@ import {NgxPaginationModule} from 'ngx-pagination';
     FooterComponent,
     ConfirmPhoneNumberComponent,
     RegisterPhoneNumberComponent,
+    DeclareDetailQrcodeComponent,
 
 
   ],
-  imports: [
-    CommonModule,
-    FormsModule,
-    ClientRoutingModule,
-    ReactiveFormsModule,
-    NgxPaginationModule,
-  ],
+    imports: [
+        CommonModule,
+        FormsModule,
+        ClientRoutingModule,
+        ReactiveFormsModule,
+        NgxPaginationModule,
+        NgxQRCodeModule,
+        PaginationModule
+    ],
 
 })
-export class ClientModule {
-}
+export class ClientModule {}

@@ -1,6 +1,6 @@
 export interface AccountByAllResponse {
   accountId: number;
-  name: string|null;
+  name: string | null;
   birthDay: string;
   gender: boolean;
   phone: string;
@@ -10,4 +10,7 @@ export interface AccountByAllResponse {
   communeName?: string;
   address: string | null;
   stt?: number;
+  ratio?: number;
+  dateDeclare?: string;
+
 }

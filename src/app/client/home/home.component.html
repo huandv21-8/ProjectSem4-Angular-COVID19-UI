@@ -54,20 +54,39 @@
               </div>
             </div>
             <div class="col-sm-12">
+              <div class="container total_items">
+                <div class="row">
+                  <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 item item-sick" >
+                    <p class="text">SỐ CA NHIỄM</p>
+                    <p class="value">{{totalInternalCase| number}}</p>
+                    <p class="note">Hôm nay <span class="note"> +{{todayInternalCase| number}}</span></p>
+                  </div>
+                  <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 item item-cured" >
+                    <p class="text">KHỎI</p>
+                    <p class="value">{{totalInternalCured| number}}</p>
+                  </div>
+                  <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 item item-died" >
+                    <p class="text">TỬ VONG</p>
+                    <p class="value">{{totalInternalDeath| number}}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-12">
               <div class="center-home">
                 <div class="disease-data">
                   <table>
                     <tr id="header-table">
                       <th>Tỉnh/TP</th>
                       <th>Tổng số ca</th>
-                      <th>Đã Khỏi</th>
+                      <th>Hôm nay</th>
                       <th>Tử vong</th>
                     </tr>
                     <tr *ngFor="let item of listCountPeopleByProvinces">
-                      <td>{{item.provinceName}}</td>
-                      <td>{{item.countPeopleSick}}</td>
-                      <td>{{item.countPeopleCured}}</td>
-                      <td>{{item.countPeopleDied}}</td>
+                      <td>{{item.name}}</td>
+                      <td>{{item.cases| number}}</td>
+                      <td [ngStyle]="{'color': 'red'}">+{{item.casesToday| number}}</td>
+                      <td>{{item.death| number}}</td>
                     </tr>
                   </table>
                 </div>
@@ -96,7 +115,7 @@
                     <hr>
                     <div *ngFor="let item of listSituation| paginate: { itemsPerPage: 3, currentPage: p }"
                          class="epidemic-evolution">
-<!--                      <img src="../assets/img/avatars/icon.png" class="icon" alt="banner">-->
+                      <!--                      <img src="../assets/img/avatars/icon.png" class="icon" alt="banner">-->
                       <div class="text-epidemic">
                         <div class="text-headding">
                           <h5>{{item.updatedAt}}</h5>

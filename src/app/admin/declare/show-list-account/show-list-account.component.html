@@ -30,6 +30,11 @@
                         <i class="fas fa-house-user fa-lg" (click)="setOptionChoice('f1AllAccount')"
                            tooltip="Đánh dấu đang cách ly" placement="top" [ngStyle]="{'color': '#1d7fae'}"></i>
                       </div>
+                      <div class="icon-option-checkBox"
+                           (click)="OptionAccountModal.show()">
+                        <i class="fas fa-sms" (click)="setOptionChoice('smsAllAccount')"
+                           tooltip="Gửi sms" placement="top" [ngStyle]="{'color': '#8c2c97'}"></i>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -85,14 +90,71 @@
                                 <option selected [value]="0">Tất cả</option>
                                 <option *ngFor="let city of listProvince"
                                         value="{{city.provinceId}}">{{city.provinceName}}</option>
-
                               </select>
                             </dt>
                             <dt>
-                              <button type="button" class="btn-reset"(click)="reset()">Đặt lại</button>
+                              <button type="button" class="btn-reset" (click)="reset()">Đặt lại</button>
+                            </dt>
+                          </dl>
+                          <h4 style="margin-left: 22px;">Triệu chứng :</h4>
+                          <dl class="row row1">
+                            <dt class="col2" style="margin-left: 32px">
+                              <input type="checkbox" (change)="Search()" class="sizeCheckbox "
+                                     [formControlName]="'txtFever'">
+                              <label>Sốt</label><br>
+                            </dt>
+                            <dt class="col2 mLcol">
+                              <input type="checkbox" (change)="Search()" class="sizeCheckbox "
+                                     [formControlName]="'txtCough'">
+                              <label>Ho</label><br>
+                            </dt>
+                            <dt class="col2 mLcol">
+                              <input type="checkbox" (change)="Search()" class="sizeCheckbox "
+                                     [formControlName]="'txtShortnessOfBreath'">
+                              <label>Khó thở</label><br>
+                            </dt>
+                            <dt class="col2 mLcol">
+                              <input type="checkbox" (change)="Search()" class="sizeCheckbox "
+                                     [formControlName]="'txtPneumonia'">
+                              <label>Viêm phổi</label><br>
+                            </dt>
+                            <dt class="col2 mLcol">
+                              <input type="checkbox" (change)="Search()" class="sizeCheckbox "
+                                     [formControlName]="'txtSoreThroat'">
+                              <label>Đau họng</label><br>
+                            </dt>
+                            <dt class="col2 mLcol">
+                              <input type="checkbox" (change)="Search()" class="sizeCheckbox "
+                                     [formControlName]="'txtTired'">
+                              <label>Mệt mỏi</label><br>
+                            </dt>
+                            <dt class="col2 mLcol">
+                              <input type="checkbox" (change)="Search()" class="sizeCheckbox "
+                                     [formControlName]="'txtExposureToF0'">
+                              <label>Tiếp xúc với F0</label><br>
+                            </dt>
+                            <dt class="col2 mLcol">
+                              <label>Mức độ:</label>
+                              <select  [formControlName]="'txtMucdo'" (change)="Search()" class="txtSearch">
+                                <option selected value="all">Tất cả</option>
+                                <option  [value]="3">Cao</option>
+                                <option  [value]="2">Trung bình</option>
+                                <option  [value]="1">Thấp</option>
+                              </select>
                             </dt>
 
                           </dl>
+<!--                          <dl class="row row1">-->
+<!--                            <dt class="col3">-->
+<!--                              <p>Chọn Tỉnh:</p>-->
+<!--                              <select (change)="Search()" class="txtSearch">-->
+<!--                                <option selected [value]="0">Tất cả</option>-->
+<!--                                <option selected [value]="0">Tất cả</option>-->
+<!--                                <option selected [value]="0">Tất cả</option>-->
+<!--                              </select>-->
+<!--                            </dt>-->
+<!--                          </dl>-->
+
                         </form>
                       </div>
                     </div>
@@ -116,7 +178,8 @@
               <th><strong>Số điện thoại</strong></th>
               <th><strong>Địa chỉ</strong></th>
               <th><strong>Giới tính</strong></th>
-              <!--              <th><strong>Loại</strong></th>-->
+              <th><strong>Ngày khai báo</strong></th>
+              <th><strong>Khả năng nhiễm bệnh</strong></th>
               <th></th>
             </tr>
             </thead>
@@ -130,6 +193,13 @@
               <td>{{item.phone}}</td>
               <td>{{item.provinceName}}</td>
               <td>{{item.gender ? "Nam" : "Nữ"}}</td>
+              <td>{{item.dateDeclare}}</td>
+              <td *ngIf="item.ratio && item.ratio >= 3" [ngStyle]="{'color': 'red'}"><strong>Cao</strong></td>
+              <td *ngIf="item.ratio && item.ratio == 2" [ngStyle]="{'color': '#DB6124FF'}"><strong>Trung bình</strong>
+              </td>
+              <td *ngIf="item.ratio && item.ratio == 0 || item.ratio == 1 " [ngStyle]="{'color': '#34b60f'}"><strong>Thấp</strong>
+              </td>
+
               <td class="option-td">
                 <div class="btn-group" dropdown>
                   <button dropdownToggle class="option-btn">...</button>
@@ -153,6 +223,11 @@
                     <li role="menuitem" (click)="OptionAccountModal.show()">
                         <span class="dropdown-item" (click)="setOptionChoice('f1Account',item.accountId)">
                            <i class="fas fa-house-user" [ngStyle]="{'color': '#1d7fae'}"></i>Cách ly
+                        </span>
+                    </li>
+                    <li role="menuitem" (click)="OptionAccountModal.show()">
+                        <span class="dropdown-item" (click)="setOptionChoice('smsAccount',item.accountId)">
+                           <i class="fas fa-sms" [ngStyle]="{'color': '#8c2c97'}"></i>Gửi sms
                         </span>
                     </li>
                     <li role="menuitem" data-toggle="modal" (click)="OptionAccountModal.show()">

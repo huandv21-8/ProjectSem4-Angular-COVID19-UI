@@ -60,6 +60,14 @@ export class ShowListAccountComponent implements OnInit {
       txtBirthDay: new FormControl(''),
       txtProvince: new FormControl(''),
       txtPhone: new FormControl(''),
+      txtFever: new FormControl(false),
+      txtCough: new FormControl(false),
+      txtShortnessOfBreath: new FormControl(false),
+      txtPneumonia: new FormControl(false),
+      txtSoreThroat: new FormControl(false),
+      txtTired: new FormControl(false),
+      txtExposureToF0: new FormControl(false),
+      txtMucdo: new FormControl('all'),
     });
   }
 
@@ -126,7 +134,10 @@ export class ShowListAccountComponent implements OnInit {
   }
 
   managementAccount() {
-    if (this.idChoiceAccount && this.optionChoice === 'deleteAccount' || this.optionChoice === 'f1Account' || this.optionChoice === 'sickAccount') {
+    if (this.idChoiceAccount && this.optionChoice === 'deleteAccount'
+      || this.optionChoice === 'f1Account'
+      || this.optionChoice === 'sickAccount'
+      || this.optionChoice === 'smsAccount') {
       this.declareManagementService.managementAccountById(this.optionChoice, this.idChoiceAccount).subscribe(data => {
           this.getAllAccount();
           this.toastrService.success('Thành công');
@@ -136,7 +147,10 @@ export class ShowListAccountComponent implements OnInit {
         });
       this.optionAccountModal.hide();
     }
-    if (this.optionChoice === 'deleteAllAccount' || this.optionChoice === 'f1AllAccount' || this.optionChoice === 'sickAllAccount'
+    if (this.optionChoice === 'deleteAllAccount'
+      || this.optionChoice === 'f1AllAccount'
+      || this.optionChoice === 'sickAllAccount'
+      || this.optionChoice === 'smsAllAccount'
       && this.listIdAccountCheckbox) {
       this.declareManagementService.managementAllAccountById(this.optionChoice, this.listIdAccountCheckbox).subscribe(data => {
           this.getAllAccount();
@@ -147,20 +161,41 @@ export class ShowListAccountComponent implements OnInit {
         });
       this.optionAccountModal.hide();
     }
+
+
   }
 
   Search() {
     this.declareManagementService.getAllAccountSearch(this.searchForm.value.txtName,
       this.searchForm.value.txtBirthDay,
       this.searchForm.value.txtProvince,
-      this.searchForm.value.txtPhone).subscribe(data => {
-      this.listAccount = data;
+      this.searchForm.value.txtPhone,
+      this.searchForm.value.txtFever,
+      this.searchForm.value.txtCough,
+      this.searchForm.value.txtShortnessOfBreath,
+      this.searchForm.value.txtPneumonia,
+      this.searchForm.value.txtSoreThroat,
+      this.searchForm.value.txtTired,
+      this.searchForm.value.txtExposureToF0,
+    ).subscribe(data => {
+      if (this.searchForm.value.txtMucdo === 'all') {
+        this.listAccount = data;
+      } else if (parseInt(this.searchForm.value.txtMucdo) === 3) {
+        this.listAccount = data.filter(item => (item.ratio >= 3));
+      } else if (parseInt(this.searchForm.value.txtMucdo) === 2) {
+        this.listAccount = data.filter(item => (item.ratio === 2));
+      } else if (parseInt(this.searchForm.value.txtMucdo) === 1) {
+        this.listAccount = data.filter(item => (item.ratio === 1 || item.ratio === 0));
+      }
+      this.no = 0;
+      this.listAccount.forEach(item => {
+        item.stt = (this.no += 1);
+      });
     });
   }
 
   getAccountDetail(accountId: number) {
     this.declareManagementService.detailAccount(accountId).subscribe(data => {
-      // console.log(data);
       this.accountDetail = data;
     });
   }

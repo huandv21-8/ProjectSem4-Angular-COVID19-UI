@@ -11,11 +11,11 @@ export class DeclareService {
   constructor(private http: HttpClient) {
   }
 
-  declare(declareRequest: DeclareRequest ): Observable<any> {
-    return this.http.post('http://localhost:8082/v1/declare', declareRequest);
+  declare(declareRequest: DeclareRequest): Observable<DeclareRequest> {
+    return this.http.post<DeclareRequest>('http://localhost:8082/v1/declare', declareRequest);
   }
 
-  findAccountByPhone(phone: string  ): Observable<any> {
+  findAccountByPhone(phone: string): Observable<any> {
 
     const params = new HttpParams()
       .set('phone', phone);

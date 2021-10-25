@@ -7,7 +7,7 @@ import {IndexComponent} from './index/index.component';
 import {NewsComponent} from './news/news.component';
 import {ConfirmPhoneNumberComponent} from './confirm-phone-number/confirm-phone-number.component';
 import {RegisterPhoneNumberComponent} from './register-phone-number/register-phone-number.component';
-import {AuthGuardGuard} from '../shared/service/auth-guard.guard';
+import {DeclareDetailQrcodeComponent} from './declare-detail-qrcode/declare-detail-qrcode.component';
 import {SmsOtpGuardGuard} from '../shared/service/sms-otp-guard.guard';
 
 
@@ -41,14 +41,12 @@ const routes: Routes = [
       {
         path: 'confirm-phone-number',
         component: ConfirmPhoneNumberComponent,
+      }, {
+        path: 'declare-detail-qrcode',
+        component: DeclareDetailQrcodeComponent,
       },
     ],
   }
-  // ,
-  // {
-  //   path: "abc",
-  //   component: HomeComponent
-  // }
 ];
 
 @NgModule({

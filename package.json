@@ -56,6 +56,7 @@
     "ngx-bootstrap": "^6.2.0",
     "ngx-pagination": "^5.1.1",
     "ngx-perfect-scrollbar": "^10.1.0",
+    "ngx-qrcode2": "^9.0.0",
     "ngx-toastr": "^14.0.0",
     "ngx-webstorage": "^8.0.0",
     "rxjs": "^6.6.6",

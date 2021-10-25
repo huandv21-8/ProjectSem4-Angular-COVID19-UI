@@ -35,8 +35,10 @@ export class DeclareManagementService {
     return this.http.get<AccountByAllResponse>(`http://localhost:8082/v1/declare/detailAccount?accountId=${accountId}`);
   }
 
-  getAllAccountSearch(name: string, birthDay: any, province: any, phone: string): Observable<Array<AccountByAllResponse>> {
-    return this.http.get<Array<AccountByAllResponse>>(`http://localhost:8082/v1/declare/listAccountSearch?name=${name}&birthDay=${birthDay}&provinceId=${province}&phone=${phone}`);
+  getAllAccountSearch(name: string, birthDay: any, province: any, phone: string, fever: boolean, cough: boolean, shortnessOfBreath: boolean, pneumonia: boolean, soreThroat: boolean, tired: boolean, exposureToF0: boolean): Observable<Array<AccountByAllResponse>> {
+    return this.http.get<Array<AccountByAllResponse>>(`http://localhost:8082/v1/declare/listAccountSearch?name=${name}&
+    birthDay=${birthDay}&provinceId=${province}&phone=${phone}&fever=${fever}&cough=${cough}&shortnessOfBreath=${shortnessOfBreath}
+    &pneumonia=${pneumonia}&soreThroat=${soreThroat}&tired=${tired}&exposureToF0=${exposureToF0}`);
   }
 
   getAllDeclareByAccountId(accountId: number, orderByDate: string): Observable<Array<DeclareResponse>> {

@@ -4,45 +4,44 @@
       <div class="row">
         <div class="col-sm-5">
           <h4 class="card-title mb-0">Covid-19</h4>
-<!--          <div class="small text-muted">November 2017</div>-->
+          <!--          <div class="small text-muted">November 2017</div>-->
         </div><!--/.col-->
         <div class="col-sm-7 d-none d-md-block">
           <button type="button" class="btn btn-primary float-right"><i class="icon-cloud-download"></i></button>
           <div class="btn-group btn-group-toggle float-right mr-3" data-toggle="buttons">
-            <label class="btn btn-outline-secondary" (click)="onStatisticsChange(radioModel.valueOf())" [(ngModel)]="radioModel" btnRadio="Day" id="option1">Ngày</label>
-            <label class="btn btn-outline-secondary" (click)="onStatisticsChange(radioModel.valueOf())" [(ngModel)]="radioModel" btnRadio="Month" id="option2">Tháng</label>
-            <label class="btn btn-outline-secondary" (click)="onStatisticsChange(radioModel.valueOf())" [(ngModel)]="radioModel" btnRadio="Year" id="option3">Năm</label>
+            <label class="btn btn-outline-secondary"
+                   [(ngModel)]="radioModel" btnRadio="Day" id="option1">Ngày</label>
+            <label class="btn btn-outline-secondary"
+                   [(ngModel)]="radioModel" btnRadio="Month" id="option2">Tháng</label>
+            <label class="btn btn-outline-secondary"
+                   [(ngModel)]="radioModel" btnRadio="Year" id="option3">Năm</label>
           </div>
         </div><!--/.col-->
       </div><!--/.row-->
       <div class="chart-wrapper" style="height:300px;margin-top:40px;">
-          <canvas baseChart class="chart"
-        [datasets]="mainChartData"
-        [labels]="mainChartLabels"
-        [options]="mainChartOptions"
-        [colors]="mainChartColours"
-        [legend]="mainChartLegend"
-        [chartType]="'line'"></canvas>
+        <canvas baseChart class="chart"
+                [datasets]="mainChartData"
+                [labels]="mainChartLabels"
+                [options]="mainChartOptions"
+                [colors]="mainChartColours"
+                [legend]="mainChartLegend"
+                [chartType]="'line'"></canvas>
       </div>
     </div>
     <div class="card-footer">
       <div class="row text-center">
         <div class="col-sm-12 col-md mb-sm-4 mb-0">
-          <div class="text-muted">KHỎI BỆNH</div>
-          <strong>{{staticalTotalPeopleByCured}} Người</strong>
-
+          <div class="text-muted">BỆNH NHÂN</div>
+          <strong [ngStyle]="{'color': '#ED1C24'}">{{staticalTotalPeopleBySick| number }} Người</strong>
         </div>
         <div class="col-sm-12 col-md mb-sm-4 mb-0">
-          <div class="text-muted">BỆNH NHÂN</div>
-          <strong>{{staticalTotalPeopleBySick}} Người</strong>
-
+          <div class="text-muted">KHỎI BỆNH</div>
+          <strong [ngStyle]="{'color': '#4ea80c'}">{{staticalTotalPeopleByCured | number }} Người</strong>
         </div>
         <div class="col-sm-12 col-md mb-sm-4 mb-0">
           <div class="text-muted">TỬ VONG</div>
-          <strong>{{staticalTotalPeopleByDied}} Người</strong>
-
+          <strong [ngStyle]="{'color': '#171313'}">{{staticalTotalPeopleByDied| number }} Người</strong>
         </div>
-
       </div>
     </div>
   </div>

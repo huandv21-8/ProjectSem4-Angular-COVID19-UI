@@ -9,7 +9,7 @@ export interface DeclareRequest {
   districtName?: string;
   communeName?: string;
   address?: string;
-  updatedAt?: String;
+  updateAt?: String;
   exposureToF0: boolean;
   comeBackFromEpidemicArea: boolean;
   contactWithPeopleReturningFromEpidemicAreas: boolean;
